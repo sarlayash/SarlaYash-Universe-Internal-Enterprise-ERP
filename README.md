@@ -27,22 +27,25 @@
 
 ---
 
-## 👥 Organization Roster & Default Logins
+## 👥 Official Team Credentials & Login Directory
 
-| ECODE | Name | Designation | Reports To | Portal Role | Assigned Focus Channel |
-| :---: | :--- | :--- | :--- | :---: | :--- |
-| **SYM001** | **Kapil Narula** | Founder | SarlaYash Leaders | Super Admin | SarlaYash Mission (YT) |
-| **SYM002** | **Sathursan Kamalanathan** | Chief Executive Officer | Kapil Narula | Admin | DSA Unfiltered (LI) |
-| **SYM003** | **Trisha Ghosh** | Chief People Officer | Kapil Narula | Admin | HR Mirror (YT) |
-| **SYM004** | **Amber Khanum** | Industry Ready Solution Engineer | Sathursan Kamalanathan | Employee | **AI Ladder 🪜 With Kapil (YT)** |
-| **SYM005** | **Arpan Mandal** | Industry Ready Solution Engineer | Sathursan Kamalanathan | Employee | DSA Unfiltered (YT/LI) |
-| **SYM006** | **Abhishek Kaundal** | Industry Ready Solution Engineer | Sathursan Kamalanathan | Employee | Cyber IQ With Kapil (FB/LI) |
-| **SYM007** | **Nidhi Rathore** | Industry Ready Solution Engineer | Trisha Ghosh | Employee | Polish Aptitude With Kapil (LI) |
-| **SYM008** | **Manju Kushwaha** | Industry Ready Solution Engineer | Trisha Ghosh | Employee | Mysteries Of POSH (YT/LI) |
-| **SYM009** | **Tarunika A** | Industry Ready Solution Engineer | Trisha Ghosh | Employee | Mind Your Words (YT/LI) |
-| **SYM010** | **Madhumita Adak** | Industry Ready Solution Engineer | Trisha Ghosh | Employee | SarlaYash Mission (FB/LI) |
+All 10 accounts are pre-configured in accordance with official company records:
 
-*Default Demo Password for all accounts:* `sarlayash123`
+| SNo | ECODE | Name | Designation | Reports To | ERP Login ID | Password |
+| :---: | :---: | :--- | :--- | :--- | :---: | :---: |
+| 1 | **SYM001** | **Kapil Narula** | Founder | SarlaYash Leaders | `SYM001` | `Passw@rd` |
+| 2 | **SYM002** | **Sathursan Kamalanathan** | Chief Executive Officer | Kapil Narula | `SYM002` | `Passw@rd` |
+| 3 | **SYM003** | **Trisha Ghosh** | Chief People Officer | Kapil Narula | `SYM003` | `Passw@rd` |
+| 4 | **SYM004** | **Amber Khanum** | Industry Ready Solution Engineer | Sathursan Kamalanathan | `SYM004` | `Passw@rd` |
+| 5 | **SYM005** | **Arpan Mandal** | Industry Ready Solution Engineer | Sathursan Kamalanathan | `SYM005` | `Passw@rd` |
+| 6 | **SYM006** | **Abhishek Kaundal** | Industry Ready Solution Engineer | Sathursan Kamalanathan | `SYM006` | `Passw@rd` |
+| 7 | **SYM007** | **Nidhi Rathore** | Industry Ready Solution Engineer | Trisha Ghosh | `SYM007` | `Passw@rd` |
+| 8 | **SYM008** | **Manju Kushwaha** | Industry Ready Solution Engineer | Trisha Ghosh | `SYM008` | `Passw@rd` |
+| 9 | **SYM009** | **Tarunika A** | Industry Ready Solution Engineer | Trisha Ghosh | `SYM009` | `Passw@rd` |
+| 10 | **SYM010** | **Madhumita Adak** | Industry Ready Solution Engineer | Trisha Ghosh | `SYM010` | `Passw@rd` |
+
+> **Password Note:** For all 10 members, the password is **`Passw@rd`**.  
+> The login popup displays automatically on the landing page for any new or logged-out session. Users can also use the 1-click Fast Sign-In tiles to enter their personal workspace immediately.
 
 ---
 
