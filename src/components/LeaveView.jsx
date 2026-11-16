@@ -450,11 +450,13 @@ export default function LeaveView({
                     onChange={(e) => setLeaveType(e.target.value)}
                     className="w-full p-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white focus:outline-none focus:border-amber-400"
                   >
-                    <option value="Casual Leave">Casual Leave (CL)</option>
+                    <option value="Parental Care Leave">Parental Care Leave (Care Model)</option>
+                    <option value="Exam Leave">Exam Leave (Academic)</option>
+                    <option value="Female No-Question Leave">Female No-Question Leave (Monthly Cycles)</option>
                     <option value="Sick Leave">Sick Leave (SL)</option>
-                    <option value="Privilege Leave">Privilege Leave (PL)</option>
                     <option value="SarlaYash Blessings Leave">SarlaYash Blessings Leave (Spiritual / Renewal)</option>
-                    <option value="Exam & Study Leave">Exam & Study Leave</option>
+                    <option value="Casual Leave">Casual Leave (CL)</option>
+                    <option value="Privilege Leave">Privilege Leave (PL)</option>
                   </select>
                 </div>
 

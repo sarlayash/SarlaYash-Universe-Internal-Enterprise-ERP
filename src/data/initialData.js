@@ -761,6 +761,13 @@ export const COMPANY_POLICIES = [
     category: "Blessings & Wellness",
     summary: "3 days of paid Blessings Leave annually for community service, spiritual retreats, or personal renewal without deduction from casual quota.",
     lastUpdated: "2026-10-20"
+  },
+  {
+    id: "POL-05",
+    title: "🙌 What Makes SarlaYash Blessings Internships Different? (Charter & Slabs)",
+    category: "Internships & Earning Model",
+    summary: "An internship should not feel like another classroom. It should give you responsibility, flexibility, care and a chance to create measurable impact: Just 1 Hour a Day, 5-Day Work Week, Permanent WFH, A Model That Cares (Parental, Exam, Sick, Female No-Question Leave), 100% Refundable ₹50 Daily Commitment Deposit, and Performance Slabs: Slab 0 (₹1,000), Slab 1 (₹1,000-₹5,000), Slab 2 (₹1,000-₹10,000), Slab 3 (₹1,000-₹15,000).",
+    lastUpdated: "2026-11-16"
   }
 ];
 
