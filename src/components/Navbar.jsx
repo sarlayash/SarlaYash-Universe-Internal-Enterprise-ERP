@@ -20,7 +20,9 @@ export default function Navbar({
   todayAttendance,
   onQuickPunch,
   pendingLeavesCount,
-  onNavigate
+  onNavigate,
+  onLogout,
+  onOpenLoginModal
 }) {
   const [currentTime, setCurrentTime] = useState(new Date());
   const [showUserDropdown, setShowUserDropdown] = useState(false);
@@ -242,11 +244,29 @@ export default function Navbar({
                   >
                     <RefreshCw className="w-3.5 h-3.5" /> Reset Data
                   </button>
-                  <span className="text-[10px] text-slate-500">10 Team Members</span>
+                  
+                  <button
+                    onClick={() => {
+                      setShowUserDropdown(false);
+                      onLogout();
+                    }}
+                    className="flex items-center gap-1 text-rose-400 hover:text-rose-300 font-bold transition-colors py-1"
+                  >
+                    <LogOut className="w-3.5 h-3.5" /> Log Out
+                  </button>
                 </div>
               </div>
             )}
           </div>
+
+          {/* Direct Logout Button in Header */}
+          <button
+            onClick={onLogout}
+            className="p-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-400 hover:text-rose-400 hover:border-rose-500/40 transition-colors"
+            title="Log Out of SarlaYash ERP"
+          >
+            <LogOut className="w-4 h-4" />
+          </button>
         </div>
       </div>
     </header>

@@ -6,18 +6,21 @@ import {
   INITIAL_HOLIDAYS_AND_EVENTS,
   INITIAL_ANNOUNCEMENTS,
   INITIAL_EARNING_TARGETS,
+  INITIAL_TASKS,
   COMPANY_POLICIES
 } from "../data/initialData";
 
 const KEYS = {
-  EMPLOYEES: "sarlayash_erp_employees",
-  CHANNELS: "sarlayash_erp_channels",
-  LEAVES: "sarlayash_erp_leaves",
-  ATTENDANCE: "sarlayash_erp_attendance",
-  EVENTS: "sarlayash_erp_events",
-  ANNOUNCEMENTS: "sarlayash_erp_announcements",
-  EARNING_TARGETS: "sarlayash_erp_earning_targets",
-  CURRENT_USER_ID: "sarlayash_erp_current_user_id"
+  EMPLOYEES: "sarlayash_erp_employees_v2",
+  CHANNELS: "sarlayash_erp_channels_v2",
+  LEAVES: "sarlayash_erp_leaves_v2",
+  ATTENDANCE: "sarlayash_erp_attendance_v2",
+  EVENTS: "sarlayash_erp_events_v2",
+  ANNOUNCEMENTS: "sarlayash_erp_announcements_v2",
+  EARNING_TARGETS: "sarlayash_erp_earning_targets_v2",
+  TASKS: "sarlayash_erp_tasks_v2",
+  CURRENT_USER_ID: "sarlayash_erp_current_user_id_v2",
+  IS_LOGGED_IN: "sarlayash_erp_is_logged_in_v2"
 };
 
 export const getStoredData = (key, fallback) => {
@@ -60,8 +63,15 @@ export const initializeStorage = () => {
   if (!localStorage.getItem(KEYS.EARNING_TARGETS)) {
     setStoredData(KEYS.EARNING_TARGETS, INITIAL_EARNING_TARGETS);
   }
+  if (!localStorage.getItem(KEYS.TASKS)) {
+    setStoredData(KEYS.TASKS, INITIAL_TASKS);
+  }
   if (!localStorage.getItem(KEYS.CURRENT_USER_ID)) {
-    setStoredData(KEYS.CURRENT_USER_ID, "SYM001"); // Default to Founder Kapil Narula
+    setStoredData(KEYS.CURRENT_USER_ID, "SYM001");
+  }
+  if (localStorage.getItem(KEYS.IS_LOGGED_IN) === null) {
+    // Default to false on first landing so the login popup appears!
+    setStoredData(KEYS.IS_LOGGED_IN, false);
   }
 };
 
@@ -73,7 +83,9 @@ export const resetAllData = () => {
   localStorage.setItem(KEYS.EVENTS, JSON.stringify(INITIAL_HOLIDAYS_AND_EVENTS));
   localStorage.setItem(KEYS.ANNOUNCEMENTS, JSON.stringify(INITIAL_ANNOUNCEMENTS));
   localStorage.setItem(KEYS.EARNING_TARGETS, JSON.stringify(INITIAL_EARNING_TARGETS));
+  localStorage.setItem(KEYS.TASKS, JSON.stringify(INITIAL_TASKS));
   localStorage.setItem(KEYS.CURRENT_USER_ID, JSON.stringify("SYM001"));
+  localStorage.setItem(KEYS.IS_LOGGED_IN, JSON.stringify(false));
   window.location.reload();
 };
 

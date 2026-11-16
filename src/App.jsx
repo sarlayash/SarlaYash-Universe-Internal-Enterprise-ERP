@@ -3,6 +3,7 @@ import Navbar from "./components/Navbar";
 import Sidebar from "./components/Sidebar";
 import DashboardView from "./components/DashboardView";
 import AttendanceView from "./components/AttendanceView";
+import DailyTasksView from "./components/DailyTasksView";
 import LeaveView from "./components/LeaveView";
 import CalendarView from "./components/CalendarView";
 import OrgHierarchyView from "./components/OrgHierarchyView";
@@ -27,7 +28,8 @@ import {
   INITIAL_ATTENDANCE,
   INITIAL_HOLIDAYS_AND_EVENTS,
   INITIAL_ANNOUNCEMENTS,
-  INITIAL_EARNING_TARGETS
+  INITIAL_EARNING_TARGETS,
+  INITIAL_TASKS
 } from "./data/initialData";
 
 export default function App() {
@@ -57,8 +59,14 @@ export default function App() {
   const [earningTargets, setEarningTargets] = useState(() =>
     getStoredData(KEYS.EARNING_TARGETS, INITIAL_EARNING_TARGETS)
   );
+  const [tasks, setTasks] = useState(() =>
+    getStoredData(KEYS.TASKS, INITIAL_TASKS)
+  );
   const [currentUserId, setCurrentUserId] = useState(() =>
     getStoredData(KEYS.CURRENT_USER_ID, "SYM001")
+  );
+  const [isLoggedIn, setIsLoggedIn] = useState(() =>
+    getStoredData(KEYS.IS_LOGGED_IN, false)
   );
 
   const [activeTab, setActiveTab] = useState("dashboard");
@@ -94,8 +102,16 @@ export default function App() {
   }, [earningTargets]);
 
   useEffect(() => {
+    setStoredData(KEYS.TASKS, tasks);
+  }, [tasks]);
+
+  useEffect(() => {
     setStoredData(KEYS.CURRENT_USER_ID, currentUserId);
   }, [currentUserId]);
+
+  useEffect(() => {
+    setStoredData(KEYS.IS_LOGGED_IN, isLoggedIn);
+  }, [isLoggedIn]);
 
   const currentUser = employees.find((e) => e.id === currentUserId) || employees[0];
 
@@ -110,6 +126,23 @@ export default function App() {
   // Handlers
   const handleSwitchUser = (empId) => {
     setCurrentUserId(empId);
+  };
+
+  const handleLoginSuccess = (empId) => {
+    setCurrentUserId(empId);
+    setIsLoggedIn(true);
+    setIsLoginModalOpen(false);
+
+    confetti({
+      particleCount: 50,
+      spread: 60,
+      origin: { y: 0.6 }
+    });
+  };
+
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+    setIsLoginModalOpen(true);
   };
 
   const handleRecordAttendance = (record) => {
@@ -212,6 +245,20 @@ export default function App() {
     setAnnouncements((prev) => [newAnnouncement, ...prev]);
   };
 
+  const handleAddTask = (newTask) => {
+    setTasks((prev) => [newTask, ...prev]);
+  };
+
+  const handleUpdateTaskStatus = (taskId, newStatus) => {
+    setTasks((prev) =>
+      prev.map((t) =>
+        t.id === taskId
+          ? { ...t, status: newStatus }
+          : t
+      )
+    );
+  };
+
   return (
     <div className="min-h-screen bg-[#070b14] text-slate-100 flex flex-col font-sans selection:bg-amber-500/30 selection:text-amber-200">
       {/* Top Fixed Navbar */}
@@ -223,6 +270,7 @@ export default function App() {
         onQuickPunch={handleQuickPunch}
         pendingLeavesCount={pendingLeavesCount}
         onNavigate={(tab) => setActiveTab(tab)}
+        onLogout={handleLogout}
         onOpenLoginModal={() => setIsLoginModalOpen(true)}
       />
 
@@ -262,6 +310,16 @@ export default function App() {
               attendanceList={attendance}
               onRecordAttendance={handleRecordAttendance}
               todayAttendance={todayAttendance}
+            />
+          )}
+
+          {activeTab === "tasks" && (
+            <DailyTasksView
+              tasksList={tasks}
+              currentUser={currentUser}
+              employees={employees}
+              onAddTask={handleAddTask}
+              onUpdateTaskStatus={handleUpdateTaskStatus}
             />
           )}
 
@@ -331,12 +389,13 @@ export default function App() {
         </main>
       </div>
 
-      {/* Login & Switch Account Modal */}
+      {/* Mandatory Login Modal on Landing Page or when requested */}
       <LoginModal
-        isOpen={isLoginModalOpen}
+        isOpen={!isLoggedIn || isLoginModalOpen}
+        isMandatory={!isLoggedIn}
         onClose={() => setIsLoginModalOpen(false)}
         employees={employees}
-        onLoginSuccess={handleSwitchUser}
+        onLoginSuccess={handleLoginSuccess}
       />
     </div>
   );

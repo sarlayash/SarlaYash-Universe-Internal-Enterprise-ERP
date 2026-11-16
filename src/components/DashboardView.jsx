@@ -102,17 +102,27 @@ export default function DashboardView({
               </div>
             </div>
 
-            <button
-              onClick={onQuickPunch}
-              className={`w-full py-2.5 px-5 rounded-xl font-bold text-xs transition-all flex items-center justify-center gap-2 shadow-lg ${
-                isCheckedIn
-                  ? "bg-slate-800 hover:bg-slate-700 text-rose-300 border border-rose-500/30"
-                  : "bg-gradient-to-r from-amber-500 via-amber-400 to-amber-600 text-slate-950 hover:brightness-110 glow-gold"
-              }`}
-            >
-              <Clock className="w-4 h-4" />
-              <span>{isCheckedIn ? "Clock Out for the Day" : "Clock In / Mark Attendance"}</span>
-            </button>
+            <div className="space-y-2">
+              <button
+                onClick={onQuickPunch}
+                className={`w-full py-2.5 px-5 rounded-xl font-bold text-xs transition-all flex items-center justify-center gap-2 shadow-lg ${
+                  isCheckedIn
+                    ? "bg-slate-800 hover:bg-slate-700 text-rose-300 border border-rose-500/30"
+                    : "bg-gradient-to-r from-amber-500 via-amber-400 to-amber-600 text-slate-950 hover:brightness-110 glow-gold"
+                }`}
+              >
+                <Clock className="w-4 h-4" />
+                <span>{isCheckedIn ? "Clock Out for the Day" : "Clock In / Mark Attendance"}</span>
+              </button>
+
+              <button
+                onClick={() => onNavigate("tasks")}
+                className="w-full py-2 px-4 rounded-xl bg-slate-800 hover:bg-slate-750 text-amber-300 font-bold text-xs transition-all flex items-center justify-center gap-2 border border-amber-500/30"
+              >
+                <FileText className="w-3.5 h-3.5" />
+                <span>Submit Daily Task Log</span>
+              </button>
+            </div>
           </div>
         </div>
       </div>

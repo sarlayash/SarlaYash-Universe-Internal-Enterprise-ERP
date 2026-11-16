@@ -2,6 +2,7 @@ import React from "react";
 import {
   LayoutDashboard,
   Clock,
+  CheckSquare,
   CalendarDays,
   CalendarCheck2,
   Users2,
@@ -42,6 +43,14 @@ export default function Sidebar({
       badge: isCheckedIn ? "Active" : "Pending",
       badgeColor: isCheckedIn ? "bg-emerald-500/20 text-emerald-400 border-emerald-500/30" : "bg-amber-500/20 text-amber-400 border-amber-500/30",
       desc: "Punch In/Out & Monthly Log"
+    },
+    {
+      id: "tasks",
+      label: "Daily Tasks & Log",
+      icon: CheckSquare,
+      badge: "Worklog",
+      badgeColor: "bg-emerald-500/20 text-emerald-300 border-emerald-500/30",
+      desc: "Submit Deliverables & Hours"
     },
     {
       id: "leaves",
