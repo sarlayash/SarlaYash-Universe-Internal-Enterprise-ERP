@@ -15,11 +15,13 @@ export default function PayslipView({
   currentUser,
   employees
 }) {
-  const isAdmin = currentUser?.role === "super_admin" || currentUser?.role === "admin";
+  const isSuperAdmin = currentUser?.role === "super_admin" || currentUser?.id === "SYM001";
   const [selectedEmpId, setSelectedEmpId] = useState(currentUser.id);
   const [selectedMonth, setSelectedMonth] = useState("November 2026");
 
-  const targetEmp = employees.find((e) => e.id === selectedEmpId) || currentUser;
+  const targetEmp = isSuperAdmin
+    ? (employees.find((e) => e.id === selectedEmpId) || currentUser)
+    : currentUser;
 
   const basic = targetEmp.salary?.basic || 75000;
   const hra = targetEmp.salary?.hra || 30000;
@@ -51,8 +53,8 @@ export default function PayslipView({
         </div>
 
         <div className="flex items-center gap-3">
-          {/* Employee Selector for Admin */}
-          {isAdmin && (
+          {/* Employee Selector for Super Admin only */}
+          {isSuperAdmin && (
             <select
               value={selectedEmpId}
               onChange={(e) => setSelectedEmpId(e.target.value)}
@@ -72,8 +74,7 @@ export default function PayslipView({
             className="px-3 py-2 rounded-xl bg-[#08080d] border border-[#2a2a38] text-xs text-white focus:outline-none focus:border-[#ffd700]"
           >
             <option value="November 2026">November 2026</option>
-            <option value="October 2026">October 2026</option>
-            <option value="September 2026">September 2026</option>
+            <option value="December 2026">December 2026</option>
           </select>
 
           <button

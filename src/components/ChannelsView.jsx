@@ -127,7 +127,7 @@ export default function ChannelsView({
               AI Ladder 🪜 With Kapil • Lead by Amber Khanum
             </h3>
             <p className="text-xs text-slate-300">
-              96.4K Subscribers • Official assignment in Team Roster
+              Generative AI & Hands-On Engineering • Official Ecosystem Flagship
             </p>
           </div>
         </div>
@@ -178,8 +178,8 @@ export default function ChannelsView({
                 </div>
 
                 <div className="flex items-center justify-between text-xs py-2 px-3 rounded-xl bg-[#08080d] border border-[#222230]">
-                  <span className="text-slate-400">Community / Reach:</span>
-                  <strong className="text-[#ffd700] font-mono">{channel.followers || "Growing"}</strong>
+                  <span className="text-slate-400">Content Domain:</span>
+                  <strong className="text-[#ffd700] text-[11px] truncate">{channel.category || "Educational Media"}</strong>
                 </div>
 
                 <div className="space-y-1 text-xs">

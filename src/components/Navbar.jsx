@@ -8,7 +8,11 @@ import {
   ChevronDown,
   CheckCircle2,
   AlertTriangle,
-  RefreshCw
+  RefreshCw,
+  Shield,
+  Check,
+  Trash2,
+  Lock
 } from "lucide-react";
 import { resetAllData } from "../utils/storage";
 
@@ -19,6 +23,10 @@ export default function Navbar({
   todayAttendance,
   onQuickPunch,
   pendingLeavesCount,
+  pendingCorrectionsCount = 0,
+  notifications = [],
+  onMarkNotificationRead,
+  onClearNotifications,
   onNavigate,
   onLogout,
   onOpenLoginModal
@@ -33,6 +41,18 @@ export default function Navbar({
   }, []);
 
   const isCheckedIn = !!todayAttendance?.checkIn && !todayAttendance?.checkOut;
+  const isSuperAdmin = currentUser?.role === "super_admin" || currentUser?.id === "SYM001";
+
+  // Filter notifications relevant to current user
+  const userNotifications = notifications.filter(
+    (n) =>
+      n.recipientId === "all" ||
+      (isSuperAdmin && n.recipientId === "super_admin") ||
+      n.recipientId === currentUser?.id ||
+      n.recipientId === currentUser?.ecode
+  );
+
+  const unreadCount = userNotifications.filter((n) => !n.isRead).length;
 
   const formattedTime = currentTime.toLocaleTimeString("en-IN", {
     hour: "2-digit",
@@ -98,7 +118,7 @@ export default function Navbar({
           </span>
         </div>
 
-        {/* Right Action Tools & Fast Persona Switcher */}
+        {/* Right Action Tools */}
         <div className="flex items-center gap-3">
           {/* Quick Punch Button */}
           <button
@@ -113,68 +133,103 @@ export default function Navbar({
             <span>{isCheckedIn ? "Checked In (Clock Out)" : "Punch Attendance"}</span>
           </button>
 
-          {/* Notifications Bell */}
+          {/* Real-Time Notifications Bell */}
           <div className="relative">
             <button
               onClick={() => setShowNotifications(!showNotifications)}
               className="relative p-2 rounded-xl bg-[#111118] border border-[#2a2a38] text-slate-300 hover:text-[#ffd700] hover:border-[#ffd700]/50 transition-colors"
-              title="Notifications"
+              title="Real-Time Alerts"
             >
               <Bell className="w-4 h-4" />
-              {pendingLeavesCount > 0 && (
+              {unreadCount > 0 && (
                 <span className="absolute -top-1 -right-1 w-4 h-4 bg-[#dc2626] text-white font-extrabold text-[10px] rounded-full flex items-center justify-center animate-bounce shadow">
-                  {pendingLeavesCount}
+                  {unreadCount}
                 </span>
               )}
             </button>
 
             {/* Notifications Dropdown */}
             {showNotifications && (
-              <div className="absolute right-0 mt-2 w-80 bg-[#0d0d14] border border-[#ffd700]/30 rounded-2xl shadow-2xl p-3.5 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
+              <div className="absolute right-0 mt-2 w-80 sm:w-96 bg-[#0d0d14] border border-[#ffd700]/30 rounded-2xl shadow-2xl p-4 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
                 <div className="flex items-center justify-between pb-2 border-b border-[#222230] mb-2.5">
                   <h4 className="text-xs font-bold text-[#ffd700] uppercase tracking-wider flex items-center gap-1.5">
-                    <Sparkles className="w-3.5 h-3.5 text-[#dc2626]" /> SarlaYash Alerts
+                    <Sparkles className="w-3.5 h-3.5 text-[#dc2626]" /> Real-Time Alerts
                   </h4>
-                  <span className="text-[10px] text-slate-400">Live Telemetry</span>
+                  <div className="flex items-center gap-2">
+                    <button
+                      onClick={() => onClearNotifications && onClearNotifications()}
+                      className="text-[10px] text-slate-400 hover:text-red-400 flex items-center gap-1"
+                      title="Clear notifications"
+                    >
+                      <Trash2 className="w-3 h-3" /> Clear
+                    </button>
+                  </div>
                 </div>
-                <div className="space-y-2 text-xs">
-                  {pendingLeavesCount > 0 && (
+
+                <div className="max-h-80 overflow-y-auto space-y-2 text-xs pr-1">
+                  {isSuperAdmin && (pendingLeavesCount > 0 || pendingCorrectionsCount > 0) && (
                     <div
                       onClick={() => {
                         setShowNotifications(false);
-                        onNavigate("leaves");
+                        onNavigate(pendingLeavesCount > 0 ? "leaves" : "attendance");
                       }}
-                      className="p-2.5 rounded-xl bg-[#2a1012] border border-[#dc2626]/50 text-red-200 cursor-pointer hover:bg-[#3d1417] transition-colors flex items-start gap-2"
+                      className="p-3 rounded-xl bg-[#2a1012] border border-[#dc2626]/50 text-red-200 cursor-pointer hover:bg-[#3d1417] transition-colors flex items-start gap-2.5"
                     >
                       <AlertTriangle className="w-4 h-4 text-[#dc2626] shrink-0 mt-0.5" />
                       <div>
-                        <p className="font-bold text-white">{pendingLeavesCount} Pending Leave Request(s)</p>
-                        <p className="text-[11px] text-slate-300">Requires executive manager approval.</p>
+                        <p className="font-bold text-white">Super Admin Approvals Pending</p>
+                        <p className="text-[11px] text-slate-300">
+                          {pendingLeavesCount} leave application(s) • {pendingCorrectionsCount} punch correction(s)
+                        </p>
                       </div>
                     </div>
                   )}
 
-                  <div className="p-2.5 rounded-xl bg-[#14141e] border border-[#222230] text-slate-200 flex items-start gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-[#ffd700] shrink-0 mt-0.5" />
-                    <div>
-                      <p className="font-semibold text-white">Daily Attendance Active</p>
-                      <p className="text-[11px] text-slate-400">1-Hour consistency model & 5-Day week active.</p>
+                  {userNotifications.length === 0 ? (
+                    <div className="p-4 text-center text-slate-400 text-xs">
+                      No notifications yet. Real-time alerts will appear here.
                     </div>
-                  </div>
-
-                  <div className="p-2.5 rounded-xl bg-[#14141e] border border-[#222230] text-slate-200 flex items-start gap-2">
-                    <Sparkles className="w-4 h-4 text-[#dc2626] shrink-0 mt-0.5" />
-                    <div>
-                      <p className="font-semibold text-white">Performance Slabs 0–3</p>
-                      <p className="text-[11px] text-slate-400">₹1,000 to ₹15,000 monthly slabs unlocked.</p>
-                    </div>
-                  </div>
+                  ) : (
+                    userNotifications.map((notif) => (
+                      <div
+                        key={notif.id}
+                        onClick={() => {
+                          onMarkNotificationRead && onMarkNotificationRead(notif.id);
+                        }}
+                        className={`p-3 rounded-xl border transition-colors flex items-start gap-2.5 cursor-pointer ${
+                          notif.isRead
+                            ? "bg-[#111118] border-[#222230] text-slate-400"
+                            : "bg-[#16121e] border-[#ffd700]/30 text-slate-200"
+                        }`}
+                      >
+                        <div className="p-1 rounded bg-[#09090e] text-[#ffd700] shrink-0 mt-0.5">
+                          {notif.type === "leave" ? (
+                            <AlertTriangle className="w-3.5 h-3.5 text-[#ffd700]" />
+                          ) : notif.type === "correction" ? (
+                            <Clock className="w-3.5 h-3.5 text-[#dc2626]" />
+                          ) : (
+                            <Sparkles className="w-3.5 h-3.5 text-emerald-400" />
+                          )}
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <p className="font-bold text-white text-xs truncate">{notif.title}</p>
+                          <p className="text-[11px] text-slate-300 leading-snug mt-0.5">{notif.message}</p>
+                          <p className="text-[9px] text-slate-500 mt-1 font-mono">
+                            {new Date(notif.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                          </p>
+                        </div>
+                        {!notif.isRead && (
+                          <span className="w-2 h-2 rounded-full bg-[#dc2626] shrink-0 mt-1"></span>
+                        )}
+                      </div>
+                    ))
+                  )}
                 </div>
               </div>
             )}
           </div>
 
-          {/* Active User Pill & Fast Role Switcher */}
+          {/* User Profile Pill & Secure Menu */}
           <div className="relative">
             <button
               onClick={() => setShowUserDropdown(!showUserDropdown)}
@@ -197,78 +252,63 @@ export default function Navbar({
               <ChevronDown className="w-3.5 h-3.5 text-slate-400" />
             </button>
 
-            {/* Quick Switch Persona Dropdown */}
+            {/* Profile Dropdown */}
             {showUserDropdown && (
-              <div className="absolute right-0 mt-2 w-72 bg-[#09090f] border border-[#ffd700]/30 rounded-2xl shadow-2xl p-2.5 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
-                <div className="px-3 py-2 border-b border-[#222230] mb-2">
-                  <p className="text-[10px] uppercase tracking-wider font-extrabold text-[#ffd700]">
-                    Switch Active Persona (Instant Demo)
-                  </p>
-                  <p className="text-[11px] text-slate-400">All 10 Accounts • Password: Passw@rd</p>
+              <div className="absolute right-0 mt-2 w-72 bg-[#09090f] border border-[#ffd700]/30 rounded-2xl shadow-2xl p-3 z-50 animate-in fade-in slide-in-from-top-2 duration-150 space-y-2">
+                <div className="p-3 rounded-xl bg-[#121218] border border-[#222230]">
+                  <p className="font-bold text-white text-sm">{currentUser?.name}</p>
+                  <p className="text-xs text-[#ffd700] font-mono mt-0.5">{currentUser?.ecode} • {currentUser?.designation}</p>
+                  <p className="text-[11px] text-slate-400 mt-1">{currentUser?.email}</p>
+                  {isSuperAdmin && (
+                    <span className="inline-block mt-2 px-2 py-0.5 rounded bg-[#dc2626]/20 text-[#ffd700] border border-[#dc2626]/40 text-[10px] font-bold uppercase">
+                      👑 Super Admin Access Active
+                    </span>
+                  )}
                 </div>
 
-                <div className="max-h-80 overflow-y-auto space-y-1 pr-1">
-                  {employees.map((emp) => {
-                    const isSelected = emp.id === currentUser?.id;
-                    return (
-                      <button
-                        key={emp.id}
-                        onClick={() => {
-                          onSwitchUser(emp.id);
-                          setShowUserDropdown(false);
-                        }}
-                        className={`w-full flex items-center justify-between p-2 rounded-xl text-left transition-all text-xs ${
-                          isSelected
-                            ? "bg-[#dc2626]/20 border border-[#dc2626]/50 text-[#ffd700] font-bold"
-                            : "hover:bg-[#181822] text-slate-300"
-                        }`}
-                      >
-                        <div className="flex items-center gap-2 truncate">
-                          <span className="text-base">{emp.avatar}</span>
-                          <div className="truncate">
-                            <p className="font-semibold text-white truncate">{emp.name}</p>
-                            <p className="text-[10px] text-slate-400 truncate">{emp.designation}</p>
-                          </div>
-                        </div>
-                        <span className="text-[9px] px-1.5 py-0.5 rounded bg-[#121218] text-[#ffd700] font-mono shrink-0 ml-1 border border-[#2a2a36]">
-                          {emp.ecode}
-                        </span>
-                      </button>
-                    );
-                  })}
-                </div>
+                {/* If Super Admin Kapil, allow auditing/switching personas */}
+                {isSuperAdmin && (
+                  <div className="pt-2 border-t border-[#222230]">
+                    <p className="text-[10px] uppercase tracking-wider font-extrabold text-[#ffd700] mb-1.5 flex items-center gap-1">
+                      <Shield className="w-3 h-3 text-[#dc2626]" /> Super Admin User Inspection:
+                    </p>
+                    <div className="max-h-48 overflow-y-auto space-y-1 pr-1">
+                      {employees.map((emp) => (
+                        <button
+                          key={emp.id}
+                          onClick={() => {
+                            onSwitchUser(emp.id);
+                            setShowUserDropdown(false);
+                          }}
+                          className={`w-full flex items-center justify-between p-1.5 px-2 rounded-lg text-left text-xs transition-colors ${
+                            emp.id === currentUser?.id
+                              ? "bg-[#dc2626]/20 text-[#ffd700] font-bold"
+                              : "hover:bg-[#161622] text-slate-300"
+                          }`}
+                        >
+                          <span className="truncate">{emp.name}</span>
+                          <span className="text-[10px] font-mono text-slate-400">{emp.ecode}</span>
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                )}
 
-                <div className="mt-2 pt-2 border-t border-[#222230] flex items-center justify-between text-xs px-2">
-                  <button
-                    onClick={resetAllData}
-                    className="flex items-center gap-1.5 text-slate-400 hover:text-[#ffd700] transition-colors py-1"
-                    title="Reset all dummy records to clean state"
-                  >
-                    <RefreshCw className="w-3.5 h-3.5" /> Reset Data
-                  </button>
-                  
+                <div className="pt-2 border-t border-[#222230] space-y-1 text-xs">
                   <button
                     onClick={() => {
                       setShowUserDropdown(false);
                       onLogout();
                     }}
-                    className="flex items-center gap-1 text-[#f87171] hover:text-[#dc2626] font-bold transition-colors py-1"
+                    className="w-full flex items-center justify-center gap-2 p-2 rounded-xl bg-[#dc2626]/20 hover:bg-[#dc2626]/30 text-[#fca5a5] font-bold transition-colors border border-[#dc2626]/40"
                   >
-                    <LogOut className="w-3.5 h-3.5" /> Log Out
+                    <LogOut className="w-3.5 h-3.5" />
+                    <span>Log Out from Session</span>
                   </button>
                 </div>
               </div>
             )}
           </div>
-
-          {/* Direct Logout Button in Header */}
-          <button
-            onClick={onLogout}
-            className="p-2 rounded-xl bg-[#111118] border border-[#2a2a38] text-slate-400 hover:text-[#f87171] hover:border-[#dc2626]/50 transition-colors"
-            title="Log Out of SarlaYash ERP"
-          >
-            <LogOut className="w-4 h-4" />
-          </button>
         </div>
       </div>
     </header>

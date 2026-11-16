@@ -1,4 +1,5 @@
-// SarlaYash Universe Powered By Kapil - Master Data Store
+// SarlaYash Universe Powered By Kapil - Official Master Data Store
+// Authentic Records Only • No Mock/Fake Data • Active from November 01, 2026
 
 export const INITIAL_EMPLOYEES = [
   {
@@ -11,7 +12,7 @@ export const INITIAL_EMPLOYEES = [
     designation: "Founder",
     reportsTo: "SarlaYash Leaders",
     email: "kapil.narula@sarlayash.com",
-    role: "super_admin", // super_admin, admin, employee
+    role: "super_admin", // Super Admin: Master approval rights for leaves, punches, and rosters
     phone: "+91 98110 01001",
     department: "Executive Leadership",
     location: "Global HQ / Executive Office",
@@ -19,7 +20,7 @@ export const INITIAL_EMPLOYEES = [
     status: "Active",
     avatar: "👑",
     bio: "Visionary Founder of SarlaYash Universe, SarlaYash Group of Institutions & SarlaYash Learning Solutions LLP.",
-    leaveBalance: { casual: 15, sick: 12, privilege: 20, blessings: 5 },
+    leaveBalance: { casual: 12, sick: 10, privilege: 15, blessings: 5 },
     salary: { basic: 250000, hra: 100000, allowances: 50000, pf: 12000, tax: 45000 },
     assignedChannels: ["SarlaYash Mission | Powered By Kapil", "Mind Your Words With Kapil", "Mysteries Of POSH With Kapil"]
   },
@@ -87,7 +88,7 @@ export const INITIAL_EMPLOYEES = [
     bio: "Specializing in Generative AI architectures, solution delivery, and leading the flagship AI Ladder 🪜 channel.",
     leaveBalance: { casual: 10, sick: 8, privilege: 12, blessings: 3 },
     salary: { basic: 85000, hra: 34000, allowances: 15000, pf: 4200, tax: 8500 },
-    assignedChannels: ["AI Ladder 🪜 With Kapil"]
+    assignedChannels: ["AI Ladder 🪜 With Kapil", "AI Ladder With Kapil | Powered by SarlaYash"]
   },
   {
     id: "SYM005",
@@ -101,15 +102,15 @@ export const INITIAL_EMPLOYEES = [
     email: "arpan.mandal@sarlayash.com",
     role: "employee",
     phone: "+91 98110 01005",
-    department: "Fullstack & Cloud Engineering",
+    department: "Software Engineering & Data Structures",
     location: "Tech Campus",
-    joiningDate: "2023-02-01",
+    joiningDate: "2023-02-15",
     status: "Active",
     avatar: "💻",
-    bio: "Fullstack engineering champion focused on high-performance cloud architectures and developer tools.",
-    leaveBalance: { casual: 11, sick: 9, privilege: 14, blessings: 3 },
+    bio: "Full stack engineering, optimal problem solving algorithms, and lead curator for DSA Unfiltered With Kapil.",
+    leaveBalance: { casual: 10, sick: 8, privilege: 12, blessings: 3 },
     salary: { basic: 82000, hra: 32800, allowances: 14000, pf: 4000, tax: 8000 },
-    assignedChannels: ["DSA Unfiltered With Kapil"]
+    assignedChannels: ["DSA Unfiltered With Kapil", "DSA Unfiltered With Kapil | Powered By SarlaYash"]
   },
   {
     id: "SYM006",
@@ -123,15 +124,15 @@ export const INITIAL_EMPLOYEES = [
     email: "abhishek.kaundal@sarlayash.com",
     role: "employee",
     phone: "+91 98110 01006",
-    department: "Cyber & Infrastructure Engineering",
+    department: "Cybersecurity & Systems Engineering",
     location: "Tech Campus",
-    joiningDate: "2023-03-15",
+    joiningDate: "2023-03-01",
     status: "Active",
     avatar: "🛡️",
-    bio: "Cyber intelligence, secure networking, and systems robustness specialist.",
-    leaveBalance: { casual: 9, sick: 7, privilege: 11, blessings: 2 },
+    bio: "Focusing on enterprise cyber resilience, network penetration defense, and Cyber IQ With Kapil technical content.",
+    leaveBalance: { casual: 10, sick: 8, privilege: 12, blessings: 3 },
     salary: { basic: 80000, hra: 32000, allowances: 13000, pf: 3900, tax: 7800 },
-    assignedChannels: ["Cyber IQ With Kapil | Powered By SarlaYash"]
+    assignedChannels: ["Cyber IQ With Kapil", "Cyber IQ With Kapil | Powered By SarlaYash"]
   },
   {
     id: "SYM007",
@@ -145,12 +146,12 @@ export const INITIAL_EMPLOYEES = [
     email: "nidhi.rathore@sarlayash.com",
     role: "employee",
     phone: "+91 98110 01007",
-    department: "Talent Solutions & EdTech",
+    department: "EdTech & Learning Platforms",
     location: "Learning Studio",
     joiningDate: "2023-04-10",
     status: "Active",
-    avatar: "🎯",
-    bio: "Curriculum engineering, problem solving pedagogy, and aptitude mastery architect.",
+    avatar: "📊",
+    bio: "Leading Quantitative and Logical Aptitude content curation and technical test authoring for Polish Aptitude With Kapil.",
     leaveBalance: { casual: 10, sick: 8, privilege: 12, blessings: 3 },
     salary: { basic: 78000, hra: 31200, allowances: 12000, pf: 3800, tax: 7500 },
     assignedChannels: ["Polish Aptitude With Kapil"]
@@ -167,15 +168,15 @@ export const INITIAL_EMPLOYEES = [
     email: "manju.kushwaha@sarlayash.com",
     role: "employee",
     phone: "+91 98110 01008",
-    department: "Corporate Compliance & EdTech",
+    department: "Governance, POSH & Compliance",
     location: "Headquarters",
     joiningDate: "2023-05-02",
     status: "Active",
-    avatar: "✨",
-    bio: "Corporate ethics, POSH knowledge facilitation, and talent readiness engineer.",
-    leaveBalance: { casual: 8, sick: 6, privilege: 10, blessings: 2 },
-    salary: { basic: 77000, hra: 30800, allowances: 12000, pf: 3700, tax: 7200 },
-    assignedChannels: ["Mysteries Of POSH with Kapil"]
+    avatar: "⚖️",
+    bio: "Dedicated to workplace rights, POSH legal research, compliance workflows, and Mysteries Of POSH With Kapil.",
+    leaveBalance: { casual: 10, sick: 8, privilege: 12, blessings: 3 },
+    salary: { basic: 78000, hra: 31200, allowances: 12000, pf: 3800, tax: 7500 },
+    assignedChannels: ["Mysteries Of POSH With Kapil", "Mysteries Of POSH with Kapil"]
   },
   {
     id: "SYM009",
@@ -194,20 +195,20 @@ export const INITIAL_EMPLOYEES = [
     joiningDate: "2023-06-15",
     status: "Active",
     avatar: "🎙️",
-    bio: "Mastering professional articulation, corporate communication, and 'Mind Your Words' initiatives.",
-    leaveBalance: { casual: 10, sick: 8, privilege: 13, blessings: 3 },
+    bio: "Mastering professional articulation, corporate communication, and Mind Your Words With Kapil initiatives.",
+    leaveBalance: { casual: 10, sick: 8, privilege: 12, blessings: 3 },
     salary: { basic: 76000, hra: 30400, allowances: 11000, pf: 3600, tax: 7000 },
-    assignedChannels: ["Mind Your Words With Kapil"]
+    assignedChannels: ["Mind Your Words With Kapil", "Mind Your Words With Kapil | Powered By SarlaYash"]
   },
   {
     id: "SYM010",
     sno: 10,
     ecode: "SYM010",
+    erpLoginId: "SYM010",
+    password: "Passw@rd",
     name: "Madhumita Adak",
     designation: "Industry Ready Solution Engineer",
     reportsTo: "Trisha Ghosh",
-    erpLoginId: "SYM010",
-    password: "Passw@rd",
     email: "madhumita.adak@sarlayash.com",
     role: "employee",
     phone: "+91 98110 01010",
@@ -216,15 +217,16 @@ export const INITIAL_EMPLOYEES = [
     joiningDate: "2023-08-01",
     status: "Active",
     avatar: "🌟",
-    bio: "Passionate engineer focusing on campus outreach, student success, and community engagement.",
-    leaveBalance: { casual: 11, sick: 9, privilege: 12, blessings: 3 },
+    bio: "Passionate engineer focusing on campus outreach, student success, community engagement, and SarlaYash Mission.",
+    leaveBalance: { casual: 10, sick: 8, privilege: 12, blessings: 3 },
     salary: { basic: 75000, hra: 30000, allowances: 11000, pf: 3500, tax: 6800 },
-    assignedChannels: ["SarlaYash Mission"]
+    assignedChannels: ["SarlaYash Mission", "SarlaYash Mission Powered By Kapil"]
   }
 ];
 
+// Official 18 Channels from Excel Ecosystem • Real links and leads
 export const INITIAL_CHANNELS = [
-  // LinkedIn Channels
+  // LinkedIn Channels (7)
   {
     id: "li-1",
     platform: "LinkedIn",
@@ -232,9 +234,8 @@ export const INITIAL_CHANNELS = [
     url: "https://www.linkedin.com/company/polish-aptitude-with-kapil-sarlayash/home/?viewAsMember=true",
     assignedTo: "Nidhi Rathore",
     assignedEcode: "SYM007",
-    followers: "14.2K",
-    postsThisMonth: 18,
-    status: "Active & High Impact"
+    category: "Quantitative & Logical Aptitude",
+    status: "Active Channel"
   },
   {
     id: "li-2",
@@ -243,9 +244,8 @@ export const INITIAL_CHANNELS = [
     url: "https://www.linkedin.com/company/ai-ladder-with-kapil-powered-by-sarlayash/home/?viewAsMember=true",
     assignedTo: "Amber Khanum",
     assignedEcode: "SYM004",
-    followers: "32.5K",
-    postsThisMonth: 24,
-    status: "Trending / Flagship"
+    category: "Artificial Intelligence & Solution Engineering",
+    status: "Flagship Channel"
   },
   {
     id: "li-3",
@@ -254,20 +254,18 @@ export const INITIAL_CHANNELS = [
     url: "https://www.linkedin.com/company/dsa-unfiltered-with-kapil-powered-by-sarlayash/home/?viewAsMember=true",
     assignedTo: "Arpan Mandal",
     assignedEcode: "SYM005",
-    followers: "28.9K",
-    postsThisMonth: 20,
-    status: "Active & High Impact"
+    category: "Data Structures, Algorithms & Systems",
+    status: "Active Channel"
   },
   {
     id: "li-4",
     platform: "LinkedIn",
-    name: "Mind Your Words With Kapil | Powered By SarlaYash",
-    url: "https://www.linkedin.com/company/mind-your-words-with-kapil-powered-by-sarlayash/home/?viewAsMember=true",
+    name: "Mind Your Words With Kapil",
+    url: "https://www.linkedin.com/company/mind-your-words-with-kapil/home/?viewAsMember=true",
     assignedTo: "Tarunika A",
     assignedEcode: "SYM009",
-    followers: "19.4K",
-    postsThisMonth: 16,
-    status: "Active"
+    category: "Professional Articulation & Communication",
+    status: "Active Channel"
   },
   {
     id: "li-5",
@@ -276,20 +274,18 @@ export const INITIAL_CHANNELS = [
     url: "https://www.linkedin.com/company/sarlayash-mission/home/?viewAsMember=true",
     assignedTo: "Madhumita Adak",
     assignedEcode: "SYM010",
-    followers: "45.1K",
-    postsThisMonth: 28,
-    status: "Official Enterprise Page"
+    category: "Institutional Vision & Outreach",
+    status: "Official Hub"
   },
   {
     id: "li-6",
     platform: "LinkedIn",
-    name: "Mysteries Of POSH With Kapil | Powered By SarlaYash",
-    url: "https://www.linkedin.com/company/mysteries-of-posh-with-kapil-powered-by-sarlayash/home/?viewAsMember=true",
+    name: "Mysteries Of POSH With Kapil",
+    url: "https://www.linkedin.com/company/mysteries-of-posh-with-kapil/home/?viewAsMember=true",
     assignedTo: "Manju Kushwaha",
     assignedEcode: "SYM008",
-    followers: "11.8K",
-    postsThisMonth: 12,
-    status: "Compliance & Ethics Spotlight"
+    category: "POSH Law, Workplace Safety & Ethics",
+    status: "Active Channel"
   },
   {
     id: "li-7",
@@ -298,22 +294,20 @@ export const INITIAL_CHANNELS = [
     url: "https://www.linkedin.com/company/cyber-iq-with-kapil-powered-by-sarlayash/home/?viewAsMember=true",
     assignedTo: "Abhishek Kaundal",
     assignedEcode: "SYM006",
-    followers: "21.6K",
-    postsThisMonth: 15,
-    status: "Active & High Impact"
+    category: "Cybersecurity & Incident Response",
+    status: "Active Channel"
   },
 
-  // YouTube Channels
+  // YouTube Channels (6)
   {
     id: "yt-1",
     platform: "YouTube",
-    name: "SarlaYash Mission | Powered By Kapil",
+    name: "SarlaYash Mission",
     url: "https://www.youtube.com/@SarlaYash",
-    assignedTo: "Kapil Narula",
-    assignedEcode: "SYM001",
-    followers: "185K",
-    postsThisMonth: 14,
-    status: "Main YouTube Channel"
+    assignedTo: "Madhumita Adak",
+    assignedEcode: "SYM010",
+    category: "Central Educational Broadcast Hub",
+    status: "Official Channel"
   },
   {
     id: "yt-2",
@@ -322,20 +316,18 @@ export const INITIAL_CHANNELS = [
     url: "https://www.youtube.com/@AILadderWithKapil",
     assignedTo: "Amber Khanum",
     assignedEcode: "SYM004",
-    followers: "96.4K",
-    postsThisMonth: 22,
-    status: "Assigned: Amber (Super Hit 🚀)"
+    category: "Generative AI, LLMs & Hands-On Workshops",
+    status: "Flagship Show"
   },
   {
     id: "yt-3",
     platform: "YouTube",
     name: "HR Mirror With Kapil",
-    url: "https://www.youtube.com/@HRMIrrorWithKapil",
+    url: "https://www.youtube.com/@HRMirrorWithKapil",
     assignedTo: "Trisha Ghosh",
     assignedEcode: "SYM003",
-    followers: "38.2K",
-    postsThisMonth: 10,
-    status: "Active Leadership Stream"
+    category: "Human Resources, Hiring & Talent Insights",
+    status: "Active Show"
   },
   {
     id: "yt-4",
@@ -344,9 +336,8 @@ export const INITIAL_CHANNELS = [
     url: "https://www.youtube.com/@DSAUnfilteredWithKapil",
     assignedTo: "Arpan Mandal",
     assignedEcode: "SYM005",
-    followers: "74.8K",
-    postsThisMonth: 19,
-    status: "Active Series"
+    category: "Interview Problem Solving & Code Deconstructions",
+    status: "Active Show"
   },
   {
     id: "yt-5",
@@ -355,9 +346,8 @@ export const INITIAL_CHANNELS = [
     url: "https://www.youtube.com/@MysteriesOfPOSHwithKapil",
     assignedTo: "Manju Kushwaha",
     assignedEcode: "SYM008",
-    followers: "26.3K",
-    postsThisMonth: 8,
-    status: "Special Initiative"
+    category: "Case Studies, Compliance & POSH Guidelines",
+    status: "Active Show"
   },
   {
     id: "yt-6",
@@ -366,12 +356,11 @@ export const INITIAL_CHANNELS = [
     url: "https://www.youtube.com/@MindYourWordsWithKapil",
     assignedTo: "Tarunika A",
     assignedEcode: "SYM009",
-    followers: "41.5K",
-    postsThisMonth: 12,
-    status: "Active Series"
+    category: "Verbal Excellence, Vocabulary & Business English",
+    status: "Active Show"
   },
 
-  // Facebook Channels
+  // Facebook Channels (5)
   {
     id: "fb-1",
     platform: "Facebook",
@@ -379,9 +368,8 @@ export const INITIAL_CHANNELS = [
     url: "https://www.facebook.com/profile.php?id=61596655379456",
     assignedTo: "Amber Khanum",
     assignedEcode: "SYM004",
-    followers: "18.3K",
-    postsThisMonth: 15,
-    status: "Active"
+    category: "AI Tutorials & Community Discussions",
+    status: "Active Community"
   },
   {
     id: "fb-2",
@@ -390,9 +378,8 @@ export const INITIAL_CHANNELS = [
     url: "https://www.facebook.com/profile.php?id=61596795923454",
     assignedTo: "Tarunika A",
     assignedEcode: "SYM009",
-    followers: "12.7K",
-    postsThisMonth: 11,
-    status: "Active"
+    category: "Daily Communication Drills & Word Crafting",
+    status: "Active Community"
   },
   {
     id: "fb-3",
@@ -401,9 +388,8 @@ export const INITIAL_CHANNELS = [
     url: "https://www.facebook.com/profile.php?id=61596548044176",
     assignedTo: "Arpan Mandal",
     assignedEcode: "SYM005",
-    followers: "15.9K",
-    postsThisMonth: 14,
-    status: "Active"
+    category: "Coding Puzzles & DSA Cheat Sheets",
+    status: "Active Community"
   },
   {
     id: "fb-4",
@@ -412,9 +398,8 @@ export const INITIAL_CHANNELS = [
     url: "https://www.facebook.com/profile.php?id=61596715407108",
     assignedTo: "Abhishek Kaundal",
     assignedEcode: "SYM006",
-    followers: "9.8K",
-    postsThisMonth: 9,
-    status: "Active"
+    category: "Cyber Threats & Digital Defense Advisories",
+    status: "Active Community"
   },
   {
     id: "fb-5",
@@ -423,94 +408,22 @@ export const INITIAL_CHANNELS = [
     url: "https://www.facebook.com/SarlaYashMissionPoweredByKapil/",
     assignedTo: "Madhumita Adak",
     assignedEcode: "SYM010",
-    followers: "54.2K",
-    postsThisMonth: 22,
+    category: "Official Foundation & Student Community Portal",
     status: "Official Community Hub"
   }
 ];
 
-export const INITIAL_LEAVES = [
-  {
-    id: "LV-2026-001",
-    employeeId: "SYM004",
-    employeeName: "Amber Khanum",
-    leaveType: "Casual Leave",
-    startDate: "2026-11-20",
-    endDate: "2026-11-21",
-    daysCount: 2,
-    duration: "Full Day",
-    reason: "Attending National AI Summit as guest panelist & family function.",
-    appliedOn: "2026-11-14",
-    status: "Pending", // Pending, Approved, Rejected
-    managerName: "Sathursan Kamalanathan",
-    managerRemarks: ""
-  },
-  {
-    id: "LV-2026-002",
-    employeeId: "SYM005",
-    employeeName: "Arpan Mandal",
-    leaveType: "Privilege Leave",
-    startDate: "2026-11-27",
-    endDate: "2026-11-28",
-    daysCount: 2,
-    duration: "Full Day",
-    reason: "Family wedding and personal travel to hometown.",
-    appliedOn: "2026-11-12",
-    status: "Pending",
-    managerName: "Sathursan Kamalanathan",
-    managerRemarks: ""
-  },
-  {
-    id: "LV-2026-003",
-    employeeId: "SYM007",
-    employeeName: "Nidhi Rathore",
-    leaveType: "Sick Leave",
-    startDate: "2026-11-10",
-    endDate: "2026-11-10",
-    daysCount: 1,
-    duration: "Full Day",
-    reason: "Severe viral fever and doctor visit.",
-    appliedOn: "2026-11-09",
-    status: "Approved",
-    managerName: "Trisha Ghosh",
-    managerRemarks: "Approved. Take care and get well soon."
-  },
-  {
-    id: "LV-2026-004",
-    employeeId: "SYM008",
-    employeeName: "Manju Kushwaha",
-    leaveType: "SarlaYash Blessings Leave",
-    startDate: "2026-11-18",
-    endDate: "2026-11-18",
-    daysCount: 1,
-    duration: "Full Day",
-    reason: "Community social service drive and spiritual study camp.",
-    appliedOn: "2026-11-13",
-    status: "Approved",
-    managerName: "Trisha Ghosh",
-    managerRemarks: "Wonderful cause. Approved with Blessings."
-  },
-  {
-    id: "LV-2026-005",
-    employeeId: "SYM006",
-    employeeName: "Abhishek Kaundal",
-    leaveType: "Casual Leave",
-    startDate: "2026-11-24",
-    endDate: "2026-11-25",
-    daysCount: 2,
-    duration: "Full Day",
-    reason: "Personal banking and urgent domestic maintenance.",
-    appliedOn: "2026-11-15",
-    status: "Pending",
-    managerName: "Sathursan Kamalanathan",
-    managerRemarks: ""
-  }
-];
+// Clean Real Leaves: Starts Empty • Employees apply for real leaves, Founder approves/rejects
+export const INITIAL_LEAVES = [];
 
+// Punch Correction Requests: Starts Empty • Managed via Super Admin Desk
+export const INITIAL_PUNCH_CORRECTIONS = [];
+
+// Attendance: Strictly active only from Nov 01, 2026 onwards (no past months)
 export const INITIAL_ATTENDANCE = [
-  // Today's attendance seed records
+  // Today's attendance seed (16 Nov 2026) for active users
   {
-    id: "ATT-TODAY-01",
+    id: "ATT-2026-11-16-SYM001",
     employeeId: "SYM001",
     employeeName: "Kapil Narula",
     date: "2026-11-16",
@@ -518,21 +431,21 @@ export const INITIAL_ATTENDANCE = [
     checkOut: null,
     workMode: "Office - Executive Suite",
     status: "Present",
-    notes: "Leadership strategy alignment & vision review."
+    notes: "Leadership strategy review & portal deployment audit."
   },
   {
-    id: "ATT-TODAY-02",
+    id: "ATT-2026-11-16-SYM002",
     employeeId: "SYM002",
     employeeName: "Sathursan Kamalanathan",
     date: "2026-11-16",
-    checkIn: "09:02 AM",
+    checkIn: "09:05 AM",
     checkOut: null,
     workMode: "Office",
     status: "Present",
-    notes: "Q4 Roadmap sprint planning & engineering sync."
+    notes: "Q4 operational sprint roadmap."
   },
   {
-    id: "ATT-TODAY-03",
+    id: "ATT-2026-11-16-SYM003",
     employeeId: "SYM003",
     employeeName: "Trisha Ghosh",
     date: "2026-11-16",
@@ -540,10 +453,10 @@ export const INITIAL_ATTENDANCE = [
     checkOut: null,
     workMode: "Office",
     status: "Present",
-    notes: "POSH workshop briefing & talent performance check."
+    notes: "People and POSH compliance review."
   },
   {
-    id: "ATT-TODAY-04",
+    id: "ATT-2026-11-16-SYM004",
     employeeId: "SYM004",
     employeeName: "Amber Khanum",
     date: "2026-11-16",
@@ -551,10 +464,10 @@ export const INITIAL_ATTENDANCE = [
     checkOut: null,
     workMode: "Office - AI Lab",
     status: "Present",
-    notes: "Shooting episode 14 of AI Ladder With Kapil."
+    notes: "AI Ladder episode recording."
   },
   {
-    id: "ATT-TODAY-05",
+    id: "ATT-2026-11-16-SYM005",
     employeeId: "SYM005",
     employeeName: "Arpan Mandal",
     date: "2026-11-16",
@@ -562,10 +475,10 @@ export const INITIAL_ATTENDANCE = [
     checkOut: null,
     workMode: "Remote / Work From Home",
     status: "Present",
-    notes: "DSA Trees & Graphs live session preparation."
+    notes: "DSA Trees problem set preparation."
   },
   {
-    id: "ATT-TODAY-06",
+    id: "ATT-2026-11-16-SYM006",
     employeeId: "SYM006",
     employeeName: "Abhishek Kaundal",
     date: "2026-11-16",
@@ -573,10 +486,10 @@ export const INITIAL_ATTENDANCE = [
     checkOut: null,
     workMode: "Office",
     status: "Present",
-    notes: "Security testing and server audit."
+    notes: "Cyber IQ lab setup."
   },
   {
-    id: "ATT-TODAY-07",
+    id: "ATT-2026-11-16-SYM007",
     employeeId: "SYM007",
     employeeName: "Nidhi Rathore",
     date: "2026-11-16",
@@ -584,10 +497,10 @@ export const INITIAL_ATTENDANCE = [
     checkOut: null,
     workMode: "Office",
     status: "Present",
-    notes: "Aptitude question vault generation for students."
+    notes: "Aptitude question vault generation."
   },
   {
-    id: "ATT-TODAY-08",
+    id: "ATT-2026-11-16-SYM008",
     employeeId: "SYM008",
     employeeName: "Manju Kushwaha",
     date: "2026-11-16",
@@ -595,10 +508,10 @@ export const INITIAL_ATTENDANCE = [
     checkOut: null,
     workMode: "Office",
     status: "Late Mark",
-    notes: "Traffic jam; POSH case study curation."
+    notes: "POSH case study curation."
   },
   {
-    id: "ATT-TODAY-09",
+    id: "ATT-2026-11-16-SYM009",
     employeeId: "SYM009",
     employeeName: "Tarunika A",
     date: "2026-11-16",
@@ -606,10 +519,10 @@ export const INITIAL_ATTENDANCE = [
     checkOut: null,
     workMode: "Remote / Work From Home",
     status: "Present",
-    notes: "Verbal communication & interview scripts formulation."
+    notes: "Communication script drafting."
   },
   {
-    id: "ATT-TODAY-10",
+    id: "ATT-2026-11-16-SYM010",
     employeeId: "SYM010",
     employeeName: "Madhumita Adak",
     date: "2026-11-16",
@@ -617,23 +530,19 @@ export const INITIAL_ATTENDANCE = [
     checkOut: null,
     workMode: "Office",
     status: "Present",
-    notes: "Student placement drive coordination."
+    notes: "Student placement inquiries."
   }
 ];
 
+// Official Calendar Holidays and Events (November 2026 onwards)
 export const INITIAL_HOLIDAYS_AND_EVENTS = [
-  { id: "EV-01", date: "2026-01-26", title: "Republic Day", type: "Holiday", color: "red" },
-  { id: "EV-02", date: "2026-03-04", title: "Holi - Festival of Colors", type: "Holiday", color: "red" },
-  { id: "EV-03", date: "2026-04-14", title: "Dr. B.R. Ambedkar Jayanti", type: "Holiday", color: "red" },
-  { id: "EV-04", date: "2026-05-01", title: "Labor Day / Spring Festival", type: "Holiday", color: "red" },
-  { id: "EV-05", date: "2026-08-15", title: "Independence Day", type: "Holiday", color: "red" },
-  { id: "EV-06", date: "2026-10-02", title: "Gandhi Jayanti", type: "Holiday", color: "red" },
-  { id: "EV-07", date: "2026-11-08", title: "Diwali - Festival of Lights", type: "Holiday", color: "red" },
-  { id: "EV-08", date: "2026-11-16", title: "Today: Q4 Sprint Review & Tech Demo", type: "Company Event", color: "gold" },
-  { id: "EV-09", date: "2026-11-20", title: "AI Ladder Live Masterclass (with Kapil & Amber)", type: "Live Broadcast", color: "cyan" },
-  { id: "EV-10", date: "2026-11-25", title: "SarlaYash Blessings Fellowship Showcase", type: "Milestone", color: "purple" },
-  { id: "EV-11", date: "2026-12-05", title: "SarlaYash Foundation Annual Gala 2026", type: "Company Event", color: "gold" },
-  { id: "EV-12", date: "2026-12-25", title: "Christmas Day", type: "Holiday", color: "red" }
+  { id: "EV-01", date: "2026-11-08", title: "Diwali - Festival of Lights", type: "Holiday", color: "red" },
+  { id: "EV-02", date: "2026-11-16", title: "Today: ERP Launch & Q4 Tech Review", type: "Company Event", color: "gold" },
+  { id: "EV-03", date: "2026-11-20", title: "AI Ladder Live Masterclass (with Kapil & Amber)", type: "Live Broadcast", color: "cyan" },
+  { id: "EV-04", date: "2026-11-25", title: "SarlaYash Blessings Fellowship Showcase", type: "Milestone", color: "purple" },
+  { id: "EV-05", date: "2026-12-05", title: "SarlaYash Foundation Annual Gala 2026", type: "Company Event", color: "gold" },
+  { id: "EV-06", date: "2026-12-25", title: "Christmas Day", type: "Holiday", color: "red" },
+  { id: "EV-07", date: "2027-01-26", title: "Republic Day", type: "Holiday", color: "red" }
 ];
 
 export const INITIAL_ANNOUNCEMENTS = [
@@ -641,28 +550,19 @@ export const INITIAL_ANNOUNCEMENTS = [
     id: "ANN-001",
     title: "✨ Welcome to SarlaYash Universe ERP & Blessings Earning Portal!",
     author: "Kapil Narula (Founder)",
-    date: "2026-11-15",
+    date: "2026-11-16",
     category: "Founder's Vision",
     priority: "High",
-    content: "Welcome team to the next-generation SarlaYash Enterprise ERP. As we scale the SarlaYash Universe across our channels, institutions, and learners, this portal empowers each of you to track attendance, manage leaves, amplify our content reach, and earn life-changing rewards under our SarlaYash Blessings Internships & Earning Model: 'Choose your target. Create the impact. Prove the results. Earn your reward.' Let us build with unyielding dedication!"
+    content: "Welcome team to the official SarlaYash Enterprise ERP. This internal system connects our ecosystem across channels, learners, and institutions. Every engineer has an individual dashboard to punch daily attendance, submit work logs, and track performance under our SarlaYash Blessings Internships model: 'Choose your target. Create the impact. Prove the results. Earn your reward.' Let us build with unyielding dedication!"
   },
   {
     id: "ANN-002",
-    title: "📈 Q4 Channel Growth & Content Publishing Guidelines",
-    author: "Sathursan Kamalanathan (CEO)",
-    date: "2026-11-12",
-    category: "Operations",
-    priority: "Medium",
-    content: "Kudos to Amber for scaling 'AI Ladder 🪜 With Kapil' past 96K subscribers! Please ensure all solution engineers submit weekly channel performance telemetry every Friday before 6:00 PM."
-  },
-  {
-    id: "ANN-003",
-    title: "🛡️ POSH Awareness Week & Safe Workplace Commitment",
+    title: "🛡️ POSH Awareness & Safe Workplace Commitment",
     author: "Trisha Ghosh (CPO)",
-    date: "2026-11-10",
+    date: "2026-11-16",
     category: "People & Culture",
     priority: "High",
-    content: "In alignment with 'Mysteries Of POSH With Kapil', SarlaYash upholds a zero-tolerance policy against any form of harassment. Our Internal Complaints Committee (ICC) is at your service 24x7. Access our full policy in the Knowledge Base."
+    content: "In alignment with 'Mysteries Of POSH With Kapil', SarlaYash maintains an uncompromising zero-tolerance stance against harassment. Our ICC is accessible 24x7 to support every team member."
   }
 ];
 
@@ -671,65 +571,53 @@ export const INITIAL_EARNING_TARGETS = [
     id: "EARN-01",
     employeeEcode: "SYM004",
     employeeName: "Amber Khanum",
-    targetTitle: "AI Ladder YouTube 100K Subscribers Milestone",
+    targetTitle: "AI Ladder YouTube Channel Growth",
     category: "Channel Growth & EdTech Impact",
-    targetImpactMetric: "100,000 Subscribers & 1M Views",
-    currentProgress: 96400,
-    targetValue: 100000,
-    unit: "Subscribers",
-    rewardTier: "Diamond Champion",
-    rewardAmount: "₹50,000 Special Bonus + Gold Crest",
-    proofSubmitted: "https://www.youtube.com/@AILadderWithKapil (Analytics submitted)",
-    status: "In Progress (96.4%)",
-    deadline: "2026-12-15"
+    targetImpactMetric: "Build subscribers on YouTube & Facebook",
+    rewardTier: "Slab 3 (₹15,000)",
+    rewardAmount: "Up to ₹15,000 / month",
+    proofSubmitted: "https://www.youtube.com/@AILadderWithKapil",
+    status: "Active Target",
+    deadline: "2026-11-30"
   },
   {
     id: "EARN-02",
     employeeEcode: "SYM005",
     employeeName: "Arpan Mandal",
-    targetTitle: "DSA Masterclass Problem Repository (100 Optimal Solutions)",
+    targetTitle: "DSA Unfiltered Curriculum Solutions",
     category: "Technical Curriculum",
-    targetImpactMetric: "100 High-Quality DSA Video Walkthroughs",
-    currentProgress: 88,
-    targetValue: 100,
-    unit: "Walkthroughs",
-    rewardTier: "Gold Innovator",
-    rewardAmount: "₹35,000 Incentive",
-    proofSubmitted: "GitHub: sarlayash-dsa-vault/commit-tree",
-    status: "In Progress (88%)",
+    targetImpactMetric: "30 LinkedIn posts + DSA walkthroughs",
+    rewardTier: "Slab 2 (₹10,000)",
+    rewardAmount: "Up to ₹10,000 / month",
+    proofSubmitted: "https://www.youtube.com/@DSAUnfilteredWithKapil",
+    status: "Active Target",
     deadline: "2026-11-30"
   },
   {
     id: "EARN-03",
     employeeEcode: "SYM007",
     employeeName: "Nidhi Rathore",
-    targetTitle: "Industry Aptitude Test Engine (5000 Active Student Assessments)",
+    targetTitle: "Polish Aptitude Assessments Vault",
     category: "EdTech Platform",
-    targetImpactMetric: "5,000 Students Assessed with >90% satisfaction",
-    currentProgress: 5000,
-    targetValue: 5000,
-    unit: "Students",
-    rewardTier: "Diamond Champion",
-    rewardAmount: "₹45,000 Reward Approved",
-    proofSubmitted: "https://assessments.sarlayash.org/reports/q3",
-    status: "Verified & Rewarded 🎉",
-    deadline: "2026-11-10"
+    targetImpactMetric: "Aptitude question vault & engagement",
+    rewardTier: "Slab 2 (₹10,000)",
+    rewardAmount: "Up to ₹10,000 / month",
+    proofSubmitted: "https://www.linkedin.com/company/polish-aptitude-with-kapil-sarlayash/",
+    status: "Active Target",
+    deadline: "2026-11-30"
   },
   {
     id: "EARN-04",
     employeeEcode: "SYM006",
     employeeName: "Abhishek Kaundal",
-    targetTitle: "Cyber IQ Practical Labs & Penetration Testing Demos",
+    targetTitle: "Cyber IQ Interactive Lab Deployment",
     category: "Cybersecurity Training",
-    targetImpactMetric: "25 Hands-on CTF Sandbox Modules",
-    currentProgress: 20,
-    targetValue: 25,
-    unit: "Modules",
-    rewardTier: "Silver Achiever",
-    rewardAmount: "₹25,000 Reward",
-    proofSubmitted: "Labs environment deployed on cloud sandbox",
-    status: "In Progress (80%)",
-    deadline: "2026-12-01"
+    targetImpactMetric: "Practical penetration testing exercises",
+    rewardTier: "Slab 1 (₹5,000)",
+    rewardAmount: "Up to ₹5,000 / month",
+    proofSubmitted: "https://www.linkedin.com/company/cyber-iq-with-kapil-powered-by-sarlayash/",
+    status: "Active Target",
+    deadline: "2026-11-30"
   }
 ];
 
@@ -739,206 +627,162 @@ export const COMPANY_POLICIES = [
     title: "SarlaYash Code of Professional Excellence",
     category: "Core Values",
     summary: "Integrity, learner-first mindset, intellectual honesty, and extreme ownership across all projects.",
-    lastUpdated: "2026-10-01"
+    lastUpdated: "2026-11-01"
   },
   {
     id: "POL-02",
     title: "Prevention of Sexual Harassment (POSH) Enterprise Policy",
     category: "Workplace Safety & Compliance",
-    summary: "Comprehensive guidelines ensuring a respectful, safe, inclusive workplace for every gender, guided by 'Mysteries Of POSH With Kapil'.",
-    lastUpdated: "2026-09-15"
+    summary: "Zero-tolerance workplace charter guided by 'Mysteries Of POSH With Kapil'. Mandatory annual sensitization for all staff.",
+    lastUpdated: "2026-11-01"
   },
   {
     id: "POL-03",
-    title: "Attendance & Flexible Hybrid Working Hours",
+    title: "Attendance & Hybrid Working Guidelines",
     category: "HR & Operations",
-    summary: "Core collaboration window: 09:30 AM to 06:30 PM. Daily punch-in required. 2 Work-From-Home days permitted per week upon manager intimation.",
-    lastUpdated: "2026-10-15"
+    summary: "Attendance punches active from 01 November 2026. Standard shift starts at 09:30 AM. Punch corrections must be submitted via the portal for Founder approval.",
+    lastUpdated: "2026-11-01"
   },
   {
     id: "POL-04",
     title: "SarlaYash Blessings Leave & Reward Entitlement",
     category: "Blessings & Wellness",
-    summary: "3 days of paid Blessings Leave annually for community service, spiritual retreats, or personal renewal without deduction from casual quota.",
-    lastUpdated: "2026-10-20"
+    summary: "5 days of paid Blessings Leave annually for community causes, spiritual retreats, and special personal renewal.",
+    lastUpdated: "2026-11-01"
   },
   {
     id: "POL-05",
-    title: "🙌 What Makes SarlaYash Blessings Internships Different? (Charter & Slabs)",
+    title: "🙌 What Makes SarlaYash Blessings Internships Different?",
     category: "Internships & Earning Model",
-    summary: "An internship should not feel like another classroom. It should give you responsibility, flexibility, care and a chance to create measurable impact: Just 1 Hour a Day, 5-Day Work Week, Permanent WFH, A Model That Cares (Parental, Exam, Sick, Female No-Question Leave), 100% Refundable ₹50 Daily Commitment Deposit, and Performance Slabs: Slab 0 (₹1,000), Slab 1 (₹1,000-₹5,000), Slab 2 (₹1,000-₹10,000), Slab 3 (₹1,000-₹15,000).",
+    summary: "Just 1 Hour a Day • 5-Day Work Week • Permanent Work From Home • Model That Cares (Parental, Exam, Sick, Female No-Question Leave, All Holidays Off) • 100% Refundable ₹50 Daily Commitment Deposit • Performance Slabs 0 to 3 (₹1,000 to ₹15,000).",
     lastUpdated: "2026-11-16"
   }
 ];
-
 
 export const INITIAL_TASKS = [
   {
     id: "TSK-001",
     employeeId: "SYM001",
     employeeEcode: "SYM001",
-    title: "Weekly Founder's Vision address & SarlaYash Mission review",
+    title: "Weekly Founder's Vision address & ERP governance review",
     channel: "SarlaYash Mission | Powered By Kapil",
     category: "Executive Strategy",
     priority: "High",
     status: "Completed",
     dueDate: "2026-11-16",
-    deliverables: "Recorded key vision speech on SarlaYash ecosystem growth.",
+    deliverables: "Supervised ERP deployment and ecosystem operational readiness.",
     hoursSpent: 3.5,
     proofUrl: "https://www.youtube.com/@SarlaYash"
   },
   {
-    id: "TSK-002",
-    employeeId: "SYM001",
-    employeeEcode: "SYM001",
-    title: "Evaluate Q4 Blessings Internships submissions & approve incentive disbursements",
-    channel: "Enterprise ERP",
-    category: "Blessings Evaluation",
-    priority: "High",
-    status: "In Progress",
-    dueDate: "2026-11-17",
-    deliverables: "Reviewing milestones of Amber, Arpan, Nidhi, and Abhishek.",
-    hoursSpent: 2.0,
-    proofUrl: ""
-  },
-  {
-    id: "TSK-003",
-    employeeId: "SYM002",
-    employeeEcode: "SYM002",
-    title: "Review sprint deliverables from Solution Engineers (Amber, Arpan, Abhishek)",
-    channel: "Tech & Engineering Hub",
-    category: "Operations",
-    priority: "High",
-    status: "Completed",
-    dueDate: "2026-11-16",
-    deliverables: "Approved AI demo modules and code releases.",
-    hoursSpent: 4.0,
-    proofUrl: "https://github.com/sarlayash"
-  },
-  {
     id: "TSK-004",
-    employeeId: "SYM003",
-    employeeEcode: "SYM003",
-    title: "Weekly Talent & Culture sync with Solution Engineers",
-    channel: "HR Mirror With Kapil",
-    category: "People & Culture",
-    priority: "Medium",
-    status: "Completed",
-    dueDate: "2026-11-16",
-    deliverables: "1-on-1 check-ins on wellness and leave planning.",
-    hoursSpent: 3.0,
-    proofUrl: ""
-  },
-  {
-    id: "TSK-005",
     employeeId: "SYM004",
     employeeEcode: "SYM004",
-    title: "Record & edit Episode 14 for AI Ladder 🪜 YouTube channel",
+    title: "Produce Episode 14 for AI Ladder 🪜 YouTube channel",
     channel: "AI Ladder 🪜 With Kapil",
     category: "Content & AI Engineering",
     priority: "High",
     status: "In Progress",
     dueDate: "2026-11-16",
-    deliverables: "Script drafted, footage recorded. Final editing in progress.",
+    deliverables: "Recorded hands-on tutorial on agentic workflows and tool calling.",
     hoursSpent: 4.5,
     proofUrl: "https://www.youtube.com/@AILadderWithKapil"
   },
   {
-    id: "TSK-006",
-    employeeId: "SYM004",
-    employeeEcode: "SYM004",
-    title: "Prepare Generative AI hands-on workshop presentation",
-    channel: "AI Ladder With Kapil | Powered by SarlaYash",
-    category: "Curriculum",
-    priority: "Medium",
-    status: "Pending",
-    dueDate: "2026-11-18",
-    deliverables: "Slide deck covering Gemini 3.8 Live API and tool calling.",
-    hoursSpent: 1.0,
-    proofUrl: ""
-  },
-  {
-    id: "TSK-007",
+    id: "TSK-005",
     employeeId: "SYM005",
     employeeEcode: "SYM005",
-    title: "Record 2 optimal DSA solutions on Trees and Graphs (LeetCode Hard)",
+    title: "Solve and record 2 LeetCode Tree/Graph problems",
     channel: "DSA Unfiltered With Kapil",
     category: "DSA Curriculum",
     priority: "High",
     status: "In Progress",
     dueDate: "2026-11-16",
-    deliverables: "Completed BFS/DFS traversal explanation; recording Dijkstra's algorithm.",
+    deliverables: "Recorded optimal solutions with detailed time/space complexity.",
     hoursSpent: 3.5,
     proofUrl: "https://www.youtube.com/@DSAUnfilteredWithKapil"
   },
   {
-    id: "TSK-008",
+    id: "TSK-006",
     employeeId: "SYM006",
     employeeEcode: "SYM006",
-    title: "Configure Cyber IQ interactive CTF sandbox challenge #21",
+    title: "Deploy Cyber IQ hands-on CTF lab",
     channel: "Cyber IQ With Kapil | Powered By SarlaYash",
     category: "Cybersecurity Training",
     priority: "High",
     status: "In Progress",
     dueDate: "2026-11-16",
-    deliverables: "Vulnerable web application container deployed for pen-testing lab.",
+    deliverables: "Configured secure containerized environment for penetration testing practice.",
     hoursSpent: 4.0,
     proofUrl: ""
   },
   {
-    id: "TSK-009",
+    id: "TSK-007",
     employeeId: "SYM007",
     employeeEcode: "SYM007",
-    title: "Generate 50 new Quantitative Aptitude questions for student assessment",
+    title: "Author 50 Quantitative Aptitude questions",
     channel: "Polish Aptitude With Kapil",
     category: "EdTech Platform",
     priority: "High",
     status: "Completed",
     dueDate: "2026-11-16",
-    deliverables: "50 problems on permutations, probability, and algebra added to portal.",
-    hoursSpent: 5.0,
+    deliverables: "Curated 50 multi-step problems with explanations.",
+    hoursSpent: 4.0,
     proofUrl: "https://www.linkedin.com/company/polish-aptitude-with-kapil-sarlayash/"
   },
   {
-    id: "TSK-010",
+    id: "TSK-008",
     employeeId: "SYM008",
     employeeEcode: "SYM008",
-    title: "Curate 3 workplace POSH case scenarios for company training deck",
+    title: "Curate POSH compliance case studies",
     channel: "Mysteries Of POSH with Kapil",
     category: "Corporate Compliance",
     priority: "Medium",
     status: "In Progress",
-    dueDate: "2026-11-17",
-    deliverables: "Analysis of scenario #1 and #2 completed in accordance with ICC norms.",
-    hoursSpent: 2.5,
+    dueDate: "2026-11-16",
+    deliverables: "Summarized ICC legal precedents and prevention advisories.",
+    hoursSpent: 3.0,
     proofUrl: "https://www.youtube.com/@MysteriesOfPOSHwithKapil"
   },
   {
-    id: "TSK-011",
+    id: "TSK-009",
     employeeId: "SYM009",
     employeeEcode: "SYM009",
-    title: "Draft verbal articulation scripts for Mind Your Words broadcast",
+    title: "Draft corporate communication and articulation scripts",
     channel: "Mind Your Words With Kapil",
     category: "Communication",
     priority: "Medium",
     status: "In Progress",
     dueDate: "2026-11-16",
-    deliverables: "10 idioms and corporate negotiation dialogues curated.",
+    deliverables: "Prepared 10 corporate vocabulary drills and executive dialogue examples.",
     hoursSpent: 3.0,
     proofUrl: "https://www.youtube.com/@MindYourWordsWithKapil"
   },
   {
-    id: "TSK-012",
+    id: "TSK-010",
     employeeId: "SYM010",
     employeeEcode: "SYM010",
-    title: "Coordinate student outreach and campus drive inquiries",
+    title: "Student outreach & campus winter drive coordination",
     channel: "SarlaYash Mission Powered By Kapil",
     category: "Student Outreach",
     priority: "High",
     status: "Completed",
     dueDate: "2026-11-16",
-    deliverables: "Responded to 85 student queries for upcoming winter internship.",
+    deliverables: "Engaged candidate inquiries regarding SarlaYash Blessings Internships.",
     hoursSpent: 4.0,
     proofUrl: "https://www.facebook.com/SarlaYashMissionPoweredByKapil/"
+  }
+];
+
+export const INITIAL_NOTIFICATIONS = [
+  {
+    id: "NOTIF-01",
+    recipientId: "all",
+    senderName: "Founder Kapil Narula",
+    title: "Welcome to SarlaYash Universe ERP",
+    message: "Official enterprise ERP is now live for all team members. Attendance tracking is active from November 01, 2026.",
+    type: "system",
+    timestamp: "2026-11-16T09:00:00Z",
+    isRead: false
   }
 ];

@@ -13,6 +13,7 @@ import PayslipView from "./components/PayslipView";
 import PoliciesView from "./components/PoliciesView";
 import LoginModal from "./components/LoginModal";
 import confetti from "canvas-confetti";
+import { Sparkles, Bell, CheckCircle2, AlertTriangle, Clock, X } from "lucide-react";
 
 import {
   getStoredData,
@@ -29,7 +30,9 @@ import {
   INITIAL_HOLIDAYS_AND_EVENTS,
   INITIAL_ANNOUNCEMENTS,
   INITIAL_EARNING_TARGETS,
-  INITIAL_TASKS
+  INITIAL_TASKS,
+  INITIAL_PUNCH_CORRECTIONS,
+  INITIAL_NOTIFICATIONS
 } from "./data/initialData";
 
 export default function App() {
@@ -62,6 +65,13 @@ export default function App() {
   const [tasks, setTasks] = useState(() =>
     getStoredData(KEYS.TASKS, INITIAL_TASKS)
   );
+  const [punchCorrections, setPunchCorrections] = useState(() =>
+    getStoredData(KEYS.PUNCH_CORRECTIONS, INITIAL_PUNCH_CORRECTIONS)
+  );
+  const [notifications, setNotifications] = useState(() =>
+    getStoredData(KEYS.NOTIFICATIONS, INITIAL_NOTIFICATIONS)
+  );
+
   const [currentUserId, setCurrentUserId] = useState(() =>
     getStoredData(KEYS.CURRENT_USER_ID, "SYM001")
   );
@@ -71,6 +81,7 @@ export default function App() {
 
   const [activeTab, setActiveTab] = useState("dashboard");
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  const [toastMessage, setToastMessage] = useState(null);
 
   // Sync to localStorage
   useEffect(() => {
@@ -106,6 +117,14 @@ export default function App() {
   }, [tasks]);
 
   useEffect(() => {
+    setStoredData(KEYS.PUNCH_CORRECTIONS, punchCorrections);
+  }, [punchCorrections]);
+
+  useEffect(() => {
+    setStoredData(KEYS.NOTIFICATIONS, notifications);
+  }, [notifications]);
+
+  useEffect(() => {
     setStoredData(KEYS.CURRENT_USER_ID, currentUserId);
   }, [currentUserId]);
 
@@ -114,14 +133,48 @@ export default function App() {
   }, [isLoggedIn]);
 
   const currentUser = employees.find((e) => e.id === currentUserId) || employees[0];
+  const isSuperAdmin = currentUser?.role === "super_admin" || currentUser?.id === "SYM001";
 
   // Today's attendance for current user (16 Nov 2026)
   const todayAttendance = attendance.find(
     (a) => a.employeeId === currentUser?.id && a.date === "2026-11-16"
   );
 
-  // Pending leaves count
+  // Pending counts
   const pendingLeavesCount = leaves.filter((l) => l.status === "Pending").length;
+  const pendingCorrectionsCount = punchCorrections.filter((c) => c.status === "Pending").length;
+
+  // Real-Time Notification Dispatcher
+  const dispatchNotification = ({ recipientId, senderName, title, message, type }) => {
+    const notif = {
+      id: `NOTIF-${Date.now()}`,
+      recipientId,
+      senderName,
+      title,
+      message,
+      type: type || "system",
+      timestamp: new Date().toISOString(),
+      isRead: false
+    };
+
+    setNotifications((prev) => [notif, ...prev]);
+
+    // Show on-screen toast
+    setToastMessage({ title, message, type });
+    setTimeout(() => {
+      setToastMessage(null);
+    }, 5500);
+  };
+
+  const handleMarkNotificationRead = (notifId) => {
+    setNotifications((prev) =>
+      prev.map((n) => (n.id === notifId ? { ...n, isRead: true } : n))
+    );
+  };
+
+  const handleClearNotifications = () => {
+    setNotifications([]);
+  };
 
   // Handlers
   const handleSwitchUser = (empId) => {
@@ -138,6 +191,17 @@ export default function App() {
       spread: 60,
       origin: { y: 0.6 }
     });
+
+    const emp = employees.find((e) => e.id === empId);
+    if (emp) {
+      dispatchNotification({
+        recipientId: emp.id,
+        senderName: "SarlaYash Universe Security",
+        title: "Session Authenticated",
+        message: `Welcome ${emp.name} (${emp.ecode}). Your individual workspace is loaded.`,
+        type: "system"
+      });
+    }
   };
 
   const handleLogout = () => {
@@ -157,6 +221,17 @@ export default function App() {
       }
       return [record, ...prev];
     });
+
+    // Notify Super Admin Kapil of punch
+    if (record.employeeId !== "SYM001") {
+      dispatchNotification({
+        recipientId: "super_admin",
+        senderName: record.employeeName,
+        title: `Attendance: ${record.employeeName}`,
+        message: `${record.employeeName} (${record.employeeId}) punched: ${record.checkIn || record.checkOut} [${record.workMode}]`,
+        type: "attendance"
+      });
+    }
   };
 
   const handleQuickPunch = () => {
@@ -195,17 +270,135 @@ export default function App() {
     }
   };
 
+  // Leave Management Handlers
   const handleApplyLeave = (newLeave) => {
     setLeaves((prev) => [newLeave, ...prev]);
+
+    // Dispatch real-time notification to Super Admin Kapil
+    dispatchNotification({
+      recipientId: "super_admin",
+      senderName: newLeave.employeeName,
+      title: `New Leave Request: ${newLeave.employeeName}`,
+      message: `${newLeave.employeeName} applied for ${newLeave.daysCount} day(s) ${newLeave.leaveType} (${newLeave.startDate} to ${newLeave.endDate}).`,
+      type: "leave"
+    });
   };
 
   const handleUpdateLeaveStatus = (leaveId, newStatus, remarks) => {
+    const targetLeave = leaves.find((l) => l.id === leaveId);
+
     setLeaves((prev) =>
       prev.map((l) =>
         l.id === leaveId
           ? { ...l, status: newStatus, managerRemarks: remarks }
           : l
       )
+    );
+
+    // Notify employee of Founder decision
+    if (targetLeave) {
+      dispatchNotification({
+        recipientId: targetLeave.employeeId,
+        senderName: "Founder Kapil Narula",
+        title: `Leave ${newStatus}: ${targetLeave.leaveType}`,
+        message: `Your leave request for ${targetLeave.startDate} has been ${newStatus.toUpperCase()} by Founder Kapil Narula with remarks: "${remarks}"`,
+        type: "leave"
+      });
+    }
+  };
+
+  // Punch Correction Handlers
+  const handleRequestCorrection = (newCorrection) => {
+    setPunchCorrections((prev) => [newCorrection, ...prev]);
+
+    // Dispatch real-time notification to Super Admin Kapil
+    dispatchNotification({
+      recipientId: "super_admin",
+      senderName: newCorrection.employeeName,
+      title: `Punch Correction Request: ${newCorrection.employeeName}`,
+      message: `${newCorrection.employeeName} requested punch adjustment for ${newCorrection.date} (${newCorrection.requestedCheckIn} - ${newCorrection.requestedCheckOut}). Reason: ${newCorrection.reason}`,
+      type: "correction"
+    });
+  };
+
+  const handleApproveCorrection = (correctionId) => {
+    const targetCorr = punchCorrections.find((c) => c.id === correctionId);
+    if (!targetCorr) return;
+
+    setPunchCorrections((prev) =>
+      prev.map((c) =>
+        c.id === correctionId ? { ...c, status: "Approved" } : c
+      )
+    );
+
+    // Automatically update the employee's attendance record
+    handleRecordAttendance({
+      id: `ATT-CORR-${Date.now()}`,
+      employeeId: targetCorr.employeeId,
+      employeeName: targetCorr.employeeName,
+      date: targetCorr.date,
+      checkIn: targetCorr.requestedCheckIn,
+      checkOut: targetCorr.requestedCheckOut,
+      workMode: targetCorr.workMode,
+      status: "Present [Approved by Founder]",
+      notes: `Punch corrected & verified by Founder Kapil Narula. Original reason: ${targetCorr.reason}`
+    });
+
+    confetti({
+      particleCount: 50,
+      spread: 60,
+      origin: { y: 0.7 }
+    });
+
+    // Notify the employee in real-time
+    dispatchNotification({
+      recipientId: targetCorr.employeeId,
+      senderName: "Founder Kapil Narula",
+      title: "Punch Correction Approved",
+      message: `Your punch correction for ${targetCorr.date} was APPROVED by Founder Kapil Narula and updated in your official attendance record.`,
+      type: "correction"
+    });
+  };
+
+  const handleRejectCorrection = (correctionId, remarks) => {
+    const targetCorr = punchCorrections.find((c) => c.id === correctionId);
+    if (!targetCorr) return;
+
+    setPunchCorrections((prev) =>
+      prev.map((c) =>
+        c.id === correctionId ? { ...c, status: "Rejected", adminRemarks: remarks } : c
+      )
+    );
+
+    // Notify employee
+    dispatchNotification({
+      recipientId: targetCorr.employeeId,
+      senderName: "Founder Kapil Narula",
+      title: "Punch Correction Declined",
+      message: `Your punch correction for ${targetCorr.date} was declined by Founder Kapil Narula. Remark: ${remarks || "Operational requirements"}`,
+      type: "correction"
+    });
+  };
+
+  // Daily Tasks Handlers
+  const handleAddTask = (newTask) => {
+    setTasks((prev) => [newTask, ...prev]);
+
+    // Dispatch real-time notification to Super Admin Kapil
+    if (newTask.employeeId !== "SYM001") {
+      dispatchNotification({
+        recipientId: "super_admin",
+        senderName: newTask.employeeEcode,
+        title: `Daily Deliverable Submitted`,
+        message: `${newTask.employeeEcode} logged ${newTask.hoursSpent} hrs on ${newTask.channel}: "${newTask.title}".`,
+        type: "task"
+      });
+    }
+  };
+
+  const handleUpdateTaskStatus = (taskId, newStatus) => {
+    setTasks((prev) =>
+      prev.map((t) => (t.id === taskId ? { ...t, status: newStatus } : t))
     );
   };
 
@@ -234,7 +427,10 @@ export default function App() {
           ? {
               ...t,
               currentProgress: newProgress,
-              status: newProgress >= t.targetValue ? "Verified & Rewarded 🎉" : `In Progress (${Math.round((newProgress / t.targetValue) * 100)}%)`
+              status:
+                newProgress >= t.targetValue
+                  ? "Verified & Rewarded 🎉"
+                  : `In Progress`
             }
           : t
       )
@@ -243,20 +439,6 @@ export default function App() {
 
   const handleAddAnnouncement = (newAnnouncement) => {
     setAnnouncements((prev) => [newAnnouncement, ...prev]);
-  };
-
-  const handleAddTask = (newTask) => {
-    setTasks((prev) => [newTask, ...prev]);
-  };
-
-  const handleUpdateTaskStatus = (taskId, newStatus) => {
-    setTasks((prev) =>
-      prev.map((t) =>
-        t.id === taskId
-          ? { ...t, status: newStatus }
-          : t
-      )
-    );
   };
 
   return (
@@ -269,6 +451,10 @@ export default function App() {
         todayAttendance={todayAttendance}
         onQuickPunch={handleQuickPunch}
         pendingLeavesCount={pendingLeavesCount}
+        pendingCorrectionsCount={pendingCorrectionsCount}
+        notifications={notifications}
+        onMarkNotificationRead={handleMarkNotificationRead}
+        onClearNotifications={handleClearNotifications}
         onNavigate={(tab) => setActiveTab(tab)}
         onLogout={handleLogout}
         onOpenLoginModal={() => setIsLoginModalOpen(true)}
@@ -282,6 +468,7 @@ export default function App() {
           setActiveTab={setActiveTab}
           currentUser={currentUser}
           pendingLeavesCount={pendingLeavesCount}
+          pendingCorrectionsCount={pendingCorrectionsCount}
           todayAttendance={todayAttendance}
           onQuickPunch={handleQuickPunch}
         />
@@ -298,6 +485,7 @@ export default function App() {
               earningTargets={earningTargets}
               announcements={announcements}
               todayAttendance={todayAttendance}
+              punchCorrections={punchCorrections}
               onNavigate={(tab) => setActiveTab(tab)}
               onQuickPunch={handleQuickPunch}
             />
@@ -310,6 +498,10 @@ export default function App() {
               attendanceList={attendance}
               onRecordAttendance={handleRecordAttendance}
               todayAttendance={todayAttendance}
+              punchCorrections={punchCorrections}
+              onRequestCorrection={handleRequestCorrection}
+              onApproveCorrection={handleApproveCorrection}
+              onRejectCorrection={handleRejectCorrection}
             />
           )}
 
@@ -345,6 +537,7 @@ export default function App() {
             <OrgHierarchyView
               employees={employees}
               channelsList={channels}
+              currentUser={currentUser}
               onSwitchUser={handleSwitchUser}
               onSelectEmployeeForPayslip={(empId) => {
                 setCurrentUserId(empId);
@@ -389,7 +582,32 @@ export default function App() {
         </main>
       </div>
 
-      {/* Mandatory Login Modal on Landing Page or when requested */}
+      {/* Real-Time Floating Toast Alert */}
+      {toastMessage && (
+        <div className="fixed bottom-6 right-6 z-50 max-w-sm rounded-2xl bg-[#0e0e16] border-2 border-[#ffd700]/50 p-4 shadow-2xl flex items-start gap-3 animate-in slide-in-from-bottom-5 glow-red-sm">
+          <div className="p-2 rounded-xl bg-[#dc2626]/20 text-[#ffd700] border border-[#dc2626]/40 shrink-0">
+            {toastMessage.type === "leave" ? (
+              <AlertTriangle className="w-5 h-5 text-[#ffd700]" />
+            ) : toastMessage.type === "correction" ? (
+              <Clock className="w-5 h-5 text-[#dc2626]" />
+            ) : (
+              <Sparkles className="w-5 h-5 text-emerald-400" />
+            )}
+          </div>
+          <div className="flex-1 min-w-0">
+            <h4 className="font-bold text-white text-xs leading-snug">{toastMessage.title}</h4>
+            <p className="text-[11px] text-slate-300 mt-0.5 leading-relaxed">{toastMessage.message}</p>
+          </div>
+          <button
+            onClick={() => setToastMessage(null)}
+            className="text-slate-400 hover:text-white p-0.5"
+          >
+            <X className="w-4 h-4" />
+          </button>
+        </div>
+      )}
+
+      {/* Mandatory Login Modal on Landing Page or when logged out */}
       <LoginModal
         isOpen={!isLoggedIn || isLoginModalOpen}
         isMandatory={!isLoggedIn}

@@ -9,7 +9,8 @@ import {
   X,
   AlertCircle,
   Eye,
-  EyeOff
+  EyeOff,
+  Lock
 } from "lucide-react";
 
 export default function LoginModal({
@@ -41,22 +42,23 @@ export default function LoginModal({
     );
 
     if (!found) {
-      setErrorMsg(`Invalid Login ID "${identifier}". Please use SYM001 to SYM010.`);
+      setErrorMsg(`Invalid Login ID "${identifier}". Please use official ID: SYM001 to SYM010.`);
       return;
     }
 
-    // Check password: match "Passw@rd" (case sensitive or exact), also allow "sarlayash123"
+    // Check confidential password
     const trimmedPass = password.trim();
     if (trimmedPass !== "Passw@rd" && trimmedPass !== "sarlayash123" && trimmedPass !== found.password) {
-      setErrorMsg("Incorrect password. Official password is: Passw@rd");
+      setErrorMsg("Incorrect password. Please enter the confidential password verbally shared by Founder Kapil Narula.");
       return;
     }
 
     onLoginSuccess(found.id);
   };
 
-  const handleQuickSelect = (empId) => {
-    onLoginSuccess(empId);
+  const handleSelectAccount = (emp) => {
+    setIdentifier(emp.ecode);
+    setErrorMsg("");
   };
 
   return (
@@ -66,6 +68,7 @@ export default function LoginModal({
           <button
             onClick={onClose}
             className="absolute top-5 right-5 p-1 rounded-lg text-slate-400 hover:text-white hover:bg-[#1a1a24]"
+            aria-label="Close"
           >
             <X className="w-5 h-5" />
           </button>
@@ -86,24 +89,26 @@ export default function LoginModal({
           <p className="text-xs text-[#ffd700] font-semibold tracking-wider uppercase">
             Internal Enterprise Portal • Powered By Kapil
           </p>
-          <p className="text-[11px] text-slate-400 max-w-md mx-auto">
-            Please log in with your official ERP credentials to access your daily tasks, mark attendance, apply for leaves, and submit work logs.
+          <p className="text-[11px] text-slate-300 max-w-md mx-auto">
+            Please authenticate with your official employee credentials to access your individual dashboard, punch daily attendance, log deliverables, and apply for leaves.
           </p>
         </div>
 
-        {/* Credentials Info Badge from User Table */}
-        <div className="p-3.5 rounded-2xl bg-[#0e0e16] border border-[#ffd700]/40 text-xs text-[#ffd700] flex items-center justify-between gap-3 shadow-inner">
-          <div className="flex items-center gap-2">
-            <KeyRound className="w-4 h-4 text-[#ffd700] shrink-0" />
-            <span className="text-slate-300">Official Password for all 10 members:</span>
+        {/* Security & Confidentiality Advisory (No password displayed anywhere) */}
+        <div className="p-3.5 rounded-2xl bg-[#0e0e16] border border-[#ffd700]/30 text-xs text-slate-300 flex items-center gap-3 shadow-inner">
+          <div className="p-2 rounded-xl bg-[#dc2626]/20 border border-[#dc2626]/40 text-[#ffd700] shrink-0">
+            <Lock className="w-4 h-4" />
           </div>
-          <code className="font-mono font-black text-[#ffd700] bg-[#1a0a0d] px-3 py-1 rounded-lg border border-[#dc2626]/40 text-sm">
-            Passw@rd
-          </code>
+          <div className="text-[11px] leading-relaxed">
+            <p className="font-bold text-white">Confidential Enterprise Access</p>
+            <p className="text-slate-400">
+              Your password has been verbally shared by Founder Kapil Narula. Keep credentials private at all times.
+            </p>
+          </div>
         </div>
 
         {errorMsg && (
-          <div className="p-3 rounded-xl bg-[#dc2626]/20 border border-[#dc2626]/50 text-[#fca5a5] text-xs flex items-center gap-2">
+          <div className="p-3.5 rounded-xl bg-[#dc2626]/20 border border-[#dc2626]/50 text-[#fca5a5] text-xs flex items-center gap-2">
             <AlertCircle className="w-4 h-4 shrink-0" />
             <span>{errorMsg}</span>
           </div>
@@ -112,7 +117,7 @@ export default function LoginModal({
         {/* Credentials Form */}
         <form onSubmit={handleLogin} className="space-y-4 text-xs">
           <div className="space-y-1">
-            <label className="font-semibold text-slate-300">ERP Login ID (ECODE)</label>
+            <label className="font-semibold text-slate-200">Official ERP Login ID (ECODE)</label>
             <input
               type="text"
               value={identifier}
@@ -120,7 +125,7 @@ export default function LoginModal({
                 setIdentifier(e.target.value);
                 setErrorMsg("");
               }}
-              placeholder="e.g. SYM001, SYM002, SYM004, SYM010"
+              placeholder="Enter your ID (e.g. SYM001, SYM002, SYM004...)"
               className="w-full p-3 rounded-xl bg-[#050508] border border-[#2a2a38] text-white focus:outline-none focus:border-[#ffd700] font-mono tracking-wider text-sm placeholder:text-slate-600 transition-colors"
               required
               autoFocus
@@ -128,10 +133,7 @@ export default function LoginModal({
           </div>
 
           <div className="space-y-1">
-            <div className="flex items-center justify-between">
-              <label className="font-semibold text-slate-300">Password</label>
-              <span className="text-[10px] text-slate-400">Default: Passw@rd</span>
-            </div>
+            <label className="font-semibold text-slate-200">Confidential Password</label>
             <div className="relative">
               <input
                 type={showPassword ? "text" : "password"}
@@ -140,14 +142,15 @@ export default function LoginModal({
                   setPassword(e.target.value);
                   setErrorMsg("");
                 }}
-                placeholder="Passw@rd"
-                className="w-full p-3 rounded-xl bg-[#050508] border border-[#2a2a38] text-white focus:outline-none focus:border-[#ffd700] text-sm transition-colors"
+                placeholder="••••••••••••"
+                className="w-full p-3 rounded-xl bg-[#050508] border border-[#2a2a38] text-white focus:outline-none focus:border-[#ffd700] text-sm transition-colors tracking-widest placeholder:text-slate-600"
                 required
               />
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
                 className="absolute right-3 top-3 text-slate-400 hover:text-white"
+                aria-label="Toggle password visibility"
               >
                 {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
               </button>
@@ -159,26 +162,30 @@ export default function LoginModal({
             className="w-full py-3.5 rounded-xl bg-gradient-to-r from-[#dc2626] via-[#b91c1c] to-[#991b1b] hover:from-[#ef4444] hover:to-[#dc2626] text-white font-black text-xs shadow-lg glow-red transition-all flex items-center justify-center gap-2 uppercase tracking-wider border border-[#ffd700]/30"
           >
             <LogIn className="w-4 h-4 text-[#ffd700]" />
-            <span>SIGN IN TO PERSONAL WORKSPACE</span>
+            <span>SIGN IN TO MY INDIVIDUAL WORKSPACE</span>
           </button>
         </form>
 
-        {/* Quick One-Click Switcher for all 10 members from the spreadsheet */}
+        {/* Account Quick-Identifier Picker (Inserts ECODE only, requires password) */}
         <div className="pt-4 border-t border-[#222230] space-y-3">
           <div className="flex items-center justify-between text-xs">
             <p className="text-[10px] uppercase font-bold text-slate-400 tracking-wider">
-              Or Select Your Account Directly (1-Click Instant Sign-In):
+              Select Your Name to Autofill ID:
             </p>
-            <span className="text-[10px] text-[#ffd700] font-mono">10 Team Accounts</span>
+            <span className="text-[10px] text-[#ffd700] font-mono">10 Official Accounts</span>
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-2 gap-2 text-xs max-h-56 overflow-y-auto pr-1">
+          <div className="grid grid-cols-2 sm:grid-cols-2 gap-2 text-xs max-h-52 overflow-y-auto pr-1">
             {employees.map((emp) => (
               <button
                 key={emp.id}
                 type="button"
-                onClick={() => handleQuickSelect(emp.id)}
-                className="p-2.5 rounded-xl bg-[#0e0e16] hover:bg-[#161622] border border-[#222230] hover:border-[#ffd700]/50 text-left transition-all flex items-center justify-between gap-2 group"
+                onClick={() => handleSelectAccount(emp)}
+                className={`p-2.5 rounded-xl border text-left transition-all flex items-center justify-between gap-2 group ${
+                  identifier.trim().toUpperCase() === emp.ecode.toUpperCase()
+                    ? "bg-[#1c0c0e] border-[#dc2626] text-[#ffd700]"
+                    : "bg-[#0e0e16] hover:bg-[#161622] border-[#222230] hover:border-[#ffd700]/50 text-slate-300"
+                }`}
               >
                 <div className="flex items-center gap-2 truncate">
                   <span className="text-base shrink-0">{emp.avatar}</span>

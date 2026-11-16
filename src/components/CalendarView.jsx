@@ -35,7 +35,10 @@ export default function CalendarView({
     "July", "August", "September", "October", "November", "December"
   ];
 
+  const isAtMinMonth = year === 2026 && month <= 10;
+
   const prevMonth = () => {
+    if (isAtMinMonth) return;
     setCurrentDate(new Date(year, month - 1, 1));
   };
 
@@ -98,7 +101,11 @@ export default function CalendarView({
           <div className="flex items-center gap-1.5 p-1 rounded-xl bg-[#0e0e16] border border-[#222230]">
             <button
               onClick={prevMonth}
-              className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-[#161622] transition-colors"
+              disabled={isAtMinMonth}
+              className={`p-1.5 rounded-lg transition-colors ${
+                isAtMinMonth ? "text-slate-600 cursor-not-allowed opacity-50" : "text-slate-400 hover:text-white hover:bg-[#161622]"
+              }`}
+              title={isAtMinMonth ? "Attendance & calendar active from Nov 2026" : "Previous Month"}
             >
               <ChevronLeft className="w-4 h-4" />
             </button>

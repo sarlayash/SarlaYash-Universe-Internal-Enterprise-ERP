@@ -14,7 +14,9 @@ import {
   Users,
   ChevronRight,
   Check,
-  CheckSquare
+  CheckSquare,
+  Shield,
+  FileEdit
 } from "lucide-react";
 
 export default function DashboardView({
@@ -26,33 +28,41 @@ export default function DashboardView({
   earningTargets,
   announcements,
   todayAttendance,
+  punchCorrections = [],
   onNavigate,
   onQuickPunch
 }) {
-  const isAdmin = currentUser?.role === "super_admin" || currentUser?.role === "admin";
+  const isSuperAdmin = currentUser?.role === "super_admin" || currentUser?.id === "SYM001";
   const isCheckedIn = !!todayAttendance?.checkIn && !todayAttendance?.checkOut;
 
-  // Calculate stats
+  // Real Dynamic Metrics (No Fake Data)
+  const myNovAttendance = attendanceList.filter(
+    (a) => a.employeeId === currentUser?.id && a.date >= "2026-11-01"
+  );
+  const myPresentDays = myNovAttendance.filter((a) => a.status === "Present" || a.status?.includes("Approved")).length;
+
   const totalLeaveBalance =
     (currentUser?.leaveBalance?.casual || 0) +
     (currentUser?.leaveBalance?.sick || 0) +
     (currentUser?.leaveBalance?.privilege || 0) +
     (currentUser?.leaveBalance?.blessings || 0);
 
-  const pendingLeavesForManager = leavesList.filter((l) => l.status === "Pending");
+  const pendingLeavesForAdmin = leavesList.filter((l) => l.status === "Pending");
+  const pendingCorrectionsForAdmin = punchCorrections.filter((c) => c.status === "Pending");
   const myLeaves = leavesList.filter((l) => l.employeeId === currentUser?.id);
   const myAssignedChannels = channelsList.filter(
     (c) => c.assignedEcode === currentUser?.ecode || currentUser?.assignedChannels?.includes(c.name)
   );
 
-  const myTarget = earningTargets.find((t) => t.employeeEcode === currentUser?.ecode) || earningTargets[0];
-  const todayPresentCount = attendanceList.filter((a) => a.date === "2026-11-16" && a.status !== "Absent").length;
+  const todayPresentCount = attendanceList.filter(
+    (a) => a.date === "2026-11-16" && a.checkIn
+  ).length;
 
   return (
     <div className="space-y-6">
       {/* Top Welcome Hero - Fortune 500 Velvet Red & Obsidian Glow */}
       <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-[#0d090a] via-[#140e10] to-[#07070a] border-2 border-[#ffd700]/30 p-6 lg:p-8 shadow-2xl">
-        {/* Dramatic Velvet Red ambient spotlight */}
+        {/* Ambient spotlight */}
         <div className="absolute top-0 right-0 -mt-10 -mr-10 w-96 h-96 bg-[#dc2626]/15 rounded-full blur-3xl pointer-events-none"></div>
         <div className="absolute bottom-0 left-1/3 w-64 h-64 bg-[#ffd700]/10 rounded-full blur-3xl pointer-events-none"></div>
 
@@ -60,7 +70,9 @@ export default function DashboardView({
           <div className="space-y-2">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#dc2626]/20 border border-[#dc2626]/40 text-[#ffd700] text-xs font-bold">
               <Sparkles className="w-3.5 h-3.5 text-[#ffd700]" />
-              <span>SarlaYash Universe • Powered By Kapil</span>
+              <span>
+                {isSuperAdmin ? "Founder Executive Portal • Super Admin" : "SarlaYash Universe • Individual Workspace"}
+              </span>
             </div>
 
             <h2 className="text-2xl lg:text-4xl font-black text-white tracking-tight font-serif">
@@ -77,7 +89,7 @@ export default function DashboardView({
                 Employee ID: <strong className="text-white">{currentUser?.ecode}</strong>
               </span>
               <span className="px-3 py-1 rounded-xl bg-[#09090e] border border-[#262635] text-slate-300">
-                Reporting To: <strong className="text-[#ffd700]">{currentUser?.reportsTo}</strong>
+                Reporting Line: <strong className="text-[#ffd700]">{currentUser?.reportsTo}</strong>
               </span>
               <span className="px-3 py-1 rounded-xl bg-emerald-500/15 border border-emerald-500/40 text-emerald-300 flex items-center gap-1.5 font-bold">
                 <Check className="w-3.5 h-3.5" /> Active in Service
@@ -128,7 +140,43 @@ export default function DashboardView({
         </div>
       </div>
 
-      {/* 4 Metric Cards - Fortune 500 Standards */}
+      {/* SUPER ADMIN ACTION BANNER (If Founder Kapil) */}
+      {isSuperAdmin && (
+        <div className="p-5 rounded-3xl bg-gradient-to-r from-[#1c0c0e] via-[#120a0d] to-[#0e0e16] border-2 border-[#ffd700]/40 shadow-xl flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+          <div className="flex items-center gap-3">
+            <div className="p-3 rounded-2xl bg-[#dc2626]/20 border border-[#dc2626]/40 text-[#ffd700]">
+              <Shield className="w-6 h-6" />
+            </div>
+            <div>
+              <h3 className="font-black text-white text-base">Founder Super Admin Desk Pending Items</h3>
+              <p className="text-xs text-slate-300 mt-0.5">
+                {pendingLeavesForAdmin.length} leave application(s) • {pendingCorrectionsForAdmin.length} punch correction request(s) awaiting your executive approval.
+              </p>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-2 self-stretch md:self-auto">
+            {pendingLeavesForAdmin.length > 0 && (
+              <button
+                onClick={() => onNavigate("leaves")}
+                className="px-4 py-2 rounded-xl bg-[#dc2626] hover:bg-red-600 text-white font-bold text-xs shadow flex items-center gap-1.5"
+              >
+                <CalendarCheck2 className="w-4 h-4" /> Review Leaves ({pendingLeavesForAdmin.length})
+              </button>
+            )}
+            {pendingCorrectionsForAdmin.length > 0 && (
+              <button
+                onClick={() => onNavigate("attendance")}
+                className="px-4 py-2 rounded-xl bg-[#09090e] border border-[#ffd700]/40 hover:bg-[#161622] text-[#ffd700] font-bold text-xs shadow flex items-center gap-1.5"
+              >
+                <FileEdit className="w-4 h-4" /> Review Punches ({pendingCorrectionsForAdmin.length})
+              </button>
+            )}
+          </div>
+        </div>
+      )}
+
+      {/* 4 Metric Cards - Authentic Real Data (No Fake Stats) */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {/* Attendance Card */}
         <div
@@ -136,19 +184,25 @@ export default function DashboardView({
           className="glass-panel glass-panel-hover p-5 rounded-3xl cursor-pointer border-t-4 border-t-emerald-500"
         >
           <div className="flex items-center justify-between">
-            <span className="text-xs font-bold text-slate-300 uppercase tracking-wider">Attendance Rate</span>
+            <span className="text-xs font-bold text-slate-300 uppercase tracking-wider">
+              {isSuperAdmin ? "Today's Team Clock-In" : "November 2026 Shifts"}
+            </span>
             <div className="p-2 rounded-xl bg-emerald-500/15 text-emerald-400 border border-emerald-500/30">
               <Clock className="w-4 h-4" />
             </div>
           </div>
           <div className="mt-3">
-            <h3 className="text-3xl font-black text-white">96.8%</h3>
+            <h3 className="text-3xl font-black text-white font-mono">
+              {isSuperAdmin ? `${todayPresentCount} / 10` : `${myPresentDays} Days`}
+            </h3>
             <p className="text-xs text-slate-400 mt-1 flex items-center gap-1">
-              <span className="text-emerald-400 font-bold">22 / 23</span> working days attended
+              <span className="text-emerald-400 font-bold">
+                {isSuperAdmin ? "Members Clocked In" : "Punched Present since Nov 01"}
+              </span>
             </p>
           </div>
           <div className="mt-3 pt-2.5 border-t border-[#222230] flex items-center justify-between text-[11px] text-[#ffd700] font-bold">
-            <span>Punch Terminal & Matrix</span>
+            <span>{isSuperAdmin ? "Master Attendance Board" : "Open Punch Terminal"}</span>
             <ChevronRight className="w-3.5 h-3.5" />
           </div>
         </div>
@@ -165,7 +219,7 @@ export default function DashboardView({
             </div>
           </div>
           <div className="mt-3">
-            <h3 className="text-3xl font-black text-white">{totalLeaveBalance} Days</h3>
+            <h3 className="text-3xl font-black text-white font-mono">{totalLeaveBalance} Days</h3>
             <p className="text-xs text-slate-400 mt-1 flex items-center gap-1.5">
               <span>CL: {currentUser?.leaveBalance?.casual}</span> •{" "}
               <span>SL: {currentUser?.leaveBalance?.sick}</span> •{" "}
@@ -184,13 +238,13 @@ export default function DashboardView({
           className="glass-panel glass-panel-hover p-5 rounded-3xl cursor-pointer border-t-4 border-t-[#ffd700]"
         >
           <div className="flex items-center justify-between">
-            <span className="text-xs font-bold text-slate-300 uppercase tracking-wider">Daily Tasks Log</span>
+            <span className="text-xs font-bold text-slate-300 uppercase tracking-wider">Assigned Ecosystem</span>
             <div className="p-2 rounded-xl bg-[#ffd700]/20 text-[#ffd700] border border-[#ffd700]/40">
               <CheckSquare className="w-4 h-4" />
             </div>
           </div>
           <div className="mt-3">
-            <h3 className="text-3xl font-black text-white">
+            <h3 className="text-3xl font-black text-white font-mono">
               {myAssignedChannels.length > 0 ? `${myAssignedChannels.length} Channels` : "Active"}
             </h3>
             <p className="text-xs text-slate-400 mt-1 truncate">
@@ -198,7 +252,7 @@ export default function DashboardView({
             </p>
           </div>
           <div className="mt-3 pt-2.5 border-t border-[#222230] flex items-center justify-between text-[11px] text-[#ffd700] font-bold">
-            <span>Submit Work Log</span>
+            <span>Submit Daily Worklog</span>
             <ChevronRight className="w-3.5 h-3.5" />
           </div>
         </div>
@@ -258,219 +312,53 @@ export default function DashboardView({
                 onClick={() => onNavigate("earning-model")}
                 className="px-5 py-2 rounded-xl bg-gradient-to-r from-[#dc2626] via-[#b91c1c] to-[#991b1b] text-white font-black text-xs hover:brightness-110 shadow-lg flex items-center gap-1.5 border border-red-500/50"
               >
-                <span>Explore Slabs & Calculator</span>
-                <ArrowRight className="w-3.5 h-3.5" />
+                <span>Explore Slabs</span>
+                <ArrowRight className="w-4 h-4" />
               </button>
             </div>
           </div>
 
-          <div className="p-6 pt-3 space-y-4">
-            <div className="p-4 rounded-2xl bg-gradient-to-r from-[#20090a] via-[#150708] to-[#1a0a0c] border border-[#dc2626]/40 text-center">
-              <p className="text-sm font-bold italic text-[#ffd700]">
-                “ Choose your target. Create the impact. Prove the results. Earn your reward. 🚀 ”
-              </p>
+          <div className="p-6 grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs">
+            <div className="p-3.5 rounded-2xl bg-[#0e0e16] border border-[#222230]">
+              <span className="text-[10px] uppercase font-bold text-slate-400">Pillar 1</span>
+              <p className="font-extrabold text-white text-sm mt-0.5">⏰ Just 1 Hour a Day</p>
+              <p className="text-[11px] text-slate-400 mt-1">Consistency over keeping people busy.</p>
             </div>
 
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center text-xs">
-              <div className="p-3 rounded-2xl bg-[#111118] border border-[#222230]">
-                <span className="text-base font-extrabold text-[#ffd700]">⏰ 1 Hour</span>
-                <p className="text-[10px] text-slate-400 mt-0.5">Daily consistency</p>
-              </div>
-              <div className="p-3 rounded-2xl bg-[#111118] border border-[#222230]">
-                <span className="text-base font-extrabold text-white">📅 5 Days</span>
-                <p className="text-[10px] text-slate-400 mt-0.5">Time to breathe</p>
-              </div>
-              <div className="p-3 rounded-2xl bg-[#111118] border border-[#222230]">
-                <span className="text-base font-extrabold text-[#dc2626]">🏠 WFH</span>
-                <p className="text-[10px] text-slate-400 mt-0.5">Learn from anywhere</p>
-              </div>
-              <div className="p-3 rounded-2xl bg-[#111118] border border-[#222230]">
-                <span className="text-base font-extrabold text-[#ffd700]">💰 ₹50 Refund</span>
-                <p className="text-[10px] text-slate-400 mt-0.5">100% returned</p>
-              </div>
+            <div className="p-3.5 rounded-2xl bg-[#0e0e16] border border-[#222230]">
+              <span className="text-[10px] uppercase font-bold text-slate-400">Pillar 2</span>
+              <p className="font-extrabold text-white text-sm mt-0.5">📅 5-Day Work Week</p>
+              <p className="text-[11px] text-slate-400 mt-1">Because growth needs time to breathe.</p>
+            </div>
+
+            <div className="p-3.5 rounded-2xl bg-[#0e0e16] border border-[#222230]">
+              <span className="text-[10px] uppercase font-bold text-slate-400">Pillar 3</span>
+              <p className="font-extrabold text-white text-sm mt-0.5">💰 100% Refundable</p>
+              <p className="text-[11px] text-slate-400 mt-1">₹50 daily commitment deposit refunded.</p>
             </div>
           </div>
         </div>
 
-        {/* Admin Quick Approval / My Actions Panel */}
-        <div className="rounded-3xl border-2 border-[#ffd700]/30 bg-gradient-to-b from-[#121218] to-[#09090f] p-6 shadow-2xl flex flex-col justify-between">
-          <div>
-            <div className="flex items-center justify-between pb-3 border-b border-[#222230]">
-              <h3 className="font-extrabold text-sm text-white flex items-center gap-2">
-                <ShieldAlert className="w-4 h-4 text-[#dc2626]" />
-                {isAdmin ? "Executive Leave Desk" : "My Leave Status"}
-              </h3>
-              <span className="text-[10px] px-2 py-0.5 rounded bg-[#181824] text-[#ffd700] font-mono font-bold">
-                {isAdmin ? `${pendingLeavesForManager.length} Pending` : `${myLeaves.length} Total`}
-              </span>
-            </div>
-
-            {isAdmin ? (
-              <div className="mt-4 space-y-3">
-                <p className="text-xs text-slate-300">
-                  Leadership privileges: review and approve submitted leaves across all team members.
-                </p>
-
-                {pendingLeavesForManager.length === 0 ? (
-                  <div className="p-6 text-center text-xs text-slate-400 border border-dashed border-[#262635] rounded-2xl">
-                    <CheckCircle2 className="w-8 h-8 text-emerald-400 mx-auto mb-2 opacity-80" />
-                    All leave applications are up to date!
-                  </div>
-                ) : (
-                  <div className="space-y-2.5 max-h-56 overflow-y-auto pr-1">
-                    {pendingLeavesForManager.slice(0, 3).map((leave) => (
-                      <div
-                        key={leave.id}
-                        onClick={() => onNavigate("leaves")}
-                        className="p-3 rounded-2xl bg-[#14141e] border border-[#dc2626]/30 hover:border-[#ffd700] transition-all cursor-pointer"
-                      >
-                        <div className="flex items-center justify-between">
-                          <span className="text-xs font-bold text-white">{leave.employeeName}</span>
-                          <span className="text-[10px] px-2 py-0.5 rounded bg-[#dc2626]/20 text-[#fca5a5] font-semibold">
-                            {leave.leaveType}
-                          </span>
-                        </div>
-                        <p className="text-[11px] text-slate-300 mt-1 line-clamp-1">{leave.reason}</p>
-                        <div className="flex items-center justify-between mt-2 pt-1 border-t border-[#222230] text-[10px] text-slate-400">
-                          <span>{leave.startDate} to {leave.endDate}</span>
-                          <span className="font-bold text-[#ffd700]">Review & Decide →</span>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
-            ) : (
-              <div className="mt-4 space-y-3">
-                <p className="text-xs text-slate-300">Track your submitted leaves and manager decisions:</p>
-                {myLeaves.length === 0 ? (
-                  <div className="p-4 text-center text-xs text-slate-400 border border-dashed border-[#262635] rounded-2xl">
-                    No leaves applied yet. Need time off?
-                  </div>
-                ) : (
-                  <div className="space-y-2 max-h-56 overflow-y-auto pr-1">
-                    {myLeaves.map((leave) => (
-                      <div key={leave.id} className="p-3 rounded-2xl bg-[#14141e] border border-[#222230] text-xs">
-                        <div className="flex items-center justify-between">
-                          <span className="font-semibold text-white">{leave.leaveType}</span>
-                          <span
-                            className={`px-2 py-0.5 rounded text-[10px] font-bold ${
-                              leave.status === "Approved"
-                                ? "bg-emerald-500/20 text-emerald-300"
-                                : leave.status === "Pending"
-                                ? "bg-[#dc2626]/20 text-[#fca5a5]"
-                                : "bg-slate-800 text-slate-400"
-                            }`}
-                          >
-                            {leave.status}
-                          </span>
-                        </div>
-                        <p className="text-[11px] text-slate-400 mt-1">{leave.startDate} ({leave.daysCount} day)</p>
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
-            )}
-          </div>
-
-          <div className="mt-4 pt-4 border-t border-[#222230]">
-            <button
-              onClick={() => onNavigate("leaves")}
-              className="w-full py-2.5 rounded-xl bg-[#161622] hover:bg-[#202030] text-[#ffd700] font-bold text-xs flex items-center justify-center gap-1.5 transition-colors border border-[#ffd700]/30"
-            >
-              <span>{isAdmin ? "Open Full Approval Desk" : "Apply for New Leave"}</span>
-              <ArrowRight className="w-3.5 h-3.5" />
-            </button>
-          </div>
-        </div>
-      </div>
-
-      {/* Team Presence Roster Today & Company Announcements */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Live Attendance Feed (All 10 members) */}
-        <div className="lg:col-span-2 glass-panel p-6 rounded-3xl space-y-4">
-          <div className="flex items-center justify-between">
-            <div>
-              <h3 className="font-extrabold text-base text-white flex items-center gap-2">
-                <Users className="w-4 h-4 text-[#ffd700]" />
-                Team Presence Today ({todayPresentCount}/10 On Board)
-              </h3>
-              <p className="text-xs text-slate-400">Live attendance telemetry across SarlaYash team</p>
-            </div>
-            <button
-              onClick={() => onNavigate("attendance")}
-              className="text-xs text-[#ffd700] hover:text-white font-bold flex items-center gap-1"
-            >
-              <span>Full Attendance Matrix</span>
-              <ChevronRight className="w-3.5 h-3.5" />
-            </button>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
-            {employees.map((emp) => {
-              const att = attendanceList.find(
-                (a) => a.employeeId === emp.id && a.date === "2026-11-16"
-              );
-              const isPresent = !!att?.checkIn;
-              return (
-                <div
-                  key={emp.id}
-                  className="p-3 rounded-2xl bg-[#0f0f16] border border-[#222230] flex items-center justify-between gap-3 hover:border-[#ffd700]/40 transition-all"
-                >
-                  <div className="flex items-center gap-3 truncate">
-                    <span className="text-xl shrink-0">{emp.avatar}</span>
-                    <div className="truncate">
-                      <div className="flex items-center gap-1.5 truncate">
-                        <span className="text-xs font-bold text-white truncate">{emp.name}</span>
-                        <span className="text-[9px] font-mono text-slate-400 shrink-0">({emp.ecode})</span>
-                      </div>
-                      <p className="text-[10px] text-slate-400 truncate">{emp.designation}</p>
-                    </div>
-                  </div>
-
-                  <div className="text-right shrink-0">
-                    <span
-                      className={`inline-block px-2.5 py-0.5 rounded-full text-[10px] font-bold ${
-                        isPresent
-                          ? "bg-emerald-500/20 text-emerald-300 border border-emerald-500/30"
-                          : "bg-[#dc2626]/20 text-[#fca5a5] border border-[#dc2626]/30"
-                      }`}
-                    >
-                      {isPresent ? att.checkIn : "Not In"}
-                    </span>
-                    <p className="text-[9px] text-slate-400 mt-0.5">
-                      {att?.workMode ? (att.workMode.includes("Remote") ? "WFH" : "Office") : "Shift"}
-                    </p>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* Official Announcements & Policy Highlights */}
-        <div className="glass-panel p-6 rounded-3xl space-y-4 flex flex-col justify-between">
+        {/* Official Bulletins */}
+        <div className="rounded-3xl bg-[#0c0c12] border border-[#222230] p-6 space-y-4 shadow-xl flex flex-col justify-between">
           <div>
             <div className="flex items-center justify-between pb-3 border-b border-[#222230]">
               <h3 className="font-bold text-sm text-white flex items-center gap-2">
-                <FileText className="w-4 h-4 text-[#dc2626]" />
-                Leadership Bulletins
+                <FileText className="w-4 h-4 text-[#ffd700]" />
+                <span>Leadership Bulletins</span>
               </h3>
-              <span className="text-[10px] px-2 py-0.5 rounded bg-[#dc2626]/20 text-[#fca5a5] font-extrabold uppercase border border-red-500/40">
-                Official
-              </span>
+              <span className="text-[10px] text-[#ffd700] font-mono">Official</span>
             </div>
 
-            <div className="mt-3 space-y-3">
+            <div className="space-y-3 mt-4">
               {announcements.slice(0, 2).map((ann) => (
-                <div key={ann.id} className="p-3.5 rounded-2xl bg-[#111118] border border-[#222230] text-xs space-y-1.5">
-                  <span className="font-bold text-[#ffd700] line-clamp-1">{ann.title}</span>
-                  <p className="text-[11px] text-slate-300 line-clamp-3 leading-relaxed">{ann.content}</p>
-                  <div className="flex items-center justify-between text-[10px] text-slate-400 pt-1 border-t border-[#222230]">
-                    <span className="font-medium text-white">{ann.author}</span>
-                    <span>{ann.date}</span>
+                <div key={ann.id} className="p-3 rounded-2xl bg-[#08080d] border border-[#222230] space-y-1">
+                  <div className="flex items-center justify-between">
+                    <span className="text-[10px] text-[#ffd700] font-semibold">{ann.author}</span>
+                    <span className="text-[9px] text-slate-500 font-mono">{ann.date}</span>
                   </div>
+                  <h4 className="font-bold text-white text-xs leading-snug">{ann.title}</h4>
+                  <p className="text-[11px] text-slate-400 line-clamp-2 leading-relaxed">{ann.content}</p>
                 </div>
               ))}
             </div>
@@ -478,10 +366,10 @@ export default function DashboardView({
 
           <button
             onClick={() => onNavigate("policies")}
-            className="w-full py-2.5 rounded-xl bg-[#12121c] hover:bg-[#1a1a26] text-white hover:text-[#ffd700] font-bold text-xs border border-[#262635] transition-colors flex items-center justify-center gap-1.5 mt-4"
+            className="w-full py-2.5 rounded-xl bg-[#14141e] hover:bg-[#1a1a24] text-[#ffd700] font-bold text-xs border border-[#ffd700]/30 transition-all flex items-center justify-center gap-1.5"
           >
-            <span>View All Bulletins & Policies</span>
-            <ArrowRight className="w-3.5 h-3.5" />
+            <span>Read Compliance & Policies</span>
+            <ChevronRight className="w-3.5 h-3.5" />
           </button>
         </div>
       </div>

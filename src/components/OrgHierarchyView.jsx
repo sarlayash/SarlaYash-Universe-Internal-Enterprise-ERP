@@ -18,9 +18,11 @@ import {
 export default function OrgHierarchyView({
   employees,
   channelsList,
+  currentUser,
   onSwitchUser,
   onSelectEmployeeForPayslip
 }) {
+  const isSuperAdmin = currentUser?.role === "super_admin" || currentUser?.id === "SYM001";
   const [viewMode, setViewMode] = useState("tree"); // "tree" | "directory"
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedDept, setSelectedDept] = useState("All");
@@ -294,15 +296,17 @@ export default function OrgHierarchyView({
                 </div>
 
                 <div className="flex items-center gap-2 pt-3 border-t border-[#1e1e2c]">
-                  <button
-                    onClick={() => onSwitchUser(emp.id)}
-                    className="flex-1 py-1.5 px-3 rounded-xl bg-[#161622] hover:bg-[#1e1e2c] text-slate-300 hover:text-white text-[11px] font-semibold border border-[#222230] transition-colors"
-                  >
-                    Switch Persona
-                  </button>
+                  {isSuperAdmin && (
+                    <button
+                      onClick={() => onSwitchUser(emp.id)}
+                      className="flex-1 py-1.5 px-3 rounded-xl bg-[#161622] hover:bg-[#1e1e2c] text-slate-300 hover:text-white text-[11px] font-semibold border border-[#222230] transition-colors"
+                    >
+                      Audit Session
+                    </button>
+                  )}
                   <button
                     onClick={() => setActiveEmployeeModal(emp)}
-                    className="py-1.5 px-3 rounded-xl bg-[#dc2626]/20 hover:bg-[#dc2626]/30 text-[#fca5a5] text-[11px] font-bold border border-[#dc2626]/30 transition-colors"
+                    className="flex-1 py-1.5 px-3 rounded-xl bg-[#dc2626]/20 hover:bg-[#dc2626]/30 text-[#fca5a5] text-[11px] font-bold border border-[#dc2626]/30 transition-colors"
                   >
                     Profile Card
                   </button>
