@@ -39,11 +39,11 @@ export default function PayslipView({
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-800">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[#222230]">
         <div>
           <h2 className="text-xl lg:text-2xl font-black text-white flex items-center gap-2">
-            <ReceiptText className="w-6 h-6 text-amber-400" />
-            <span>Employee Compensation & Payslip Portal</span>
+            <ReceiptText className="w-6 h-6 text-[#ffd700]" />
+            <span className="tracking-tight">Employee Compensation & Payslip Portal</span>
           </h2>
           <p className="text-xs text-slate-400 mt-1">
             Automated monthly payroll, SarlaYash Blessings bonuses, and statutory deductions
@@ -56,7 +56,7 @@ export default function PayslipView({
             <select
               value={selectedEmpId}
               onChange={(e) => setSelectedEmpId(e.target.value)}
-              className="px-3 py-2 rounded-xl bg-slate-900 border border-slate-700 text-xs text-white focus:outline-none focus:border-amber-400"
+              className="px-3 py-2 rounded-xl bg-[#08080d] border border-[#2a2a38] text-xs text-white focus:outline-none focus:border-[#ffd700]"
             >
               {employees.map((emp) => (
                 <option key={emp.id} value={emp.id}>
@@ -69,7 +69,7 @@ export default function PayslipView({
           <select
             value={selectedMonth}
             onChange={(e) => setSelectedMonth(e.target.value)}
-            className="px-3 py-2 rounded-xl bg-slate-900 border border-slate-700 text-xs text-white focus:outline-none focus:border-amber-400"
+            className="px-3 py-2 rounded-xl bg-[#08080d] border border-[#2a2a38] text-xs text-white focus:outline-none focus:border-[#ffd700]"
           >
             <option value="November 2026">November 2026</option>
             <option value="October 2026">October 2026</option>
@@ -78,20 +78,20 @@ export default function PayslipView({
 
           <button
             onClick={handlePrint}
-            className="flex items-center gap-2 px-4 py-2 rounded-xl bg-amber-500 text-slate-950 font-bold text-xs hover:brightness-110 shadow glow-gold-sm transition-all"
+            className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#dc2626] via-[#b91c1c] to-[#991b1b] hover:from-[#ef4444] hover:to-[#dc2626] text-white font-bold text-xs shadow-lg glow-red-sm transition-all border border-[#ffd700]/30"
           >
-            <Printer className="w-4 h-4" />
+            <Printer className="w-4 h-4 text-[#ffd700]" />
             <span>Print Payslip</span>
           </button>
         </div>
       </div>
 
       {/* Payslip Document Container */}
-      <div className="max-w-4xl mx-auto rounded-3xl bg-[#080d1c] border-2 border-amber-500/30 p-6 sm:p-10 shadow-2xl space-y-6 print:border-none print:shadow-none print:bg-white print:text-black">
+      <div className="max-w-4xl mx-auto rounded-3xl bg-[#08080d] border-2 border-[#ffd700]/40 p-6 sm:p-10 shadow-2xl space-y-6 print:border-none print:shadow-none print:bg-white print:text-black glow-red-sm">
         {/* Document Header */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pb-6 border-b border-amber-500/20 text-center sm:text-left">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pb-6 border-b border-[#222230] text-center sm:text-left">
           <div className="flex items-center gap-4">
-            <div className="w-16 h-16 rounded-full p-1 bg-gradient-to-tr from-amber-400 to-amber-600 shadow-md">
+            <div className="w-16 h-16 rounded-full p-1 bg-gradient-to-tr from-[#ffd700] via-[#fef08a] to-[#d4af37] shadow-lg ring-2 ring-[#dc2626]">
               <img
                 src="./sarlayash_logo.jpg"
                 alt="SarlaYash Emblem"
@@ -99,10 +99,10 @@ export default function PayslipView({
               />
             </div>
             <div>
-              <h3 className="text-xl font-extrabold text-white font-serif tracking-wider">
+              <h3 className="text-xl font-extrabold text-white font-serif tracking-wider gold-gradient-text">
                 SARLAYASH LEARNING SOLUTIONS LLP
               </h3>
-              <p className="text-xs text-amber-400 font-semibold font-serif">
+              <p className="text-xs text-[#ffd700] font-semibold font-serif">
                 SarlaYash Group Of Institutions • Powered By Kapil
               </p>
               <p className="text-[10px] text-slate-400">
@@ -112,7 +112,7 @@ export default function PayslipView({
           </div>
 
           <div className="sm:text-right">
-            <span className="px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 font-extrabold text-xs uppercase tracking-widest border border-amber-500/30">
+            <span className="px-3 py-1 rounded-full bg-[#1a0a0d] text-[#ffd700] font-extrabold text-xs uppercase tracking-widest border border-[#dc2626]/40">
               Salary Statement
             </span>
             <p className="text-sm font-bold text-white mt-1.5 font-mono">{selectedMonth}</p>
@@ -120,14 +120,14 @@ export default function PayslipView({
         </div>
 
         {/* Employee Particulars Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 p-4 rounded-2xl bg-slate-900/60 border border-slate-800 text-xs">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 p-4 rounded-2xl bg-[#0c0c12] border border-[#222230] text-xs">
           <div>
             <span className="text-[10px] text-slate-500 uppercase font-semibold">Employee Name</span>
             <p className="font-bold text-white text-sm mt-0.5">{targetEmp.name}</p>
           </div>
           <div>
             <span className="text-[10px] text-slate-500 uppercase font-semibold">Employee Code</span>
-            <p className="font-mono font-bold text-amber-300 text-sm mt-0.5">{targetEmp.ecode}</p>
+            <p className="font-mono font-bold text-[#ffd700] text-sm mt-0.5">{targetEmp.ecode}</p>
           </div>
           <div>
             <span className="text-[10px] text-slate-500 uppercase font-semibold">Designation</span>
@@ -159,8 +159,8 @@ export default function PayslipView({
         {/* Two-Column Salary Table: Earnings vs Deductions */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs">
           {/* Earnings */}
-          <div className="space-y-3 p-4 rounded-2xl bg-slate-900/40 border border-slate-800">
-            <h4 className="font-bold text-emerald-400 uppercase tracking-wider text-[11px] pb-2 border-b border-slate-800">
+          <div className="space-y-3 p-4 rounded-2xl bg-[#0c0c12] border border-[#222230]">
+            <h4 className="font-bold text-emerald-400 uppercase tracking-wider text-[11px] pb-2 border-b border-[#222230]">
               Earnings (A)
             </h4>
 
@@ -177,23 +177,23 @@ export default function PayslipView({
                 <span className="text-slate-300">Special & Conveyance Allowance</span>
                 <span className="font-mono text-white font-semibold">₹{allowances.toLocaleString()}</span>
               </div>
-              <div className="flex items-center justify-between text-amber-300 font-semibold p-1.5 rounded bg-amber-500/10 border border-amber-500/20">
+              <div className="flex items-center justify-between text-[#ffd700] font-semibold p-2 rounded-xl bg-[#140a0c] border border-[#dc2626]/30">
                 <span className="flex items-center gap-1">
-                  <Sparkles className="w-3 h-3" /> SarlaYash Blessings Incentive
+                  <Sparkles className="w-3 h-3 text-[#ffd700]" /> SarlaYash Blessings Incentive
                 </span>
-                <span className="font-mono font-bold">₹{blessingsBonus.toLocaleString()}</span>
+                <span className="font-mono font-bold text-[#ffd700]">₹{blessingsBonus.toLocaleString()}</span>
               </div>
             </div>
 
-            <div className="pt-3 border-t border-slate-800 flex items-center justify-between font-bold text-white">
+            <div className="pt-3 border-t border-[#222230] flex items-center justify-between font-bold text-white">
               <span>Gross Earnings (A):</span>
               <span className="font-mono text-emerald-400 text-sm">₹{gross.toLocaleString()}</span>
             </div>
           </div>
 
           {/* Deductions */}
-          <div className="space-y-3 p-4 rounded-2xl bg-slate-900/40 border border-slate-800">
-            <h4 className="font-bold text-rose-400 uppercase tracking-wider text-[11px] pb-2 border-b border-slate-800">
+          <div className="space-y-3 p-4 rounded-2xl bg-[#0c0c12] border border-[#222230]">
+            <h4 className="font-bold text-[#fca5a5] uppercase tracking-wider text-[11px] pb-2 border-b border-[#222230]">
               Deductions (B)
             </h4>
 
@@ -212,17 +212,17 @@ export default function PayslipView({
               </div>
             </div>
 
-            <div className="pt-3 border-t border-slate-800 flex items-center justify-between font-bold text-white">
+            <div className="pt-3 border-t border-[#222230] flex items-center justify-between font-bold text-white">
               <span>Total Deductions (B):</span>
-              <span className="font-mono text-rose-400 text-sm">₹{(deductions + 200).toLocaleString()}</span>
+              <span className="font-mono text-[#f87171] text-sm">₹{(deductions + 200).toLocaleString()}</span>
             </div>
           </div>
         </div>
 
         {/* Net Take Home Highlight */}
-        <div className="p-5 rounded-2xl bg-gradient-to-r from-amber-500/20 via-yellow-400/20 to-amber-600/20 border border-amber-400/50 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="p-6 rounded-2xl bg-gradient-to-r from-[#20080b] via-[#120a0d] to-[#09090e] border-2 border-[#ffd700]/50 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-xl glow-red-sm">
           <div>
-            <span className="text-xs uppercase tracking-wider font-extrabold text-amber-300">
+            <span className="text-xs uppercase tracking-wider font-extrabold text-[#ffd700]">
               Net Payable Amount (A - B)
             </span>
             <p className="text-xs text-slate-300 mt-0.5">
@@ -231,7 +231,7 @@ export default function PayslipView({
           </div>
 
           <div className="text-center sm:text-right">
-            <h2 className="text-3xl font-black text-amber-300 font-mono tracking-tight">
+            <h2 className="text-3xl font-black text-[#ffd700] font-mono tracking-tight">
               ₹{(netPay - 200).toLocaleString()}
             </h2>
             <span className="text-[10px] text-emerald-400 font-bold uppercase tracking-wider">
@@ -241,15 +241,15 @@ export default function PayslipView({
         </div>
 
         {/* Footer Authorization */}
-        <div className="pt-6 border-t border-slate-800/80 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-400 gap-4">
+        <div className="pt-6 border-t border-[#222230] flex flex-col sm:flex-row items-center justify-between text-xs text-slate-400 gap-4">
           <div>
             <p className="font-medium text-slate-300">Digitally Verified & Approved by:</p>
-            <p className="text-amber-400 font-serif font-bold">Kapil Narula (Founder) & Trisha Ghosh (CPO)</p>
+            <p className="text-[#ffd700] font-serif font-bold">Kapil Narula (Founder) & Trisha Ghosh (CPO)</p>
           </div>
 
           <div className="text-center sm:text-right text-[11px] text-slate-500">
             <p>Computer generated document. No physical signature required.</p>
-            <p>SarlaYash Universe Internal Enterprise ERP</p>
+            <p className="text-[#ffd700]/70 font-semibold">SarlaYash Universe Internal Enterprise ERP</p>
           </div>
         </div>
       </div>

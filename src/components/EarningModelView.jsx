@@ -135,11 +135,11 @@ export default function EarningModelView({
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-800">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[#222230]">
         <div>
           <h2 className="text-xl lg:text-2xl font-black text-white flex items-center gap-2">
-            <Award className="w-6 h-6 text-amber-400" />
-            <span className="gold-gradient-text">SarlaYash Blessings 🙌 Internships Earning Model</span>
+            <Award className="w-6 h-6 text-[#ffd700]" />
+            <span className="gold-gradient-text tracking-tight">SarlaYash Blessings 🙌 Internships Earning Model</span>
           </h2>
           <p className="text-xs text-slate-400 mt-1">
             “An internship should not feel like another classroom. It should give you responsibility, flexibility, care and a chance to create measurable impact.”
@@ -148,31 +148,31 @@ export default function EarningModelView({
 
         <button
           onClick={() => setShowSubmitModal(true)}
-          className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 via-yellow-400 to-amber-600 text-slate-950 font-bold text-xs hover:brightness-110 shadow-lg glow-gold-sm transition-all self-start sm:self-auto"
+          className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#dc2626] via-[#b91c1c] to-[#991b1b] hover:from-[#ef4444] hover:to-[#dc2626] text-white font-bold text-xs shadow-lg glow-red-sm transition-all self-start sm:self-auto border border-[#ffd700]/30"
         >
-          <Plus className="w-4 h-4" />
+          <Plus className="w-4 h-4 text-[#ffd700]" />
           <span>Choose My Target</span>
         </button>
       </div>
 
       {feedback && (
-        <div className="p-3.5 rounded-2xl bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 text-xs font-semibold flex items-center gap-2 animate-in fade-in">
+        <div className="p-3.5 rounded-2xl bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 text-xs font-semibold flex items-center gap-2 animate-in fade-in">
           <CheckCircle2 className="w-4 h-4 shrink-0" />
           <span>{feedback}</span>
         </div>
       )}
 
       {/* Tabs */}
-      <div className="flex items-center gap-2 border-b border-slate-800 pb-2 overflow-x-auto">
+      <div className="flex items-center gap-2 border-b border-[#222230] pb-2 overflow-x-auto">
         <button
           onClick={() => setActiveTab("manifesto")}
           className={`px-4 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-2 shrink-0 ${
             activeTab === "manifesto"
-              ? "bg-amber-500 text-slate-950 shadow glow-gold-sm"
-              : "bg-slate-900 text-slate-400 hover:text-white"
+              ? "bg-[#dc2626] text-white shadow glow-red-sm border border-[#ffd700]/40"
+              : "bg-[#0e0e16] text-slate-400 hover:text-white border border-[#222230]"
           }`}
         >
-          <Sparkles className="w-4 h-4" />
+          <Sparkles className="w-4 h-4 text-[#ffd700]" />
           <span>🙌 What Makes Us Different?</span>
         </button>
 
@@ -180,11 +180,11 @@ export default function EarningModelView({
           onClick={() => setActiveTab("slabs")}
           className={`px-4 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-2 shrink-0 ${
             activeTab === "slabs"
-              ? "bg-amber-500 text-slate-950 shadow glow-gold-sm"
-              : "bg-slate-900 text-slate-400 hover:text-white"
+              ? "bg-[#dc2626] text-white shadow glow-red-sm border border-[#ffd700]/40"
+              : "bg-[#0e0e16] text-slate-400 hover:text-white border border-[#222230]"
           }`}
         >
-          <Trophy className="w-4 h-4" />
+          <Trophy className="w-4 h-4 text-[#ffd700]" />
           <span>🏆 Performance Slabs & Paycheck</span>
         </button>
 
@@ -192,11 +192,11 @@ export default function EarningModelView({
           onClick={() => setActiveTab("calculator")}
           className={`px-4 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-2 shrink-0 ${
             activeTab === "calculator"
-              ? "bg-amber-500 text-slate-950 shadow glow-gold-sm"
-              : "bg-slate-900 text-slate-400 hover:text-white"
+              ? "bg-[#dc2626] text-white shadow glow-red-sm border border-[#ffd700]/40"
+              : "bg-[#0e0e16] text-slate-400 hover:text-white border border-[#222230]"
           }`}
         >
-          <Coins className="w-4 h-4" />
+          <Coins className="w-4 h-4 text-[#ffd700]" />
           <span>🔥 Decide Your Paycheck (Simulator)</span>
         </button>
 
@@ -204,11 +204,11 @@ export default function EarningModelView({
           onClick={() => setActiveTab("targets")}
           className={`px-4 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-2 shrink-0 ${
             activeTab === "targets"
-              ? "bg-amber-500 text-slate-950 shadow glow-gold-sm"
-              : "bg-slate-900 text-slate-400 hover:text-white"
+              ? "bg-[#dc2626] text-white shadow glow-red-sm border border-[#ffd700]/40"
+              : "bg-[#0e0e16] text-slate-400 hover:text-white border border-[#222230]"
           }`}
         >
-          <Target className="w-4 h-4" />
+          <Target className="w-4 h-4 text-[#ffd700]" />
           <span>🎯 Active Team Targets ({earningTargets.length})</span>
         </button>
       </div>
@@ -217,17 +217,17 @@ export default function EarningModelView({
       {activeTab === "manifesto" && (
         <div className="space-y-6">
           {/* Hero Banner */}
-          <div className="relative overflow-hidden rounded-3xl border-2 border-amber-400/50 bg-[#060a17] shadow-2xl">
+          <div className="relative overflow-hidden rounded-3xl border-2 border-[#ffd700]/50 bg-[#060a17] shadow-2xl glow-red-sm">
             <div className="relative h-60 sm:h-72 w-full overflow-hidden">
               <img
                 src="./sarlayash_blessings_banner.jpg"
                 alt="SarlaYash Blessings Internships Earning Model"
                 className="w-full h-full object-cover object-center brightness-90 hover:brightness-100 transition-all duration-500"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#060a17] via-[#060a17]/60 to-transparent"></div>
+              <div className="absolute inset-0 bg-gradient-to-t from-[#08080d] via-[#08080d]/60 to-transparent"></div>
 
               <div className="absolute inset-0 flex flex-col justify-end p-6 sm:p-8">
-                <span className="inline-block w-fit px-3 py-1 rounded-full bg-amber-400 text-slate-950 font-extrabold text-[11px] uppercase tracking-widest shadow-md">
+                <span className="inline-block w-fit px-3.5 py-1 rounded-full bg-[#dc2626] text-white font-extrabold text-[11px] uppercase tracking-widest shadow-md border border-[#ffd700]/40">
                   Welcome To A Different Model 🚀
                 </span>
                 <h3 className="text-2xl sm:text-4xl font-black text-white font-serif mt-2 gold-gradient-text">
@@ -243,9 +243,9 @@ export default function EarningModelView({
           {/* 5 Distinct Pillars */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {/* 1. Just 1 Hour a Day */}
-            <div className="glass-panel p-5 rounded-3xl space-y-3 border-l-4 border-l-amber-400">
-              <div className="w-10 h-10 rounded-2xl bg-amber-500/20 text-amber-300 flex items-center justify-center">
-                <Clock className="w-5 h-5 text-amber-400" />
+            <div className="p-5 rounded-3xl bg-[#0c0c12] space-y-3 border-l-4 border-l-[#ffd700] border border-[#222230] shadow-md">
+              <div className="w-10 h-10 rounded-2xl bg-[#ffd700]/20 text-[#ffd700] flex items-center justify-center border border-[#ffd700]/30">
+                <Clock className="w-5 h-5 text-[#ffd700]" />
               </div>
               <h4 className="font-extrabold text-base text-white">⏰ JUST 1 HOUR A DAY</h4>
               <p className="text-xs text-slate-300 leading-relaxed">
@@ -254,9 +254,9 @@ export default function EarningModelView({
             </div>
 
             {/* 2. 5-Day Work Week */}
-            <div className="glass-panel p-5 rounded-3xl space-y-3 border-l-4 border-l-blue-400">
-              <div className="w-10 h-10 rounded-2xl bg-blue-500/20 text-blue-300 flex items-center justify-center">
-                <Calendar className="w-5 h-5 text-blue-400" />
+            <div className="p-5 rounded-3xl bg-[#0c0c12] space-y-3 border-l-4 border-l-[#dc2626] border border-[#222230] shadow-md">
+              <div className="w-10 h-10 rounded-2xl bg-[#dc2626]/20 text-[#fca5a5] flex items-center justify-center border border-[#dc2626]/30">
+                <Calendar className="w-5 h-5 text-[#dc2626]" />
               </div>
               <h4 className="font-extrabold text-base text-white">📅 5-DAY WORK WEEK</h4>
               <p className="text-xs text-slate-300 leading-relaxed">
@@ -265,8 +265,8 @@ export default function EarningModelView({
             </div>
 
             {/* 3. Permanent Work From Home */}
-            <div className="glass-panel p-5 rounded-3xl space-y-3 border-l-4 border-l-emerald-400">
-              <div className="w-10 h-10 rounded-2xl bg-emerald-500/20 text-emerald-300 flex items-center justify-center">
+            <div className="p-5 rounded-3xl bg-[#0c0c12] space-y-3 border-l-4 border-l-emerald-500 border border-[#222230] shadow-md">
+              <div className="w-10 h-10 rounded-2xl bg-emerald-500/20 text-emerald-300 flex items-center justify-center border border-emerald-500/30">
                 <Home className="w-5 h-5 text-emerald-400" />
               </div>
               <h4 className="font-extrabold text-base text-white">🏠 PERMANENT WORK FROM HOME</h4>
@@ -276,9 +276,9 @@ export default function EarningModelView({
             </div>
 
             {/* 4. A Model That Cares */}
-            <div className="glass-panel p-5 rounded-3xl space-y-3 border-l-4 border-l-rose-400 lg:col-span-2">
-              <div className="w-10 h-10 rounded-2xl bg-rose-500/20 text-rose-300 flex items-center justify-center">
-                <Heart className="w-5 h-5 text-rose-400" />
+            <div className="p-5 rounded-3xl bg-[#0c0c12] space-y-3 border-l-4 border-l-[#dc2626] border border-[#222230] shadow-md lg:col-span-2">
+              <div className="w-10 h-10 rounded-2xl bg-[#dc2626]/20 text-[#fca5a5] flex items-center justify-center border border-[#dc2626]/30">
+                <Heart className="w-5 h-5 text-[#dc2626]" />
               </div>
               <h4 className="font-extrabold text-base text-white">❤️ A MODEL THAT CARES</h4>
               <p className="text-xs text-slate-300">
@@ -286,32 +286,32 @@ export default function EarningModelView({
               </p>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-slate-200 pt-1">
-                <div className="p-2 rounded-xl bg-slate-900/80 border border-slate-800 flex items-center gap-2">
+                <div className="p-2 rounded-xl bg-[#08080d] border border-[#222230] flex items-center gap-2">
                   <Check className="w-4 h-4 text-emerald-400 shrink-0" />
                   <span><strong>Parental Care Leave:</strong> Time for parents & family</span>
                 </div>
-                <div className="p-2 rounded-xl bg-slate-900/80 border border-slate-800 flex items-center gap-2">
+                <div className="p-2 rounded-xl bg-[#08080d] border border-[#222230] flex items-center gap-2">
                   <Check className="w-4 h-4 text-emerald-400 shrink-0" />
                   <span><strong>Exam Leave:</strong> Academic exams prioritized</span>
                 </div>
-                <div className="p-2 rounded-xl bg-slate-900/80 border border-slate-800 flex items-center gap-2">
+                <div className="p-2 rounded-xl bg-[#08080d] border border-[#222230] flex items-center gap-2">
                   <Check className="w-4 h-4 text-emerald-400 shrink-0" />
                   <span><strong>Sick Leave:</strong> Rest and recover with peace of mind</span>
                 </div>
-                <div className="p-2 rounded-xl bg-slate-900/80 border border-slate-800 flex items-center gap-2">
-                  <Check className="w-4 h-4 text-rose-400 shrink-0" />
+                <div className="p-2 rounded-xl bg-[#08080d] border border-[#222230] flex items-center gap-2">
+                  <Check className="w-4 h-4 text-[#dc2626] shrink-0" />
                   <span><strong>Female No-Question Leave:</strong> Monthly cycle wellness</span>
                 </div>
               </div>
-              <p className="text-[11px] text-amber-300/90 font-medium">
+              <p className="text-[11px] text-[#ffd700] font-medium">
                 ✅ All National & International Holidays Off without deduction.
               </p>
             </div>
 
             {/* 5. The ₹50 Commitment Deposit */}
-            <div className="glass-panel p-5 rounded-3xl space-y-3 border-l-4 border-l-purple-400">
-              <div className="w-10 h-10 rounded-2xl bg-purple-500/20 text-purple-300 flex items-center justify-center">
-                <Coins className="w-5 h-5 text-purple-400" />
+            <div className="p-5 rounded-3xl bg-[#0c0c12] space-y-3 border-l-4 border-l-[#ffd700] border border-[#222230] shadow-md">
+              <div className="w-10 h-10 rounded-2xl bg-[#ffd700]/20 text-[#ffd700] flex items-center justify-center border border-[#ffd700]/30">
+                <Coins className="w-5 h-5 text-[#ffd700]" />
               </div>
               <h4 className="font-extrabold text-base text-white">💰 THE ₹50 DAILY COMMITMENT DEPOSIT</h4>
               <p className="text-xs text-slate-300 leading-relaxed">
@@ -325,11 +325,11 @@ export default function EarningModelView({
           </div>
 
           {/* Bottom Callout */}
-          <div className="p-6 rounded-3xl bg-gradient-to-r from-amber-500/20 via-yellow-400/20 to-amber-600/20 border border-amber-400/50 text-center space-y-2">
+          <div className="p-6 rounded-3xl bg-gradient-to-r from-[#2a080c] via-[#140a0e] to-[#09090e] border-2 border-[#ffd700]/50 text-center space-y-2 glow-red-sm">
             <h3 className="text-xl sm:text-2xl font-black text-white font-serif gold-gradient-text">
               “The question is not: What will I earn?”
             </h3>
-            <p className="text-lg font-bold text-amber-300">
+            <p className="text-lg font-bold text-[#ffd700]">
               “The question is: How much impact am I ready to create?”
             </p>
             <div className="pt-2 text-xs text-slate-400">
@@ -356,38 +356,38 @@ export default function EarningModelView({
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             {/* SLAB 0 */}
-            <div className="glass-panel p-5 rounded-3xl space-y-4 border-2 border-slate-700 relative flex flex-col justify-between">
+            <div className="p-5 rounded-3xl bg-[#0c0c12] border-2 border-[#ffd700]/30 relative flex flex-col justify-between shadow-xl">
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
                   <span className="text-2xl">🥉</span>
-                  <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-800 text-slate-300 font-bold">
+                  <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#161622] text-[#ffd700] font-bold border border-[#ffd700]/30">
                     Foundation
                   </span>
                 </div>
 
                 <div>
                   <h4 className="font-extrabold text-base text-white">SLAB 0</h4>
-                  <div className="text-2xl font-black text-amber-300 font-mono mt-1">₹1,000</div>
+                  <div className="text-2xl font-black text-[#ffd700] font-mono mt-1">₹1,000</div>
                   <span className="text-[10px] text-emerald-400 font-bold block mt-0.5">
                     + 100% Commitment Refund
                   </span>
                 </div>
 
-                <div className="space-y-2 text-xs text-slate-300 pt-2 border-t border-slate-800">
+                <div className="space-y-2 text-xs text-slate-300 pt-2 border-t border-[#1e1e2c]">
                   <div className="flex items-start gap-2">
-                    <Check className="w-3.5 h-3.5 text-amber-400 shrink-0 mt-0.5" />
+                    <Check className="w-3.5 h-3.5 text-[#ffd700] shrink-0 mt-0.5" />
                     <span>30 LinkedIn posts in a month</span>
                   </div>
                   <div className="flex items-start gap-2">
-                    <Check className="w-3.5 h-3.5 text-amber-400 shrink-0 mt-0.5" />
+                    <Check className="w-3.5 h-3.5 text-[#ffd700] shrink-0 mt-0.5" />
                     <span>Comments & engagement on SarlaYash Facebook posts</span>
                   </div>
                   <div className="flex items-start gap-2">
-                    <Check className="w-3.5 h-3.5 text-amber-400 shrink-0 mt-0.5" />
+                    <Check className="w-3.5 h-3.5 text-[#ffd700] shrink-0 mt-0.5" />
                     <span>Engagement on SarlaYash LinkedIn posts</span>
                   </div>
                   <div className="flex items-start gap-2">
-                    <Check className="w-3.5 h-3.5 text-amber-400 shrink-0 mt-0.5" />
+                    <Check className="w-3.5 h-3.5 text-[#ffd700] shrink-0 mt-0.5" />
                     <span>Support for YouTube upload posts</span>
                   </div>
                 </div>
@@ -403,33 +403,33 @@ export default function EarningModelView({
                   setTargetImpactMetric("30 posts + Facebook/LinkedIn/YouTube community engagement");
                   setShowSubmitModal(true);
                 }}
-                className="w-full py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-amber-300 text-xs font-bold transition-all border border-amber-500/30 mt-4"
+                className="w-full py-2.5 rounded-xl bg-[#08080d] hover:bg-[#161622] text-[#ffd700] text-xs font-bold transition-all border border-[#ffd700]/30 mt-4"
               >
                 Target Slab 0
               </button>
             </div>
 
             {/* SLAB 1 */}
-            <div className="glass-panel p-5 rounded-3xl space-y-4 border-2 border-blue-500/40 relative flex flex-col justify-between shadow-lg">
+            <div className="p-5 rounded-3xl bg-[#0c0c12] border-2 border-slate-500/40 relative flex flex-col justify-between shadow-xl">
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
                   <span className="text-2xl">🥈</span>
-                  <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-blue-500/20 text-blue-300 font-bold">
+                  <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-800 text-slate-200 font-bold border border-slate-600">
                     Achiever
                   </span>
                 </div>
 
                 <div>
                   <h4 className="font-extrabold text-base text-white">SLAB 1</h4>
-                  <div className="text-2xl font-black text-blue-300 font-mono mt-1">₹1,000 – ₹5,000</div>
+                  <div className="text-2xl font-black text-slate-100 font-mono mt-1">₹1,000 – ₹5,000</div>
                   <span className="text-[10px] text-emerald-400 font-bold block mt-0.5">
                     + 100% Commitment Refund
                   </span>
                 </div>
 
-                <div className="space-y-2 text-xs text-slate-300 pt-2 border-t border-slate-800">
+                <div className="space-y-2 text-xs text-slate-300 pt-2 border-t border-[#1e1e2c]">
                   <p className="text-[11px] text-slate-400 italic">Everything in Slab 0, plus:</p>
-                  <div className="p-2.5 rounded-xl bg-blue-500/10 border border-blue-500/20 text-blue-200">
+                  <div className="p-2.5 rounded-xl bg-[#08080d] border border-slate-700 text-slate-200">
                     <strong className="block text-white">📈 +100 Subscribers</strong>
                     <span className="text-[11px]">Build 100 subscribers individually on Facebook and YouTube.</span>
                   </div>
@@ -446,33 +446,33 @@ export default function EarningModelView({
                   setTargetImpactMetric("Everything in Slab 0 + 100 FB & YouTube subscribers");
                   setShowSubmitModal(true);
                 }}
-                className="w-full py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold transition-all mt-4 shadow"
+                className="w-full py-2.5 rounded-xl bg-slate-800 hover:bg-slate-750 text-white text-xs font-bold transition-all mt-4 shadow border border-slate-600"
               >
                 Target Slab 1
               </button>
             </div>
 
             {/* SLAB 2 */}
-            <div className="glass-panel p-5 rounded-3xl space-y-4 border-2 border-amber-400/60 relative flex flex-col justify-between shadow-xl">
+            <div className="p-5 rounded-3xl bg-[#0c0c12] border-2 border-[#ffd700]/70 relative flex flex-col justify-between shadow-xl glow-gold-sm">
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
                   <span className="text-2xl">🥇</span>
-                  <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 font-bold">
+                  <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#ffd700]/20 text-[#ffd700] font-bold border border-[#ffd700]/40">
                     Innovator
                   </span>
                 </div>
 
                 <div>
                   <h4 className="font-extrabold text-base text-white">SLAB 2</h4>
-                  <div className="text-2xl font-black text-amber-300 font-mono mt-1">₹1,000 – ₹10,000</div>
+                  <div className="text-2xl font-black text-[#ffd700] font-mono mt-1">₹1,000 – ₹10,000</div>
                   <span className="text-[10px] text-emerald-400 font-bold block mt-0.5">
                     + 100% Commitment Refund
                   </span>
                 </div>
 
-                <div className="space-y-2 text-xs text-slate-300 pt-2 border-t border-slate-800">
+                <div className="space-y-2 text-xs text-slate-300 pt-2 border-t border-[#1e1e2c]">
                   <p className="text-[11px] text-slate-400 italic">Everything in Slab 0, plus:</p>
-                  <div className="p-2.5 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-200">
+                  <div className="p-2.5 rounded-xl bg-[#140a0c] border border-[#dc2626]/30 text-amber-200">
                     <strong className="block text-white">📈 +200 Subscribers</strong>
                     <span className="text-[11px]">Build 200 subscribers individually on Facebook and YouTube.</span>
                   </div>
@@ -489,33 +489,33 @@ export default function EarningModelView({
                   setTargetImpactMetric("Everything in Slab 0 + 200 FB & YouTube subscribers");
                   setShowSubmitModal(true);
                 }}
-                className="w-full py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 text-slate-950 text-xs font-black transition-all mt-4 shadow"
+                className="w-full py-2.5 rounded-xl bg-gradient-to-r from-[#dc2626] via-[#b91c1c] to-[#991b1b] hover:from-[#ef4444] hover:to-[#dc2626] text-white text-xs font-black transition-all mt-4 shadow border border-[#ffd700]/40"
               >
                 Target Slab 2
               </button>
             </div>
 
             {/* SLAB 3 */}
-            <div className="glass-panel p-5 rounded-3xl space-y-4 border-2 border-purple-500/60 bg-gradient-to-b from-purple-950/20 to-slate-900 relative flex flex-col justify-between shadow-2xl">
+            <div className="p-5 rounded-3xl bg-gradient-to-br from-[#1a0a0d] via-[#120a0e] to-[#09090e] border-2 border-[#ffd700] relative flex flex-col justify-between shadow-2xl glow-red-sm">
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
                   <span className="text-2xl">👑</span>
-                  <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-purple-500/30 text-purple-300 font-bold">
-                    Universe Star
+                  <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#dc2626]/30 text-[#ffd700] font-black border border-[#ffd700]/50">
+                    Universe Champion
                   </span>
                 </div>
 
                 <div>
                   <h4 className="font-extrabold text-base text-white">SLAB 3</h4>
-                  <div className="text-2xl font-black text-purple-300 font-mono mt-1">₹1,000 – ₹15,000</div>
+                  <div className="text-2xl font-black text-[#ffd700] font-mono mt-1">₹1,000 – ₹15,000</div>
                   <span className="text-[10px] text-emerald-400 font-bold block mt-0.5">
                     + 100% Commitment Refund
                   </span>
                 </div>
 
-                <div className="space-y-2 text-xs text-slate-300 pt-2 border-t border-slate-800">
+                <div className="space-y-2 text-xs text-slate-300 pt-2 border-t border-[#1e1e2c]">
                   <p className="text-[11px] text-slate-400 italic">Everything in Slab 0, plus:</p>
-                  <div className="p-2.5 rounded-xl bg-purple-500/15 border border-purple-500/30 text-purple-200">
+                  <div className="p-2.5 rounded-xl bg-[#08080d] border border-[#ffd700]/30 text-amber-200">
                     <strong className="block text-white">🚀 +300 Subscribers</strong>
                     <span className="text-[11px]">Build 300 subscribers individually on Facebook and YouTube.</span>
                   </div>
@@ -532,7 +532,7 @@ export default function EarningModelView({
                   setTargetImpactMetric("Everything in Slab 0 + 300 FB & YouTube subscribers");
                   setShowSubmitModal(true);
                 }}
-                className="w-full py-2.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white text-xs font-black transition-all mt-4 shadow"
+                className="w-full py-2.5 rounded-xl bg-gradient-to-r from-[#dc2626] via-[#b91c1c] to-[#991b1b] hover:from-[#ef4444] hover:to-[#dc2626] text-white text-xs font-black transition-all mt-4 shadow border border-[#ffd700]/50 glow-red-sm"
               >
                 Target Slab 3 (Champion)
               </button>
@@ -802,13 +802,13 @@ export default function EarningModelView({
 
       {/* Target Modal */}
       {showSubmitModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-in fade-in">
-          <div className="w-full max-w-lg rounded-3xl bg-[#0a1226] border border-amber-500/40 p-6 shadow-2xl space-y-4">
-            <div className="flex items-center justify-between pb-3 border-b border-slate-800">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-sm animate-in fade-in">
+          <div className="w-full max-w-lg rounded-3xl bg-[#09090e] border-2 border-[#ffd700]/40 p-6 shadow-2xl space-y-4 glow-red-sm">
+            <div className="flex items-center justify-between pb-3 border-b border-[#222230]">
               <h3 className="font-bold text-base text-white">Enroll in SarlaYash Blessings Model</h3>
               <button
                 onClick={() => setShowSubmitModal(false)}
-                className="p-1 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800"
+                className="p-1 rounded-lg text-slate-400 hover:text-white hover:bg-[#161622]"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -822,7 +822,7 @@ export default function EarningModelView({
                   value={targetTitle}
                   onChange={(e) => setTargetTitle(e.target.value)}
                   placeholder="e.g. Slab 2 Milestone (200 subscribers + 30 LinkedIn posts)"
-                  className="w-full p-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white focus:outline-none focus:border-amber-400"
+                  className="w-full p-2.5 rounded-xl bg-[#050508] border border-[#2a2a38] text-white focus:outline-none focus:border-[#ffd700]"
                   required
                 />
               </div>
@@ -833,7 +833,7 @@ export default function EarningModelView({
                   <select
                     value={category}
                     onChange={(e) => setCategory(e.target.value)}
-                    className="w-full p-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white"
+                    className="w-full p-2.5 rounded-xl bg-[#050508] border border-[#2a2a38] text-white"
                   >
                     <option value="Channel Growth & EdTech Impact">Channel Growth</option>
                     <option value="Technical Curriculum">Technical Curriculum</option>
@@ -847,7 +847,7 @@ export default function EarningModelView({
                   <select
                     value={rewardTier}
                     onChange={(e) => setRewardTier(e.target.value)}
-                    className="w-full p-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white"
+                    className="w-full p-2.5 rounded-xl bg-[#050508] border border-[#2a2a38] text-white"
                   >
                     <option value="Slab 0 (₹1,000)">Slab 0 (₹1,000)</option>
                     <option value="Slab 1 (₹1,000 - ₹5,000)">Slab 1 (₹1,000 - ₹5,000)</option>
@@ -864,7 +864,7 @@ export default function EarningModelView({
                     type="number"
                     value={targetValue}
                     onChange={(e) => setTargetValue(e.target.value)}
-                    className="w-full p-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white"
+                    className="w-full p-2.5 rounded-xl bg-[#050508] border border-[#2a2a38] text-white font-mono"
                     required
                   />
                 </div>
@@ -876,7 +876,7 @@ export default function EarningModelView({
                     value={unit}
                     onChange={(e) => setUnit(e.target.value)}
                     placeholder="e.g. Subscribers / Posts / Modules"
-                    className="w-full p-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white"
+                    className="w-full p-2.5 rounded-xl bg-[#050508] border border-[#2a2a38] text-white"
                     required
                   />
                 </div>
@@ -889,7 +889,7 @@ export default function EarningModelView({
                   value={targetImpactMetric}
                   onChange={(e) => setTargetImpactMetric(e.target.value)}
                   placeholder="e.g. 100 new YouTube subscribers built + 30 LinkedIn posts"
-                  className="w-full p-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white"
+                  className="w-full p-2.5 rounded-xl bg-[#050508] border border-[#2a2a38] text-white"
                   required
                 />
               </div>
@@ -901,21 +901,21 @@ export default function EarningModelView({
                   value={proofSubmitted}
                   onChange={(e) => setProofSubmitted(e.target.value)}
                   placeholder="https://www.youtube.com/... or LinkedIn profile"
-                  className="w-full p-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white focus:outline-none focus:border-amber-400"
+                  className="w-full p-2.5 rounded-xl bg-[#050508] border border-[#2a2a38] text-white focus:outline-none focus:border-[#ffd700]"
                 />
               </div>
 
-              <div className="flex items-center justify-end gap-3 pt-3 border-t border-slate-800">
+              <div className="flex items-center justify-end gap-3 pt-3 border-t border-[#222230]">
                 <button
                   type="button"
                   onClick={() => setShowSubmitModal(false)}
-                  className="px-4 py-2 rounded-xl bg-slate-800 text-slate-300"
+                  className="px-4 py-2 rounded-xl bg-[#161622] text-slate-300 font-semibold hover:bg-[#1e1e2c]"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 text-slate-950 font-bold hover:brightness-110 shadow"
+                  className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#dc2626] via-[#b91c1c] to-[#991b1b] hover:from-[#ef4444] hover:to-[#dc2626] text-white font-bold shadow-lg glow-red-sm border border-[#ffd700]/30"
                 >
                   Activate Target
                 </button>

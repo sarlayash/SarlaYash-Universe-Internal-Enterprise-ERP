@@ -77,11 +77,11 @@ export default function ChannelsView({
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-800">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[#222230]">
         <div>
           <h2 className="text-xl lg:text-2xl font-black text-white flex items-center gap-2">
-            <Globe2 className="w-6 h-6 text-amber-400" />
-            <span>SarlaYash Social Media & Broadcast Command</span>
+            <Globe2 className="w-6 h-6 text-[#ffd700]" />
+            <span className="tracking-tight">SarlaYash Social Media & Broadcast Command</span>
           </h2>
           <p className="text-xs text-slate-400 mt-1">
             Tracking 18 official channels across LinkedIn, YouTube, and Facebook
@@ -89,14 +89,14 @@ export default function ChannelsView({
         </div>
 
         {/* Platform filter tabs */}
-        <div className="flex items-center gap-1.5 p-1 rounded-xl bg-slate-900 border border-slate-800 self-start sm:self-auto text-xs">
+        <div className="flex items-center gap-1.5 p-1 rounded-xl bg-[#0e0e16] border border-[#222230] self-start sm:self-auto text-xs">
           {["All", "YouTube", "LinkedIn", "Facebook"].map((platform) => (
             <button
               key={platform}
               onClick={() => setSelectedPlatform(platform)}
               className={`px-3 py-1.5 rounded-lg font-bold transition-all ${
                 selectedPlatform === platform
-                  ? "bg-amber-500 text-slate-950 shadow glow-gold-sm"
+                  ? "bg-[#dc2626] text-white shadow glow-red-sm border border-[#ffd700]/30"
                   : "text-slate-400 hover:text-white"
               }`}
             >
@@ -107,23 +107,23 @@ export default function ChannelsView({
       </div>
 
       {feedback && (
-        <div className="p-3.5 rounded-2xl bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 text-xs font-semibold flex items-center gap-2">
+        <div className="p-3.5 rounded-2xl bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 text-xs font-semibold flex items-center gap-2">
           <CheckCircle2 className="w-4 h-4 shrink-0" />
           <span>{feedback}</span>
         </div>
       )}
 
       {/* Flagship Amber / AI Ladder Highlight */}
-      <div className="p-5 rounded-3xl bg-gradient-to-r from-red-950/40 via-slate-900 to-navy-900 border border-red-500/40 shadow-xl flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div className="p-5 rounded-3xl bg-gradient-to-r from-[#2a080c] via-[#120a0d] to-[#08080d] border-2 border-[#dc2626]/50 shadow-2xl flex flex-col sm:flex-row items-center justify-between gap-4 glow-red-sm">
         <div className="flex items-center gap-4">
-          <div className="w-12 h-12 rounded-2xl bg-red-600/20 border border-red-500/40 flex items-center justify-center shrink-0">
-            <YoutubeIcon className="w-7 h-7 text-red-500" />
+          <div className="w-12 h-12 rounded-2xl bg-[#dc2626]/20 border border-[#dc2626]/50 flex items-center justify-center shrink-0">
+            <YoutubeIcon className="w-7 h-7 text-[#dc2626]" />
           </div>
           <div>
-            <span className="text-[10px] font-bold uppercase tracking-wider text-red-400 bg-red-500/10 px-2 py-0.5 rounded">
+            <span className="text-[10px] font-bold uppercase tracking-wider text-[#ffd700] bg-[#dc2626]/30 px-2.5 py-0.5 rounded border border-[#dc2626]/40">
               Flagship YouTube Series
             </span>
-            <h3 className="text-base font-extrabold text-white mt-0.5">
+            <h3 className="text-base font-extrabold text-white mt-1">
               AI Ladder 🪜 With Kapil • Lead by Amber Khanum
             </h3>
             <p className="text-xs text-slate-300">
@@ -136,10 +136,10 @@ export default function ChannelsView({
           href="https://www.youtube.com/@AILadderWithKapil"
           target="_blank"
           rel="noopener noreferrer"
-          className="px-4 py-2 rounded-xl bg-red-600 hover:bg-red-500 text-white font-bold text-xs flex items-center gap-1.5 shadow-lg transition-all shrink-0"
+          className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#dc2626] via-[#b91c1c] to-[#991b1b] hover:from-[#ef4444] hover:to-[#dc2626] text-white font-bold text-xs flex items-center gap-2 shadow-lg glow-red-sm transition-all shrink-0 border border-[#ffd700]/30"
         >
           <span>Visit YouTube Channel</span>
-          <ExternalLink className="w-3.5 h-3.5" />
+          <ExternalLink className="w-3.5 h-3.5 text-[#ffd700]" />
         </a>
       </div>
 
@@ -152,7 +152,7 @@ export default function ChannelsView({
             placeholder="Search channel name or team member..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-9 pr-4 py-2.5 rounded-2xl bg-slate-900/80 border border-slate-800 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-amber-400"
+            className="w-full pl-9 pr-4 py-2.5 rounded-2xl bg-[#0c0c12] border border-[#222230] text-xs text-white placeholder-slate-500 focus:outline-none focus:border-[#ffd700]"
           />
         </div>
 
@@ -160,12 +160,12 @@ export default function ChannelsView({
           {filteredChannels.map((channel) => (
             <div
               key={channel.id}
-              className="glass-panel glass-panel-hover p-5 rounded-3xl space-y-4 flex flex-col justify-between"
+              className="p-5 rounded-3xl bg-[#0c0c12] border border-[#222230] hover:border-[#ffd700]/50 space-y-4 flex flex-col justify-between shadow-xl transition-all"
             >
               <div className="space-y-3">
                 <div className="flex items-start justify-between gap-3">
                   <div className="flex items-center gap-2.5">
-                    <div className="p-2.5 rounded-xl bg-slate-900 border border-slate-800">
+                    <div className="p-2.5 rounded-xl bg-[#08080d] border border-[#222230]">
                       {getPlatformIcon(channel.platform)}
                     </div>
                     <div>
@@ -177,21 +177,21 @@ export default function ChannelsView({
                   </div>
                 </div>
 
-                <div className="flex items-center justify-between text-xs py-2 px-3 rounded-xl bg-slate-900/80 border border-slate-800">
+                <div className="flex items-center justify-between text-xs py-2 px-3 rounded-xl bg-[#08080d] border border-[#222230]">
                   <span className="text-slate-400">Community / Reach:</span>
-                  <strong className="text-amber-300 font-mono">{channel.followers || "Growing"}</strong>
+                  <strong className="text-[#ffd700] font-mono">{channel.followers || "Growing"}</strong>
                 </div>
 
                 <div className="space-y-1 text-xs">
                   <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">
                     Current Team Member:
                   </span>
-                  <div className="flex items-center justify-between p-2 rounded-lg bg-slate-950/60 border border-slate-800">
+                  <div className="flex items-center justify-between p-2 rounded-lg bg-[#050508] border border-[#222230]">
                     <span className="font-semibold text-slate-200">
                       {channel.assignedTo || "Unassigned"}
                     </span>
                     {channel.assignedEcode && (
-                      <span className="text-[9px] font-mono px-1.5 py-0.5 rounded bg-slate-800 text-amber-400">
+                      <span className="text-[9px] font-mono px-1.5 py-0.5 rounded bg-[#1a0a0d] text-[#ffd700] border border-[#dc2626]/30">
                         {channel.assignedEcode}
                       </span>
                     )}
@@ -199,12 +199,12 @@ export default function ChannelsView({
                 </div>
               </div>
 
-              <div className="flex items-center gap-2 pt-3 border-t border-slate-800">
+              <div className="flex items-center gap-2 pt-3 border-t border-[#1e1e2c]">
                 <a
                   href={channel.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex-1 py-2 px-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-amber-300 text-xs font-bold flex items-center justify-center gap-1.5 border border-amber-500/20 transition-all"
+                  className="flex-1 py-2 px-3 rounded-xl bg-[#08080d] hover:bg-[#161622] text-[#ffd700] text-xs font-bold flex items-center justify-center gap-1.5 border border-[#ffd700]/30 transition-all"
                 >
                   <span>Open URL</span>
                   <ExternalLink className="w-3.5 h-3.5" />
@@ -216,7 +216,7 @@ export default function ChannelsView({
                       setReassignModalChannel(channel);
                       setNewAssigneeEcode(channel.assignedEcode || "SYM004");
                     }}
-                    className="py-2 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 text-xs font-semibold border border-slate-700"
+                    className="py-2 px-3 rounded-xl bg-[#161622] hover:bg-[#1e1e2c] text-slate-300 text-xs font-semibold border border-[#222230]"
                   >
                     Reassign
                   </button>
@@ -229,17 +229,17 @@ export default function ChannelsView({
 
       {/* Reassign Modal */}
       {reassignModalChannel && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-in fade-in">
-          <div className="w-full max-w-md rounded-3xl bg-[#0a1226] border border-amber-500/40 p-6 shadow-2xl space-y-4">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-sm animate-in fade-in">
+          <div className="w-full max-w-md rounded-3xl bg-[#09090e] border-2 border-[#ffd700]/40 p-6 shadow-2xl space-y-4 glow-red-sm">
             <h3 className="font-bold text-base text-white">Reassign Channel Responsible Member</h3>
-            <p className="text-xs text-slate-300">Channel: <strong>{reassignModalChannel.name}</strong></p>
+            <p className="text-xs text-slate-300">Channel: <strong className="text-[#ffd700]">{reassignModalChannel.name}</strong></p>
 
             <div className="space-y-1 text-xs">
               <label className="text-slate-400">Select Employee</label>
               <select
                 value={newAssigneeEcode}
                 onChange={(e) => setNewAssigneeEcode(e.target.value)}
-                className="w-full p-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white"
+                className="w-full p-2.5 rounded-xl bg-[#050508] border border-[#2a2a38] text-white focus:outline-none focus:border-[#ffd700]"
               >
                 {employees.map((emp) => (
                   <option key={emp.id} value={emp.ecode}>
@@ -249,16 +249,16 @@ export default function ChannelsView({
               </select>
             </div>
 
-            <div className="flex items-center justify-end gap-3 pt-3 border-t border-slate-800">
+            <div className="flex items-center justify-end gap-3 pt-3 border-t border-[#222230]">
               <button
                 onClick={() => setReassignModalChannel(null)}
-                className="px-4 py-2 rounded-xl bg-slate-800 text-slate-300 text-xs font-semibold"
+                className="px-4 py-2 rounded-xl bg-[#161622] text-slate-300 text-xs font-semibold"
               >
                 Cancel
               </button>
               <button
                 onClick={handleSaveReassignment}
-                className="px-5 py-2 rounded-xl bg-amber-500 text-slate-950 font-bold text-xs"
+                className="px-5 py-2 rounded-xl bg-gradient-to-r from-[#dc2626] via-[#b91c1c] to-[#991b1b] hover:from-[#ef4444] hover:to-[#dc2626] text-white font-bold text-xs border border-[#ffd700]/30 shadow glow-red-sm"
               >
                 Confirm Assignment
               </button>

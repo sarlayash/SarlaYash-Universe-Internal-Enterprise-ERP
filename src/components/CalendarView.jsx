@@ -73,11 +73,11 @@ export default function CalendarView({
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-800">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[#222230]">
         <div>
           <h2 className="text-xl lg:text-2xl font-black text-white flex items-center gap-2">
-            <CalendarDays className="w-6 h-6 text-amber-400" />
-            <span>SarlaYash Enterprise Calendar & Events</span>
+            <CalendarDays className="w-6 h-6 text-[#ffd700]" />
+            <span className="tracking-tight">SarlaYash Enterprise Calendar & Events</span>
           </h2>
           <p className="text-xs text-slate-400 mt-1">
             Official holidays, team leaves, live YouTube masterclasses, and corporate milestones
@@ -88,26 +88,26 @@ export default function CalendarView({
           {isAdmin && (
             <button
               onClick={() => setShowAddModal(true)}
-              className="flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 text-slate-950 font-bold text-xs hover:brightness-110 shadow glow-gold-sm transition-all"
+              className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-[#dc2626] via-[#b91c1c] to-[#991b1b] text-white font-bold text-xs hover:brightness-110 shadow-lg glow-red-sm transition-all border border-[#ffd700]/30"
             >
-              <Plus className="w-4 h-4" />
+              <Plus className="w-4 h-4 text-[#ffd700]" />
               <span>Add Event / Holiday</span>
             </button>
           )}
 
-          <div className="flex items-center gap-1.5 p-1 rounded-xl bg-slate-900 border border-slate-800">
+          <div className="flex items-center gap-1.5 p-1 rounded-xl bg-[#0e0e16] border border-[#222230]">
             <button
               onClick={prevMonth}
-              className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors"
+              className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-[#161622] transition-colors"
             >
               <ChevronLeft className="w-4 h-4" />
             </button>
-            <span className="text-xs font-bold text-amber-300 px-3 font-mono">
+            <span className="text-xs font-bold text-[#ffd700] px-3 font-mono">
               {monthNames[month]} {year}
             </span>
             <button
               onClick={nextMonth}
-              className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors"
+              className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-[#161622] transition-colors"
             >
               <ChevronRight className="w-4 h-4" />
             </button>
@@ -118,11 +118,11 @@ export default function CalendarView({
       {/* Main Calendar & Sidebar Layout */}
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
         {/* Calendar Grid (3 Cols) */}
-        <div className="lg:col-span-3 glass-panel p-6 rounded-3xl space-y-4">
+        <div className="lg:col-span-3 rounded-3xl bg-[#0c0c12] border border-[#222230] p-6 space-y-4 shadow-xl">
           {/* Day of Week Headers */}
-          <div className="grid grid-cols-7 gap-2 text-center text-xs font-bold text-slate-400 uppercase tracking-wider pb-2 border-b border-slate-800">
+          <div className="grid grid-cols-7 gap-2 text-center text-xs font-bold text-slate-400 uppercase tracking-wider pb-2 border-b border-[#222230]">
             {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((day, idx) => (
-              <div key={day} className={idx === 0 || idx === 6 ? "text-amber-500/80" : ""}>
+              <div key={day} className={idx === 0 || idx === 6 ? "text-[#dc2626]" : ""}>
                 {day}
               </div>
             ))}
@@ -132,7 +132,7 @@ export default function CalendarView({
           <div className="grid grid-cols-7 gap-2">
             {/* Blank cells for starting day offset */}
             {Array.from({ length: firstDayIndex }).map((_, i) => (
-              <div key={`blank-${i}`} className="min-h-24 p-2 rounded-2xl bg-slate-950/20 border border-transparent opacity-30"></div>
+              <div key={`blank-${i}`} className="min-h-24 p-2 rounded-2xl bg-[#08080d]/40 border border-transparent opacity-20"></div>
             ))}
 
             {/* Days of the month */}
@@ -149,24 +149,24 @@ export default function CalendarView({
               return (
                 <div
                   key={`day-${dayNum}`}
-                  className={`min-h-24 p-2 rounded-2xl border flex flex-col justify-between transition-all group hover:border-amber-500/40 ${
+                  className={`min-h-24 p-2 rounded-2xl border flex flex-col justify-between transition-all group hover:border-[#ffd700]/50 ${
                     isToday
-                      ? "bg-amber-500/15 border-amber-400 shadow-md ring-1 ring-amber-400/50"
-                      : "bg-slate-900/60 border-slate-800/80"
+                      ? "bg-[#140a0c] border-[#dc2626] shadow-md ring-1 ring-[#ffd700]/50 glow-red-sm"
+                      : "bg-[#08080d] border-[#222230]"
                   }`}
                 >
                   <div className="flex items-center justify-between">
                     <span
                       className={`text-xs font-bold rounded-full w-6 h-6 flex items-center justify-center font-mono ${
                         isToday
-                          ? "bg-amber-400 text-slate-950 font-black shadow"
-                          : "text-slate-300 group-hover:text-amber-300"
+                          ? "bg-[#dc2626] text-white font-black shadow"
+                          : "text-slate-300 group-hover:text-[#ffd700]"
                       }`}
                     >
                       {dayNum}
                     </span>
                     {isToday && (
-                      <span className="text-[9px] font-black uppercase tracking-wider text-amber-300 bg-amber-500/20 px-1 rounded">
+                      <span className="text-[9px] font-black uppercase tracking-wider text-[#ffd700] bg-[#dc2626]/30 px-1 rounded border border-[#dc2626]/40">
                         Today
                       </span>
                     )}
@@ -179,10 +179,10 @@ export default function CalendarView({
                         key={evt.id}
                         className={`px-1.5 py-0.5 rounded text-[9px] font-semibold truncate border ${
                           evt.type === "Holiday"
-                            ? "bg-rose-500/20 text-rose-300 border-rose-500/30"
+                            ? "bg-[#dc2626]/20 text-[#fca5a5] border-[#dc2626]/40 font-bold"
                             : evt.type === "Live Broadcast"
-                            ? "bg-cyan-500/20 text-cyan-300 border-cyan-500/30"
-                            : "bg-amber-500/20 text-amber-300 border-amber-500/30"
+                            ? "bg-[#ffd700]/20 text-[#ffd700] border-[#ffd700]/40"
+                            : "bg-[#ffd700]/15 text-amber-200 border-[#ffd700]/30"
                         }`}
                         title={evt.title}
                       >
@@ -193,7 +193,7 @@ export default function CalendarView({
                     {dayLeaves.map((lv) => (
                       <div
                         key={lv.id}
-                        className="px-1.5 py-0.5 rounded text-[9px] font-medium bg-purple-500/20 text-purple-300 border border-purple-500/30 truncate"
+                        className="px-1.5 py-0.5 rounded text-[9px] font-medium bg-[#7f1d1d]/30 text-rose-200 border border-[#dc2626]/30 truncate"
                         title={`On Leave: ${lv.employeeName}`}
                       >
                         🌴 {lv.employeeName}
@@ -206,49 +206,49 @@ export default function CalendarView({
           </div>
 
           {/* Calendar Legend */}
-          <div className="pt-4 border-t border-slate-800/80 flex flex-wrap items-center gap-4 text-xs text-slate-400">
+          <div className="pt-4 border-t border-[#222230] flex flex-wrap items-center gap-4 text-xs text-slate-400">
             <div className="flex items-center gap-1.5">
-              <span className="w-2.5 h-2.5 rounded-full bg-rose-500"></span>
-              <span>Official Holiday</span>
+              <span className="w-2.5 h-2.5 rounded-full bg-[#dc2626]"></span>
+              <span className="text-white font-medium">Official Holiday</span>
+            </div>
+            <div className="flex items-center gap-1.5">
+              <span className="w-2.5 h-2.5 rounded-full bg-[#ffd700]"></span>
+              <span className="text-white font-medium">Company Milestone</span>
             </div>
             <div className="flex items-center gap-1.5">
               <span className="w-2.5 h-2.5 rounded-full bg-amber-400"></span>
-              <span>Company Milestone</span>
+              <span className="text-white font-medium">Live Masterclass / YouTube</span>
             </div>
             <div className="flex items-center gap-1.5">
-              <span className="w-2.5 h-2.5 rounded-full bg-cyan-400"></span>
-              <span>Live Masterclass / YouTube</span>
-            </div>
-            <div className="flex items-center gap-1.5">
-              <span className="w-2.5 h-2.5 rounded-full bg-purple-400"></span>
-              <span>Approved Team Leave</span>
+              <span className="w-2.5 h-2.5 rounded-full bg-rose-400"></span>
+              <span className="text-white font-medium">Approved Team Leave</span>
             </div>
           </div>
         </div>
 
         {/* Sidebar: Upcoming Month Agenda */}
-        <div className="glass-panel p-6 rounded-3xl space-y-5 flex flex-col justify-between">
+        <div className="rounded-3xl bg-[#0c0c12] border border-[#222230] p-6 space-y-5 flex flex-col justify-between shadow-xl">
           <div className="space-y-4">
-            <div className="flex items-center justify-between pb-3 border-b border-slate-800">
+            <div className="flex items-center justify-between pb-3 border-b border-[#222230]">
               <h3 className="font-bold text-sm text-white flex items-center gap-2">
-                <Clock className="w-4 h-4 text-amber-400" />
+                <Clock className="w-4 h-4 text-[#ffd700]" />
                 <span>{monthNames[month]} Agenda</span>
               </h3>
-              <span className="text-[10px] font-mono text-slate-400">{monthEvents.length} Items</span>
+              <span className="text-[10px] font-mono text-[#ffd700]">{monthEvents.length} Items</span>
             </div>
 
             <div className="space-y-3 max-h-[500px] overflow-y-auto pr-1">
               {monthEvents.map((evt) => (
-                <div key={evt.id} className="p-3 rounded-2xl bg-slate-900/80 border border-slate-800 text-xs space-y-1">
+                <div key={evt.id} className="p-3 rounded-2xl bg-[#08080d] border border-[#222230] text-xs space-y-1">
                   <div className="flex items-center justify-between">
-                    <span className="font-mono text-amber-300 font-bold">{evt.date}</span>
+                    <span className="font-mono text-[#ffd700] font-bold">{evt.date}</span>
                     <span
                       className={`text-[9px] px-2 py-0.5 rounded font-bold uppercase ${
                         evt.type === "Holiday"
-                          ? "bg-rose-500/20 text-rose-300"
+                          ? "bg-[#dc2626]/20 text-[#fca5a5] border border-[#dc2626]/30"
                           : evt.type === "Live Broadcast"
-                          ? "bg-cyan-500/20 text-cyan-300"
-                          : "bg-amber-500/20 text-amber-300"
+                          ? "bg-[#ffd700]/20 text-[#ffd700] border border-[#ffd700]/30"
+                          : "bg-[#ffd700]/15 text-amber-200 border border-[#ffd700]/30"
                       }`}
                     >
                       {evt.type}
@@ -266,12 +266,12 @@ export default function CalendarView({
             </div>
           </div>
 
-          <div className="p-4 rounded-2xl bg-amber-500/10 border border-amber-500/20 text-amber-200 text-xs space-y-1">
-            <p className="font-bold text-amber-300 flex items-center gap-1.5">
-              <Sparkles className="w-4 h-4" /> Next High Impact Event
+          <div className="p-4 rounded-2xl bg-[#140a0c] border border-[#dc2626]/30 text-rose-200 text-xs space-y-1">
+            <p className="font-bold text-[#ffd700] flex items-center gap-1.5">
+              <Sparkles className="w-4 h-4 text-[#ffd700]" /> Next High Impact Event
             </p>
             <p className="text-[11px] text-slate-300">
-              20 Nov: <strong>AI Ladder Live Masterclass</strong> hosted by Kapil Narula & Amber Khanum.
+              20 Nov: <strong className="text-white">AI Ladder Live Masterclass</strong> hosted by Kapil Narula & Amber Khanum.
             </p>
           </div>
         </div>
@@ -279,13 +279,13 @@ export default function CalendarView({
 
       {/* Add Event Modal */}
       {showAddModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-in fade-in">
-          <div className="w-full max-w-md rounded-3xl bg-[#0a1226] border border-amber-500/40 p-6 shadow-2xl space-y-5">
-            <div className="flex items-center justify-between pb-3 border-b border-slate-800">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-sm animate-in fade-in">
+          <div className="w-full max-w-md rounded-3xl bg-[#09090e] border-2 border-[#ffd700]/40 p-6 shadow-2xl space-y-5 glow-red-sm">
+            <div className="flex items-center justify-between pb-3 border-b border-[#222230]">
               <h3 className="font-bold text-base text-white">Add Calendar Event / Holiday</h3>
               <button
                 onClick={() => setShowAddModal(false)}
-                className="p-1 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800"
+                className="p-1 rounded-lg text-slate-400 hover:text-white hover:bg-[#161622]"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -299,7 +299,7 @@ export default function CalendarView({
                   value={newEventTitle}
                   onChange={(e) => setNewEventTitle(e.target.value)}
                   placeholder="e.g. Annual Tech Symposium / Founder's Day"
-                  className="w-full p-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white focus:outline-none focus:border-amber-400"
+                  className="w-full p-2.5 rounded-xl bg-[#050508] border border-[#2a2a38] text-white focus:outline-none focus:border-[#ffd700]"
                   required
                 />
               </div>
@@ -310,7 +310,7 @@ export default function CalendarView({
                   type="date"
                   value={newEventDate}
                   onChange={(e) => setNewEventDate(e.target.value)}
-                  className="w-full p-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white focus:outline-none focus:border-amber-400"
+                  className="w-full p-2.5 rounded-xl bg-[#050508] border border-[#2a2a38] text-white focus:outline-none focus:border-[#ffd700]"
                   required
                 />
               </div>
@@ -325,7 +325,7 @@ export default function CalendarView({
                     else if (e.target.value === "Live Broadcast") setNewEventColor("cyan");
                     else setNewEventColor("gold");
                   }}
-                  className="w-full p-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white focus:outline-none focus:border-amber-400"
+                  className="w-full p-2.5 rounded-xl bg-[#050508] border border-[#2a2a38] text-white focus:outline-none focus:border-[#ffd700]"
                 >
                   <option value="Company Event">Company Event / Milestone</option>
                   <option value="Holiday">Official Holiday</option>
@@ -334,17 +334,17 @@ export default function CalendarView({
                 </select>
               </div>
 
-              <div className="flex items-center justify-end gap-3 pt-3 border-t border-slate-800">
+              <div className="flex items-center justify-end gap-3 pt-3 border-t border-[#222230]">
                 <button
                   type="button"
                   onClick={() => setShowAddModal(false)}
-                  className="px-4 py-2 rounded-xl bg-slate-800 text-slate-300 font-semibold"
+                  className="px-4 py-2 rounded-xl bg-[#161622] hover:bg-[#1e1e2c] text-slate-300 font-semibold"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 text-slate-950 font-bold hover:brightness-110 shadow"
+                  className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#dc2626] via-[#b91c1c] to-[#991b1b] hover:from-[#ef4444] hover:to-[#dc2626] text-white font-bold shadow-lg glow-red-sm border border-[#ffd700]/30"
                 >
                   Save Event
                 </button>

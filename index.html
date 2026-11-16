@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/jpeg" href="./sarlayash_logo.jpg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SarlaYash Universe - Internal Enterprise ERP | Powered By Kapil</title>
+    <title>SarlaYash Universe — Enterprise Portal | Powered By Kapil</title>
     <!-- Tailwind CSS CDN for instant styling -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -13,32 +13,33 @@
         theme: {
           extend: {
             colors: {
-              gold: {
-                50: '#fffdf0',
-                100: '#fef9c3',
-                200: '#fef08a',
-                300: '#fde047',
-                400: '#facc15',
-                500: '#eab308',
-                600: '#ca8a04',
-                700: '#a16207',
-                800: '#854d0e',
-                900: '#713f12',
-                amber: '#D4AF37',
-                bright: '#FFD700',
-                dark: '#996515'
-              },
-              navy: {
-                950: '#060b19',
-                900: '#0a1226',
-                850: '#0d1938',
-                800: '#11224d',
-                700: '#1a326b',
-                600: '#23448f'
+              sy: {
+                black: '#050507',
+                dark: '#0c0c11',
+                card: '#121218',
+                cardHover: '#181822',
+                border: '#262633',
+                red: {
+                  light: '#ef4444',
+                  DEFAULT: '#dc2626',
+                  dark: '#991b1b',
+                  velvet: '#7f1d1d',
+                  glow: 'rgba(220, 38, 38, 0.35)'
+                },
+                gold: {
+                  light: '#fef08a',
+                  bright: '#ffd700',
+                  DEFAULT: '#d4af37',
+                  amber: '#f59e0b',
+                  dark: '#996515',
+                  glow: 'rgba(212, 175, 55, 0.35)'
+                },
+                white: '#ffffff',
+                muted: '#94a3b8'
               }
             },
             fontFamily: {
-              sans: ['Outfit', 'Inter', 'system-ui', 'sans-serif'],
+              sans: ['Plus Jakarta Sans', 'Outfit', 'Inter', 'system-ui', 'sans-serif'],
               serif: ['Cinzel', 'Georgia', 'serif'],
             }
           }
@@ -48,9 +49,9 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   </head>
-  <body class="bg-[#070b14] text-slate-100 min-h-screen antialiased selection:bg-amber-500/30 selection:text-amber-200">
+  <body class="bg-[#050507] text-[#f8fafc] min-h-screen antialiased selection:bg-[#dc2626]/30 selection:text-[#ffd700]">
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>

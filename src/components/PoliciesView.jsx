@@ -47,11 +47,11 @@ export default function PoliciesView({
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-800">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[#222230]">
         <div>
           <h2 className="text-xl lg:text-2xl font-black text-white flex items-center gap-2">
-            <Megaphone className="w-6 h-6 text-amber-400" />
-            <span>Notice Board, Compliance & Company Policies</span>
+            <Megaphone className="w-6 h-6 text-[#ffd700]" />
+            <span className="tracking-tight">Notice Board, Compliance & Company Policies</span>
           </h2>
           <p className="text-xs text-slate-400 mt-1">
             Official communications, POSH regulations, and SarlaYash corporate governance
@@ -61,25 +61,25 @@ export default function PoliciesView({
         {isAdmin && (
           <button
             onClick={() => setShowAddModal(true)}
-            className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 text-slate-950 font-bold text-xs hover:brightness-110 shadow glow-gold-sm transition-all self-start sm:self-auto"
+            className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#dc2626] via-[#b91c1c] to-[#991b1b] hover:from-[#ef4444] hover:to-[#dc2626] text-white font-bold text-xs shadow-lg glow-red-sm transition-all self-start sm:self-auto border border-[#ffd700]/30"
           >
-            <Plus className="w-4 h-4" />
+            <Plus className="w-4 h-4 text-[#ffd700]" />
             <span>Broadcast Announcement</span>
           </button>
         )}
       </div>
 
       {/* POSH & Ethics Spotlight Banner */}
-      <div className="p-6 rounded-3xl bg-gradient-to-r from-purple-950/40 via-slate-900 to-navy-900 border border-purple-500/30 shadow-xl flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+      <div className="p-6 rounded-3xl bg-gradient-to-r from-[#2a080c] via-[#140a0e] to-[#09090e] border-2 border-[#dc2626]/50 shadow-2xl flex flex-col md:flex-row items-start md:items-center justify-between gap-4 glow-red-sm">
         <div className="flex items-center gap-4">
-          <div className="w-12 h-12 rounded-2xl bg-purple-500/20 border border-purple-500/40 flex items-center justify-center shrink-0">
-            <Scale className="w-6 h-6 text-purple-400" />
+          <div className="w-12 h-12 rounded-2xl bg-[#dc2626]/20 border border-[#dc2626]/40 flex items-center justify-center shrink-0">
+            <Scale className="w-6 h-6 text-[#ffd700]" />
           </div>
           <div>
-            <span className="text-[10px] font-bold uppercase tracking-wider text-purple-300 bg-purple-500/10 px-2 py-0.5 rounded">
+            <span className="text-[10px] font-bold uppercase tracking-wider text-[#ffd700] bg-[#dc2626]/30 px-2.5 py-0.5 rounded border border-[#dc2626]/40">
               Mysteries Of POSH With Kapil • Zero Tolerance
             </span>
-            <h3 className="text-base font-extrabold text-white mt-0.5">
+            <h3 className="text-base font-extrabold text-white mt-1">
               Workplace Respect, Dignity & Prevention of Sexual Harassment
             </h3>
             <p className="text-xs text-slate-300">
@@ -90,20 +90,20 @@ export default function PoliciesView({
 
         <button
           onClick={() => setSelectedPolicy(COMPANY_POLICIES[1])}
-          className="px-4 py-2 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-bold text-xs flex items-center gap-1.5 shadow transition-all shrink-0"
+          className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#dc2626] via-[#b91c1c] to-[#991b1b] hover:from-[#ef4444] hover:to-[#dc2626] text-white font-bold text-xs flex items-center gap-2 shadow-lg glow-red-sm transition-all shrink-0 border border-[#ffd700]/30"
         >
           <span>Read Full POSH Guidelines</span>
-          <ChevronRight className="w-3.5 h-3.5" />
+          <ChevronRight className="w-3.5 h-3.5 text-[#ffd700]" />
         </button>
       </div>
 
       {/* Two Column Section: Announcements Board vs Policies Library */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Left (2 cols): Announcements */}
-        <div className="lg:col-span-2 glass-panel p-6 rounded-3xl space-y-4">
-          <div className="flex items-center justify-between pb-3 border-b border-slate-800">
+        <div className="lg:col-span-2 rounded-3xl bg-[#0c0c12] border border-[#222230] p-6 space-y-4 shadow-xl">
+          <div className="flex items-center justify-between pb-3 border-b border-[#222230]">
             <h3 className="font-bold text-base text-white flex items-center gap-2">
-              <Megaphone className="w-5 h-5 text-amber-400" />
+              <Megaphone className="w-5 h-5 text-[#ffd700]" />
               <span>Official Leadership Bulletins ({announcements.length})</span>
             </h3>
             <span className="text-xs text-slate-400">All-Company Feed</span>
@@ -113,24 +113,24 @@ export default function PoliciesView({
             {announcements.map((ann) => (
               <div
                 key={ann.id}
-                className="p-5 rounded-2xl bg-slate-900/80 border border-slate-800 hover:border-amber-500/30 transition-all space-y-3"
+                className="p-5 rounded-2xl bg-[#08080d] border border-[#222230] hover:border-[#ffd700]/40 transition-all space-y-3"
               >
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                   <div className="flex items-center gap-2">
-                    <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-amber-500/15 text-amber-300 border border-amber-500/30">
+                    <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-[#dc2626]/15 text-[#fca5a5] border border-[#dc2626]/30">
                       {ann.category}
                     </span>
                     <h4 className="font-bold text-white text-sm">{ann.title}</h4>
                   </div>
-                  <span className="text-[11px] font-mono text-slate-400">{ann.date}</span>
+                  <span className="text-[11px] font-mono text-[#ffd700]">{ann.date}</span>
                 </div>
 
                 <p className="text-xs text-slate-300 leading-relaxed whitespace-pre-line">
                   {ann.content}
                 </p>
 
-                <div className="pt-2 border-t border-slate-800 flex items-center justify-between text-[11px] text-slate-400">
-                  <span>Author: <strong className="text-amber-400">{ann.author}</strong></span>
+                <div className="pt-2 border-t border-[#1e1e2c] flex items-center justify-between text-[11px] text-slate-400">
+                  <span>Author: <strong className="text-[#ffd700]">{ann.author}</strong></span>
                   <span className="text-emerald-400 flex items-center gap-1">
                     <ShieldCheck className="w-3.5 h-3.5" /> Verified Broadcast
                   </span>
@@ -141,11 +141,11 @@ export default function PoliciesView({
         </div>
 
         {/* Right (1 col): Policies Library */}
-        <div className="glass-panel p-6 rounded-3xl space-y-4 flex flex-col justify-between">
+        <div className="rounded-3xl bg-[#0c0c12] border border-[#222230] p-6 space-y-4 flex flex-col justify-between shadow-xl">
           <div className="space-y-4">
-            <div className="flex items-center justify-between pb-3 border-b border-slate-800">
+            <div className="flex items-center justify-between pb-3 border-b border-[#222230]">
               <h3 className="font-bold text-sm text-white flex items-center gap-2">
-                <BookOpen className="w-4 h-4 text-amber-400" />
+                <BookOpen className="w-4 h-4 text-[#ffd700]" />
                 <span>Enterprise Policies</span>
               </h3>
               <span className="text-[10px] text-slate-400">Governance</span>
@@ -160,11 +160,11 @@ export default function PoliciesView({
                     onClick={() => setSelectedPolicy(policy)}
                     className={`p-3 rounded-2xl border text-left cursor-pointer transition-all ${
                       isSelected
-                        ? "bg-amber-500/20 border-amber-400 shadow-md"
-                        : "bg-slate-900/60 border-slate-800 hover:border-slate-700"
+                        ? "bg-[#140a0c] border-[#dc2626] shadow-md ring-1 ring-[#ffd700]/30"
+                        : "bg-[#08080d] border-[#222230] hover:border-slate-700"
                     }`}
                   >
-                    <span className="text-[9px] font-bold uppercase tracking-wider text-amber-400">
+                    <span className="text-[9px] font-bold uppercase tracking-wider text-[#ffd700]">
                       {policy.category}
                     </span>
                     <h5 className="font-bold text-white text-xs mt-0.5">{policy.title}</h5>
@@ -177,14 +177,14 @@ export default function PoliciesView({
 
           {/* Selected Policy Detail */}
           {selectedPolicy && (
-            <div className="p-4 rounded-2xl bg-slate-950/80 border border-slate-800 text-xs space-y-2">
+            <div className="p-4 rounded-2xl bg-[#08080d] border border-[#ffd700]/30 text-xs space-y-2 shadow-inner">
               <div className="flex items-center justify-between">
-                <span className="font-bold text-amber-300">Policy Document</span>
+                <span className="font-bold text-[#ffd700]">Policy Document</span>
                 <span className="text-[10px] text-slate-500">Updated: {selectedPolicy.lastUpdated}</span>
               </div>
               <h4 className="font-bold text-white text-sm">{selectedPolicy.title}</h4>
               <p className="text-slate-300 text-xs leading-relaxed">{selectedPolicy.summary}</p>
-              <div className="pt-2 border-t border-slate-800 text-[10px] text-slate-400">
+              <div className="pt-2 border-t border-[#1e1e2c] text-[10px] text-[#ffd700]/80">
                 Official SarlaYash Compliance Committee
               </div>
             </div>
@@ -194,13 +194,13 @@ export default function PoliciesView({
 
       {/* Broadcast Announcement Modal */}
       {showAddModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-in fade-in">
-          <div className="w-full max-w-lg rounded-3xl bg-[#0a1226] border border-amber-500/40 p-6 shadow-2xl space-y-4">
-            <div className="flex items-center justify-between pb-3 border-b border-slate-800">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-sm animate-in fade-in">
+          <div className="w-full max-w-lg rounded-3xl bg-[#09090e] border-2 border-[#ffd700]/40 p-6 shadow-2xl space-y-4 glow-red-sm">
+            <div className="flex items-center justify-between pb-3 border-b border-[#222230]">
               <h3 className="font-bold text-base text-white">Broadcast Announcement to Notice Board</h3>
               <button
                 onClick={() => setShowAddModal(false)}
-                className="p-1 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800"
+                className="p-1 rounded-lg text-slate-400 hover:text-white hover:bg-[#161622]"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -214,7 +214,7 @@ export default function PoliciesView({
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
                   placeholder="e.g. Q4 Company All-Hands & Internships Celebration"
-                  className="w-full p-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white focus:outline-none focus:border-amber-400"
+                  className="w-full p-2.5 rounded-xl bg-[#050508] border border-[#2a2a38] text-white focus:outline-none focus:border-[#ffd700]"
                   required
                 />
               </div>
@@ -224,7 +224,7 @@ export default function PoliciesView({
                 <select
                   value={category}
                   onChange={(e) => setCategory(e.target.value)}
-                  className="w-full p-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white"
+                  className="w-full p-2.5 rounded-xl bg-[#050508] border border-[#2a2a38] text-white"
                 >
                   <option value="Founder's Vision">Founder's Vision</option>
                   <option value="Operations & Strategy">Operations & Strategy</option>
@@ -240,22 +240,22 @@ export default function PoliciesView({
                   value={content}
                   onChange={(e) => setContent(e.target.value)}
                   placeholder="Write message for the SarlaYash team..."
-                  className="w-full p-3 rounded-xl bg-slate-900 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-amber-400"
+                  className="w-full p-3 rounded-xl bg-[#050508] border border-[#2a2a38] text-white placeholder-slate-500 focus:outline-none focus:border-[#ffd700]"
                   required
                 />
               </div>
 
-              <div className="flex items-center justify-end gap-3 pt-3 border-t border-slate-800">
+              <div className="flex items-center justify-end gap-3 pt-3 border-t border-[#222230]">
                 <button
                   type="button"
                   onClick={() => setShowAddModal(false)}
-                  className="px-4 py-2 rounded-xl bg-slate-800 text-slate-300"
+                  className="px-4 py-2 rounded-xl bg-[#161622] text-slate-300"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 text-slate-950 font-bold hover:brightness-110 shadow"
+                  className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#dc2626] via-[#b91c1c] to-[#991b1b] hover:from-[#ef4444] hover:to-[#dc2626] text-white font-bold border border-[#ffd700]/30 shadow glow-red-sm"
                 >
                   Publish Announcement
                 </button>

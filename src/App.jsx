@@ -260,7 +260,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#070b14] text-slate-100 flex flex-col font-sans selection:bg-amber-500/30 selection:text-amber-200">
+    <div className="min-h-screen bg-[#050507] text-slate-100 flex flex-col font-sans selection:bg-[#dc2626]/30 selection:text-[#ffd700]">
       {/* Top Fixed Navbar */}
       <Navbar
         currentUser={currentUser}

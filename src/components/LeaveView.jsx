@@ -114,11 +114,11 @@ export default function LeaveView({
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-800">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[#222230]">
         <div>
           <h2 className="text-xl lg:text-2xl font-black text-white flex items-center gap-2">
-            <CalendarCheck2 className="w-6 h-6 text-amber-400" />
-            <span>Leave Management & Approvals</span>
+            <CalendarCheck2 className="w-6 h-6 text-[#ffd700]" />
+            <span className="tracking-tight">Leave Management & Approvals</span>
           </h2>
           <p className="text-xs text-slate-400 mt-1">
             Apply, track quotas, and manage team leave requests with workflow transparency
@@ -127,15 +127,15 @@ export default function LeaveView({
 
         <button
           onClick={() => setShowApplyModal(true)}
-          className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 text-slate-950 font-bold text-xs hover:brightness-110 shadow-lg glow-gold-sm transition-all self-start sm:self-auto"
+          className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#dc2626] via-[#b91c1c] to-[#991b1b] text-white font-bold text-xs hover:brightness-110 shadow-lg glow-red-sm transition-all self-start sm:self-auto border border-[#ffd700]/30"
         >
-          <CalendarPlus className="w-4 h-4" />
+          <CalendarPlus className="w-4 h-4 text-[#ffd700]" />
           <span>Apply For Leave</span>
         </button>
       </div>
 
       {actionFeedback && (
-        <div className="p-3.5 rounded-2xl bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 text-xs font-semibold flex items-center gap-2 animate-in fade-in">
+        <div className="p-3.5 rounded-2xl bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 text-xs font-semibold flex items-center gap-2 animate-in fade-in">
           <CheckCircle2 className="w-4 h-4 shrink-0" />
           <span>{actionFeedback}</span>
         </div>
@@ -143,60 +143,60 @@ export default function LeaveView({
 
       {/* Leave Quota Cards */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-        <div className="glass-panel p-4 rounded-2xl border-l-4 border-l-blue-500">
+        <div className="p-4 rounded-2xl bg-[#0c0c12] border-l-4 border-l-[#ffd700] border border-[#222230] shadow-md">
           <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Casual Leave (CL)</span>
           <div className="flex items-baseline justify-between mt-2">
             <span className="text-2xl font-black text-white">{currentUser?.leaveBalance?.casual || 12}</span>
-            <span className="text-[10px] text-slate-400">Available Days</span>
+            <span className="text-[10px] text-[#ffd700]">Available Days</span>
           </div>
           <p className="text-[10px] text-slate-500 mt-1">Short personal leaves</p>
         </div>
 
-        <div className="glass-panel p-4 rounded-2xl border-l-4 border-l-emerald-500">
+        <div className="p-4 rounded-2xl bg-[#0c0c12] border-l-4 border-l-[#dc2626] border border-[#222230] shadow-md">
           <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Sick Leave (SL)</span>
           <div className="flex items-baseline justify-between mt-2">
             <span className="text-2xl font-black text-white">{currentUser?.leaveBalance?.sick || 10}</span>
-            <span className="text-[10px] text-slate-400">Available Days</span>
+            <span className="text-[10px] text-[#fca5a5]">Available Days</span>
           </div>
           <p className="text-[10px] text-slate-500 mt-1">Medical recovery & doctor visits</p>
         </div>
 
-        <div className="glass-panel p-4 rounded-2xl border-l-4 border-l-purple-500">
+        <div className="p-4 rounded-2xl bg-[#0c0c12] border-l-4 border-l-amber-500 border border-[#222230] shadow-md">
           <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Privilege Leave (PL)</span>
           <div className="flex items-baseline justify-between mt-2">
             <span className="text-2xl font-black text-white">{currentUser?.leaveBalance?.privilege || 15}</span>
-            <span className="text-[10px] text-slate-400">Available Days</span>
+            <span className="text-[10px] text-amber-300">Available Days</span>
           </div>
           <p className="text-[10px] text-slate-500 mt-1">Vacation & planned family travel</p>
         </div>
 
-        <div className="glass-panel p-4 rounded-2xl border-l-4 border-l-amber-400 bg-gradient-to-br from-amber-500/10 to-transparent">
-          <span className="text-[11px] font-bold text-amber-400 uppercase tracking-wider flex items-center gap-1">
-            <Sparkles className="w-3 h-3" /> Blessings Leave
+        <div className="p-4 rounded-2xl bg-gradient-to-br from-[#1a0a0d] via-[#0c0c12] to-[#08080d] border-l-4 border-l-[#ffd700] border border-[#dc2626]/40 shadow-md">
+          <span className="text-[11px] font-bold text-[#ffd700] uppercase tracking-wider flex items-center gap-1">
+            <Sparkles className="w-3 h-3 text-[#ffd700]" /> Blessings Leave
           </span>
           <div className="flex items-baseline justify-between mt-2">
-            <span className="text-2xl font-black text-amber-300">{currentUser?.leaveBalance?.blessings || 3}</span>
-            <span className="text-[10px] text-amber-400/80">Special Quota</span>
+            <span className="text-2xl font-black text-[#ffd700]">{currentUser?.leaveBalance?.blessings || 3}</span>
+            <span className="text-[10px] text-amber-300">Special Quota</span>
           </div>
           <p className="text-[10px] text-slate-400 mt-1">Spiritual renewal & social service</p>
         </div>
       </div>
 
       {/* Tabs Switcher (Admin Approval Desk vs My History) */}
-      <div className="flex items-center gap-2 border-b border-slate-800 pb-2">
+      <div className="flex items-center gap-2 border-b border-[#222230] pb-2">
         {isAdmin && (
           <button
             onClick={() => setActiveTab("approval-desk")}
             className={`px-4 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-2 ${
               activeTab === "approval-desk"
-                ? "bg-amber-500 text-slate-950 shadow glow-gold-sm"
-                : "bg-slate-900 text-slate-400 hover:text-white"
+                ? "bg-[#dc2626] text-white shadow glow-red-sm border border-[#ffd700]/40"
+                : "bg-[#0e0e16] text-slate-400 hover:text-white border border-[#222230]"
             }`}
           >
-            <ShieldCheck className="w-4 h-4" />
+            <ShieldCheck className="w-4 h-4 text-[#ffd700]" />
             <span>Admin Approval Desk</span>
             {pendingRequests.length > 0 && (
-              <span className="px-1.5 py-0.5 rounded-full text-[10px] bg-rose-600 text-white font-extrabold">
+              <span className="px-1.5 py-0.5 rounded-full text-[10px] bg-[#ffd700] text-slate-950 font-black">
                 {pendingRequests.length}
               </span>
             )}
@@ -207,22 +207,22 @@ export default function LeaveView({
           onClick={() => setActiveTab("my-leaves")}
           className={`px-4 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-2 ${
             activeTab === "my-leaves"
-              ? "bg-amber-500 text-slate-950 shadow glow-gold-sm"
-              : "bg-slate-900 text-slate-400 hover:text-white"
+              ? "bg-[#dc2626] text-white shadow glow-red-sm border border-[#ffd700]/40"
+              : "bg-[#0e0e16] text-slate-400 hover:text-white border border-[#222230]"
           }`}
         >
-          <User className="w-4 h-4" />
+          <User className="w-4 h-4 text-[#ffd700]" />
           <span>My Leave Applications ({myLeaves.length})</span>
         </button>
       </div>
 
       {/* ADMIN APPROVAL DESK TAB */}
       {isAdmin && activeTab === "approval-desk" && (
-        <div className="glass-panel p-6 rounded-3xl space-y-5">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-3 border-b border-slate-800">
+        <div className="p-6 rounded-3xl bg-[#0c0c12] border border-[#222230] space-y-5 shadow-xl">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-3 border-b border-[#222230]">
             <div>
               <h3 className="font-bold text-base text-white flex items-center gap-2">
-                <ShieldCheck className="w-5 h-5 text-amber-400" />
+                <ShieldCheck className="w-5 h-5 text-[#ffd700]" />
                 <span>Executive Leave Approval Desk</span>
               </h3>
               <p className="text-xs text-slate-400">
@@ -231,14 +231,14 @@ export default function LeaveView({
             </div>
 
             {/* Status Filter */}
-            <div className="flex items-center gap-1.5 p-1 rounded-xl bg-slate-900 border border-slate-800 text-xs">
+            <div className="flex items-center gap-1.5 p-1 rounded-xl bg-[#08080d] border border-[#222230] text-xs">
               {["Pending", "Approved", "Rejected", "All"].map((f) => (
                 <button
                   key={f}
                   onClick={() => setLeaveFilter(f)}
                   className={`px-3 py-1 rounded-lg font-semibold transition-all ${
                     leaveFilter === f
-                      ? "bg-amber-500 text-slate-950 shadow-sm"
+                      ? "bg-[#dc2626] text-white shadow-sm font-bold"
                       : "text-slate-400 hover:text-white"
                   }`}
                 >
@@ -249,7 +249,7 @@ export default function LeaveView({
           </div>
 
           {filteredAllRequests.length === 0 ? (
-            <div className="p-12 text-center text-xs text-slate-500 border border-dashed border-slate-800 rounded-2xl">
+            <div className="p-12 text-center text-xs text-slate-500 border border-dashed border-[#222230] rounded-2xl">
               <CheckCircle2 className="w-10 h-10 text-emerald-400 mx-auto mb-2 opacity-60" />
               <p className="text-sm font-semibold text-slate-300">No leave requests in "{leaveFilter}" category</p>
               <p className="text-[11px] text-slate-500 mt-1">All leave applications are up to date.</p>
@@ -263,8 +263,8 @@ export default function LeaveView({
                     key={leave.id}
                     className={`p-4 rounded-2xl border transition-all ${
                       isPending
-                        ? "bg-gradient-to-r from-navy-900 to-slate-900 border-amber-500/40 shadow-lg"
-                        : "bg-slate-900/60 border-slate-800 text-slate-400"
+                        ? "bg-[#100a0d] border-[#dc2626]/50 shadow-lg glow-red-sm"
+                        : "bg-[#09090e] border-[#222230] text-slate-400"
                     }`}
                   >
                     <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
@@ -272,10 +272,10 @@ export default function LeaveView({
                       <div className="space-y-1.5">
                         <div className="flex items-center gap-2">
                           <span className="font-bold text-white text-sm">{leave.employeeName}</span>
-                          <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-800 text-amber-300 border border-slate-700">
+                          <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#161622] text-[#ffd700] border border-[#222230]">
                             {leave.employeeId}
                           </span>
-                          <span className="text-[10px] px-2 py-0.5 rounded font-semibold bg-blue-500/20 text-blue-300 border border-blue-500/30">
+                          <span className="text-[10px] px-2 py-0.5 rounded font-semibold bg-[#dc2626]/20 text-[#fca5a5] border border-[#dc2626]/30">
                             {leave.leaveType}
                           </span>
                           <span
@@ -283,8 +283,8 @@ export default function LeaveView({
                               leave.status === "Approved"
                                 ? "bg-emerald-500/20 text-emerald-300 border border-emerald-500/40"
                                 : leave.status === "Pending"
-                                ? "bg-amber-500/20 text-amber-300 border border-amber-500/40"
-                                : "bg-rose-500/20 text-rose-300 border border-rose-500/40"
+                                ? "bg-[#ffd700]/20 text-[#ffd700] border border-[#ffd700]/40"
+                                : "bg-[#dc2626]/20 text-[#fca5a5] border border-[#dc2626]/40"
                             }`}
                           >
                             {leave.status}
@@ -292,19 +292,19 @@ export default function LeaveView({
                         </div>
 
                         <p className="text-xs text-slate-200">
-                          <strong className="text-amber-300 font-mono">
+                          <strong className="text-[#ffd700] font-mono">
                             {leave.startDate} to {leave.endDate}
                           </strong>{" "}
                           ({leave.daysCount} day{leave.daysCount > 1 ? "s" : ""}, {leave.duration})
                         </p>
 
-                        <div className="p-2.5 rounded-xl bg-slate-950/70 border border-slate-800/80 text-xs text-slate-300">
+                        <div className="p-2.5 rounded-xl bg-[#050508] border border-[#222230] text-xs text-slate-300">
                           <strong className="text-slate-400 font-medium">Reason: </strong>
                           {leave.reason}
                         </div>
 
                         {leave.managerRemarks && (
-                          <p className="text-[11px] text-amber-400/90 italic">
+                          <p className="text-[11px] text-[#ffd700]/90 italic">
                             Manager Remarks: "{leave.managerRemarks}"
                           </p>
                         )}
@@ -324,7 +324,7 @@ export default function LeaveView({
 
                             <button
                               onClick={() => handleReject(leave.id)}
-                              className="px-4 py-2 rounded-xl bg-slate-800 hover:bg-rose-950/60 text-rose-300 font-bold text-xs flex items-center gap-1.5 border border-rose-500/30 transition-all"
+                              className="px-4 py-2 rounded-xl bg-[#161622] hover:bg-[#dc2626]/40 text-[#fca5a5] font-bold text-xs flex items-center gap-1.5 border border-[#dc2626]/40 transition-all"
                             >
                               <X className="w-4 h-4" />
                               <span>Reject</span>
@@ -347,11 +347,11 @@ export default function LeaveView({
 
       {/* MY LEAVES TAB */}
       {(!isAdmin || activeTab === "my-leaves") && (
-        <div className="glass-panel p-6 rounded-3xl space-y-4">
-          <div className="flex items-center justify-between pb-3 border-b border-slate-800">
+        <div className="p-6 rounded-3xl bg-[#0c0c12] border border-[#222230] space-y-4 shadow-xl">
+          <div className="flex items-center justify-between pb-3 border-b border-[#222230]">
             <div>
               <h3 className="font-bold text-base text-white flex items-center gap-2">
-                <CalendarCheck2 className="w-5 h-5 text-amber-400" />
+                <CalendarCheck2 className="w-5 h-5 text-[#ffd700]" />
                 <span>My Submitted Leaves</span>
               </h3>
               <p className="text-xs text-slate-400">Applications and real-time manager approvals</p>
@@ -359,7 +359,7 @@ export default function LeaveView({
 
             <button
               onClick={() => setShowApplyModal(true)}
-              className="text-xs text-amber-400 hover:text-amber-300 font-bold flex items-center gap-1"
+              className="text-xs text-[#ffd700] hover:text-yellow-300 font-bold flex items-center gap-1"
             >
               <CalendarPlus className="w-3.5 h-3.5" />
               <span>New Request</span>
@@ -367,14 +367,14 @@ export default function LeaveView({
           </div>
 
           {myLeaves.length === 0 ? (
-            <div className="p-8 text-center text-xs text-slate-500 border border-dashed border-slate-800 rounded-2xl">
+            <div className="p-8 text-center text-xs text-slate-500 border border-dashed border-[#222230] rounded-2xl">
               You haven't submitted any leaves yet.
             </div>
           ) : (
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs">
                 <thead>
-                  <tr className="border-b border-slate-800 text-slate-400 text-[11px] uppercase tracking-wider">
+                  <tr className="border-b border-[#222230] text-slate-400 text-[11px] uppercase tracking-wider">
                     <th className="py-3 px-3">Leave Type</th>
                     <th className="py-3 px-3">Date Range</th>
                     <th className="py-3 px-3">Days</th>
@@ -384,9 +384,9 @@ export default function LeaveView({
                     <th className="py-3 px-3">Remarks</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-800/60">
+                <tbody className="divide-y divide-[#1e1e2c]">
                   {myLeaves.map((l) => (
-                    <tr key={l.id} className="hover:bg-slate-900/40">
+                    <tr key={l.id} className="hover:bg-[#12121c]">
                       <td className="py-3 px-3 font-semibold text-white">{l.leaveType}</td>
                       <td className="py-3 px-3 font-mono text-slate-300">
                         {l.startDate} → {l.endDate}
@@ -400,8 +400,8 @@ export default function LeaveView({
                             l.status === "Approved"
                               ? "bg-emerald-500/20 text-emerald-300 border border-emerald-500/30"
                               : l.status === "Pending"
-                              ? "bg-amber-500/20 text-amber-300 border border-amber-500/30"
-                              : "bg-rose-500/20 text-rose-300 border border-rose-500/30"
+                              ? "bg-[#ffd700]/20 text-[#ffd700] border border-[#ffd700]/30"
+                              : "bg-[#dc2626]/20 text-[#fca5a5] border border-[#dc2626]/30"
                           }`}
                         >
                           {l.status}
@@ -421,11 +421,11 @@ export default function LeaveView({
 
       {/* Apply Leave Modal Form */}
       {showApplyModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-in fade-in">
-          <div className="w-full max-w-xl rounded-3xl bg-[#0a1226] border border-amber-500/40 p-6 shadow-2xl space-y-5">
-            <div className="flex items-center justify-between pb-3 border-b border-slate-800">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-sm animate-in fade-in">
+          <div className="w-full max-w-xl rounded-3xl bg-[#09090e] border-2 border-[#ffd700]/40 p-6 shadow-2xl space-y-5 glow-red-sm">
+            <div className="flex items-center justify-between pb-3 border-b border-[#222230]">
               <div className="flex items-center gap-2">
-                <span className="p-2 rounded-xl bg-amber-500/20 text-amber-300 border border-amber-500/30">
+                <span className="p-2 rounded-xl bg-[#dc2626]/20 text-[#ffd700] border border-[#dc2626]/30">
                   <CalendarPlus className="w-5 h-5" />
                 </span>
                 <div>
@@ -435,7 +435,7 @@ export default function LeaveView({
               </div>
               <button
                 onClick={() => setShowApplyModal(false)}
-                className="p-1 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800"
+                className="p-1 rounded-lg text-slate-400 hover:text-white hover:bg-[#161622]"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -448,7 +448,7 @@ export default function LeaveView({
                   <select
                     value={leaveType}
                     onChange={(e) => setLeaveType(e.target.value)}
-                    className="w-full p-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white focus:outline-none focus:border-amber-400"
+                    className="w-full p-2.5 rounded-xl bg-[#050508] border border-[#2a2a38] text-white focus:outline-none focus:border-[#ffd700]"
                   >
                     <option value="Parental Care Leave">Parental Care Leave (Care Model)</option>
                     <option value="Exam Leave">Exam Leave (Academic)</option>
@@ -465,7 +465,7 @@ export default function LeaveView({
                   <select
                     value={duration}
                     onChange={(e) => setDuration(e.target.value)}
-                    className="w-full p-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white focus:outline-none focus:border-amber-400"
+                    className="w-full p-2.5 rounded-xl bg-[#050508] border border-[#2a2a38] text-white focus:outline-none focus:border-[#ffd700]"
                   >
                     <option value="Full Day">Full Day</option>
                     <option value="First Half">First Half (Morning Session)</option>
@@ -479,7 +479,7 @@ export default function LeaveView({
                     type="date"
                     value={startDate}
                     onChange={(e) => setStartDate(e.target.value)}
-                    className="w-full p-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white focus:outline-none focus:border-amber-400"
+                    className="w-full p-2.5 rounded-xl bg-[#050508] border border-[#2a2a38] text-white focus:outline-none focus:border-[#ffd700]"
                     required
                   />
                 </div>
@@ -490,15 +490,15 @@ export default function LeaveView({
                     type="date"
                     value={endDate}
                     onChange={(e) => setEndDate(e.target.value)}
-                    className="w-full p-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white focus:outline-none focus:border-amber-400"
+                    className="w-full p-2.5 rounded-xl bg-[#050508] border border-[#2a2a38] text-white focus:outline-none focus:border-[#ffd700]"
                     required
                   />
                 </div>
               </div>
 
-              <div className="p-3 rounded-xl bg-amber-500/10 border border-amber-500/25 flex items-center justify-between text-amber-200">
+              <div className="p-3 rounded-xl bg-[#0e0e16] border border-[#ffd700]/30 flex items-center justify-between text-[#ffd700]">
                 <span>Calculated Days:</span>
-                <span className="font-bold text-sm text-amber-300 font-mono">
+                <span className="font-bold text-sm text-[#ffd700] font-mono">
                   {daysCount} Day{daysCount > 1 ? "s" : ""}
                 </span>
               </div>
@@ -510,30 +510,30 @@ export default function LeaveView({
                   value={reason}
                   onChange={(e) => setReason(e.target.value)}
                   placeholder="Please describe why leave is required and work coverage arrangements..."
-                  className="w-full p-3 rounded-xl bg-slate-900 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-amber-400"
+                  className="w-full p-3 rounded-xl bg-[#050508] border border-[#2a2a38] text-white placeholder-slate-500 focus:outline-none focus:border-[#ffd700]"
                   required
                 />
               </div>
 
-              <div className="p-3 rounded-xl bg-slate-900 border border-slate-800 text-[11px] text-slate-400">
+              <div className="p-3 rounded-xl bg-[#08080d] border border-[#222230] text-[11px] text-slate-400">
                 <span>Reporting Manager: </span>
                 <strong className="text-white">{currentUser?.reportsTo}</strong>
                 <p className="mt-0.5">Notification will be instantly routed to manager desk.</p>
               </div>
 
-              <div className="flex items-center justify-end gap-3 pt-3 border-t border-slate-800">
+              <div className="flex items-center justify-end gap-3 pt-3 border-t border-[#222230]">
                 <button
                   type="button"
                   onClick={() => setShowApplyModal(false)}
-                  className="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-semibold"
+                  className="px-4 py-2 rounded-xl bg-[#161622] hover:bg-[#1e1e2c] text-slate-300 font-semibold"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="px-6 py-2 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 text-slate-950 font-bold hover:brightness-110 shadow glow-gold-sm flex items-center gap-2"
+                  className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-[#dc2626] via-[#b91c1c] to-[#991b1b] hover:from-[#ef4444] hover:to-[#dc2626] text-white font-bold shadow-lg glow-red-sm flex items-center gap-2 border border-[#ffd700]/30"
                 >
-                  <Send className="w-4 h-4" />
+                  <Send className="w-4 h-4 text-[#ffd700]" />
                   <span>Submit Application</span>
                 </button>
               </div>
