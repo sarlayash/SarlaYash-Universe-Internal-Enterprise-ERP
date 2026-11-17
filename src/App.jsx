@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Navbar from "./components/Navbar";
 import Sidebar from "./components/Sidebar";
 import DashboardView from "./components/DashboardView";
@@ -11,9 +11,10 @@ import ChannelsView from "./components/ChannelsView";
 import EarningModelView from "./components/EarningModelView";
 import PayslipView from "./components/PayslipView";
 import PoliciesView from "./components/PoliciesView";
+import BroadcastsView from "./components/BroadcastsView";
 import LoginModal from "./components/LoginModal";
 import confetti from "canvas-confetti";
-import { Sparkles, Bell, CheckCircle2, AlertTriangle, Clock, X } from "lucide-react";
+import { Sparkles, Bell, CheckCircle2, AlertTriangle, Clock, X, Radio } from "lucide-react";
 
 import {
   getStoredData,
@@ -21,6 +22,12 @@ import {
   initializeStorage,
   KEYS
 } from "./utils/storage";
+
+import {
+  getISTDate,
+  getISTTime,
+  autoCloseMidnightAttendance
+} from "./utils/timeUtils";
 
 import {
   INITIAL_EMPLOYEES,
@@ -32,7 +39,8 @@ import {
   INITIAL_EARNING_TARGETS,
   INITIAL_TASKS,
   INITIAL_PUNCH_CORRECTIONS,
-  INITIAL_NOTIFICATIONS
+  INITIAL_NOTIFICATIONS,
+  INITIAL_BROADCASTS
 } from "./data/initialData";
 
 export default function App() {
@@ -70,6 +78,9 @@ export default function App() {
   );
   const [notifications, setNotifications] = useState(() =>
     getStoredData(KEYS.NOTIFICATIONS, INITIAL_NOTIFICATIONS)
+  );
+  const [broadcasts, setBroadcasts] = useState(() =>
+    getStoredData(KEYS.BROADCASTS, INITIAL_BROADCASTS)
   );
 
   const [currentUserId, setCurrentUserId] = useState(() =>
@@ -125,6 +136,10 @@ export default function App() {
   }, [notifications]);
 
   useEffect(() => {
+    setStoredData(KEYS.BROADCASTS, broadcasts);
+  }, [broadcasts]);
+
+  useEffect(() => {
     setStoredData(KEYS.CURRENT_USER_ID, currentUserId);
   }, [currentUserId]);
 
@@ -132,12 +147,43 @@ export default function App() {
     setStoredData(KEYS.IS_LOGGED_IN, isLoggedIn);
   }, [isLoggedIn]);
 
+  // AUTOMATIC CLOCK-OUT AT 12 MIDNIGHT DAILY AS PER IST TIME ZONE
+  useEffect(() => {
+    const checkAndAutoCloseMidnightPunches = () => {
+      setAttendance((prevAttendance) => {
+        const { updatedList, hasChanged, autoClosedEmployees } = autoCloseMidnightAttendance(prevAttendance);
+        if (hasChanged) {
+          // Send notification for each auto-closed employee
+          autoClosedEmployees.forEach((emp) => {
+            dispatchNotification({
+              recipientId: emp.employeeId,
+              senderName: "Midnight IST Auto-Closure System",
+              title: "Automatic Shift Clock-Out (12:00 AM IST)",
+              message: `Your shift on ${emp.date} was automatically clocked out at 12:00 AM IST as per company policy.`,
+              type: "attendance"
+            });
+          });
+          return updatedList;
+        }
+        return prevAttendance;
+      });
+    };
+
+    // Run immediately on mount
+    checkAndAutoCloseMidnightPunches();
+
+    // Check periodically every 30 seconds
+    const interval = setInterval(checkAndAutoCloseMidnightPunches, 30000);
+    return () => clearInterval(interval);
+  }, []);
+
   const currentUser = employees.find((e) => e.id === currentUserId) || employees[0];
   const isSuperAdmin = currentUser?.role === "super_admin" || currentUser?.id === "SYM001";
+  const currentISTDate = getISTDate();
 
-  // Today's attendance for current user (16 Nov 2026)
+  // Today's attendance for current user in IST
   const todayAttendance = attendance.find(
-    (a) => a.employeeId === currentUser?.id && a.date === "2026-11-16"
+    (a) => a.employeeId === currentUser?.id && a.date === currentISTDate
   );
 
   // Pending counts
@@ -236,19 +282,15 @@ export default function App() {
 
   const handleQuickPunch = () => {
     const isCheckedIn = !!todayAttendance?.checkIn && !todayAttendance?.checkOut;
-    const now = new Date();
-    const timeStr = now.toLocaleTimeString("en-IN", {
-      hour: "2-digit",
-      minute: "2-digit",
-      hour12: true
-    });
+    const timeStr = getISTTime();
+    const dateStr = getISTDate();
 
     if (!isCheckedIn) {
       handleRecordAttendance({
         id: `ATT-${Date.now()}`,
         employeeId: currentUser.id,
         employeeName: currentUser.name,
-        date: "2026-11-16",
+        date: dateStr,
         checkIn: timeStr,
         checkOut: null,
         workMode: "Office - Campus",
@@ -265,7 +307,7 @@ export default function App() {
       handleRecordAttendance({
         ...todayAttendance,
         checkOut: timeStr,
-        notes: `${todayAttendance.notes} | Out at ${timeStr}`
+        notes: `${todayAttendance.notes} | Out at ${timeStr} (IST)`
       });
     }
   };
@@ -274,7 +316,6 @@ export default function App() {
   const handleApplyLeave = (newLeave) => {
     setLeaves((prev) => [newLeave, ...prev]);
 
-    // Dispatch real-time notification to Super Admin Kapil
     dispatchNotification({
       recipientId: "super_admin",
       senderName: newLeave.employeeName,
@@ -295,7 +336,6 @@ export default function App() {
       )
     );
 
-    // Notify employee of Founder decision
     if (targetLeave) {
       dispatchNotification({
         recipientId: targetLeave.employeeId,
@@ -311,7 +351,6 @@ export default function App() {
   const handleRequestCorrection = (newCorrection) => {
     setPunchCorrections((prev) => [newCorrection, ...prev]);
 
-    // Dispatch real-time notification to Super Admin Kapil
     dispatchNotification({
       recipientId: "super_admin",
       senderName: newCorrection.employeeName,
@@ -331,7 +370,6 @@ export default function App() {
       )
     );
 
-    // Automatically update the employee's attendance record
     handleRecordAttendance({
       id: `ATT-CORR-${Date.now()}`,
       employeeId: targetCorr.employeeId,
@@ -350,7 +388,6 @@ export default function App() {
       origin: { y: 0.7 }
     });
 
-    // Notify the employee in real-time
     dispatchNotification({
       recipientId: targetCorr.employeeId,
       senderName: "Founder Kapil Narula",
@@ -370,7 +407,6 @@ export default function App() {
       )
     );
 
-    // Notify employee
     dispatchNotification({
       recipientId: targetCorr.employeeId,
       senderName: "Founder Kapil Narula",
@@ -380,11 +416,123 @@ export default function App() {
     });
   };
 
+  // Broadcast & Session Handlers (Founder Super Admin & Employee Nomination)
+  const handleAddBroadcast = (newBroadcast) => {
+    setBroadcasts((prev) => [newBroadcast, ...prev]);
+
+    // Dispatch system notification to all users
+    dispatchNotification({
+      recipientId: "all",
+      senderName: "Founder Kapil Narula",
+      title: `New Session Announced: ${newBroadcast.title}`,
+      message: `${newBroadcast.title} scheduled for ${newBroadcast.dateTime}. Speaker & task nominations are now open on your dashboard!`,
+      type: "broadcast"
+    });
+  };
+
+  const handleNominateForBroadcast = (broadcastId, nomination) => {
+    setBroadcasts((prev) =>
+      prev.map((b) =>
+        b.id === broadcastId
+          ? { ...b, nominations: [nomination, ...(b.nominations || [])] }
+          : b
+      )
+    );
+
+    // Notify Founder Kapil Narula
+    dispatchNotification({
+      recipientId: "super_admin",
+      senderName: nomination.employeeName,
+      title: `Speaker Nomination: ${nomination.employeeName}`,
+      message: `${nomination.employeeName} (${nomination.employeeEcode}) nominated for role "${nomination.role}". Pitch: "${nomination.pitch}"`,
+      type: "nomination"
+    });
+  };
+
+  const handleApproveNomination = (broadcastId, nominationId) => {
+    let targetNom = null;
+    let targetBroadcast = null;
+
+    setBroadcasts((prev) =>
+      prev.map((b) => {
+        if (b.id === broadcastId) {
+          targetBroadcast = b;
+          const updatedNoms = (b.nominations || []).map((n) => {
+            if (n.id === nominationId) {
+              targetNom = n;
+              return {
+                ...n,
+                status: "Approved by Founder",
+                founderRemarks: `Approved as Official ${n.role} by Founder Kapil Narula.`
+              };
+            }
+            return n;
+          });
+          return { ...b, nominations: updatedNoms };
+        }
+        return b;
+      })
+    );
+
+    confetti({
+      particleCount: 60,
+      spread: 70,
+      origin: { y: 0.6 }
+    });
+
+    if (targetNom) {
+      dispatchNotification({
+        recipientId: targetNom.employeeId,
+        senderName: "Founder Kapil Narula",
+        title: `Speaker Role Confirmed! 🎉`,
+        message: `Congratulations! Founder Kapil Narula has APPROVED your nomination as "${targetNom.role}" for session "${targetBroadcast?.title}".`,
+        type: "nomination"
+      });
+    }
+  };
+
+  const handleRejectNomination = (broadcastId, nominationId, remarks) => {
+    let targetNom = null;
+
+    setBroadcasts((prev) =>
+      prev.map((b) => {
+        if (b.id === broadcastId) {
+          const updatedNoms = (b.nominations || []).map((n) => {
+            if (n.id === nominationId) {
+              targetNom = n;
+              return {
+                ...n,
+                status: "Rejected",
+                founderRemarks: remarks || "Assigned to alternative session"
+              };
+            }
+            return n;
+          });
+          return { ...b, nominations: updatedNoms };
+        }
+        return b;
+      })
+    );
+
+    if (targetNom) {
+      dispatchNotification({
+        recipientId: targetNom.employeeId,
+        senderName: "Founder Kapil Narula",
+        title: `Nomination Update`,
+        message: `Your nomination for "${targetNom.role}" was declined by Founder Kapil Narula. Remark: ${remarks || "Scheduled for future broadcast"}`,
+        type: "nomination"
+      });
+    }
+  };
+
+  const handleDeleteBroadcast = (broadcastId) => {
+    setBroadcasts((prev) => prev.filter((b) => b.id !== broadcastId));
+  };
+
   // Daily Tasks Handlers
   const handleAddTask = (newTask) => {
     setTasks((prev) => [newTask, ...prev]);
 
-    // Dispatch real-time notification to Super Admin Kapil
     if (newTask.employeeId !== "SYM001") {
       dispatchNotification({
         recipientId: "super_admin",
@@ -469,6 +617,7 @@ export default function App() {
           currentUser={currentUser}
           pendingLeavesCount={pendingLeavesCount}
           pendingCorrectionsCount={pendingCorrectionsCount}
+          broadcastsCount={broadcasts.length}
           todayAttendance={todayAttendance}
           onQuickPunch={handleQuickPunch}
         />
@@ -486,8 +635,24 @@ export default function App() {
               announcements={announcements}
               todayAttendance={todayAttendance}
               punchCorrections={punchCorrections}
+              broadcasts={broadcasts}
               onNavigate={(tab) => setActiveTab(tab)}
               onQuickPunch={handleQuickPunch}
+              onNominateClick={() => setActiveTab("broadcasts")}
+              onPushBroadcastClick={() => setActiveTab("broadcasts")}
+            />
+          )}
+
+          {activeTab === "broadcasts" && (
+            <BroadcastsView
+              broadcasts={broadcasts}
+              currentUser={currentUser}
+              employees={employees}
+              onAddBroadcast={handleAddBroadcast}
+              onNominateForBroadcast={handleNominateForBroadcast}
+              onApproveNomination={handleApproveNomination}
+              onRejectNomination={handleRejectNomination}
+              onDeleteBroadcast={handleDeleteBroadcast}
             />
           )}
 
@@ -590,6 +755,8 @@ export default function App() {
               <AlertTriangle className="w-5 h-5 text-[#ffd700]" />
             ) : toastMessage.type === "correction" ? (
               <Clock className="w-5 h-5 text-[#dc2626]" />
+            ) : toastMessage.type === "broadcast" || toastMessage.type === "nomination" ? (
+              <Radio className="w-5 h-5 text-[#dc2626]" />
             ) : (
               <Sparkles className="w-5 h-5 text-emerald-400" />
             )}

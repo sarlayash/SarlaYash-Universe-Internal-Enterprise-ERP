@@ -8,7 +8,8 @@ import {
   INITIAL_EARNING_TARGETS,
   INITIAL_TASKS,
   INITIAL_PUNCH_CORRECTIONS,
-  INITIAL_NOTIFICATIONS
+  INITIAL_NOTIFICATIONS,
+  INITIAL_BROADCASTS
 } from "../data/initialData";
 
 const KEYS = {
@@ -22,6 +23,7 @@ const KEYS = {
   TASKS: "sarlayash_erp_tasks_v3",
   PUNCH_CORRECTIONS: "sarlayash_erp_punch_corrections_v3",
   NOTIFICATIONS: "sarlayash_erp_notifications_v3",
+  BROADCASTS: "sarlayash_erp_broadcasts_v3",
   CURRENT_USER_ID: "sarlayash_erp_current_user_id_v3",
   IS_LOGGED_IN: "sarlayash_erp_is_logged_in_v3"
 };
@@ -75,6 +77,9 @@ export const initializeStorage = () => {
   if (!localStorage.getItem(KEYS.NOTIFICATIONS)) {
     setStoredData(KEYS.NOTIFICATIONS, INITIAL_NOTIFICATIONS);
   }
+  if (!localStorage.getItem(KEYS.BROADCASTS)) {
+    setStoredData(KEYS.BROADCASTS, INITIAL_BROADCASTS);
+  }
   if (!localStorage.getItem(KEYS.CURRENT_USER_ID)) {
     setStoredData(KEYS.CURRENT_USER_ID, "SYM001");
   }
@@ -94,6 +99,7 @@ export const resetAllData = () => {
   localStorage.setItem(KEYS.TASKS, JSON.stringify(INITIAL_TASKS));
   localStorage.setItem(KEYS.PUNCH_CORRECTIONS, JSON.stringify(INITIAL_PUNCH_CORRECTIONS));
   localStorage.setItem(KEYS.NOTIFICATIONS, JSON.stringify(INITIAL_NOTIFICATIONS));
+  localStorage.setItem(KEYS.BROADCASTS, JSON.stringify(INITIAL_BROADCASTS));
   localStorage.setItem(KEYS.CURRENT_USER_ID, JSON.stringify("SYM001"));
   localStorage.setItem(KEYS.IS_LOGGED_IN, JSON.stringify(false));
   window.location.reload();

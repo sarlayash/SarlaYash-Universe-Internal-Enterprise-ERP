@@ -20,6 +20,7 @@ import {
   FileEdit
 } from "lucide-react";
 import confetti from "canvas-confetti";
+import { getISTDate, getISTTime } from "../utils/timeUtils";
 
 export default function AttendanceView({
   currentUser,
@@ -41,7 +42,7 @@ export default function AttendanceView({
 
   // Punch Correction Modal State
   const [showCorrectionModal, setShowCorrectionModal] = useState(false);
-  const [correctionDate, setCorrectionDate] = useState("2026-11-16");
+  const [correctionDate, setCorrectionDate] = useState(() => getISTDate());
   const [correctCheckIn, setCorrectCheckIn] = useState("09:30 AM");
   const [correctCheckOut, setCorrectCheckOut] = useState("06:30 PM");
   const [correctWorkMode, setCorrectWorkMode] = useState("Office");
@@ -52,18 +53,14 @@ export default function AttendanceView({
 
   const isCheckedIn = !!todayAttendance?.checkIn && !todayAttendance?.checkOut;
 
-  // Handle punch
+  // Handle punch using official IST Time
   const handlePunch = () => {
-    const now = new Date();
-    const timeStr = now.toLocaleTimeString("en-IN", {
-      hour: "2-digit",
-      minute: "2-digit",
-      hour12: true
-    });
-    const dateStr = "2026-11-16"; // Current operational date in November 2026
+    const timeStr = getISTTime();
+    const dateStr = getISTDate(); // Current operational date in IST
 
     if (!isCheckedIn) {
       // Check in
+      const now = new Date();
       const status = now.getHours() > 9 || (now.getHours() === 9 && now.getMinutes() > 30) ? "Late Mark" : "Present";
       onRecordAttendance({
         id: `ATT-${Date.now()}`,
@@ -82,7 +79,7 @@ export default function AttendanceView({
         spread: 60,
         origin: { y: 0.7 }
       });
-      setFeedbackMsg(`Checked in successfully at ${timeStr}! Status: ${status}`);
+      setFeedbackMsg(`Checked in successfully at ${timeStr} (IST)! Status: ${status}`);
     } else {
       // Check out
       onRecordAttendance({
@@ -90,7 +87,7 @@ export default function AttendanceView({
         checkOut: timeStr,
         notes: workNote ? `${todayAttendance.notes} | Out note: ${workNote}` : todayAttendance.notes
       });
-      setFeedbackMsg(`Checked out successfully at ${timeStr}. Great work today!`);
+      setFeedbackMsg(`Checked out successfully at ${timeStr} (IST). Great work today!`);
     }
 
     setWorkNote("");

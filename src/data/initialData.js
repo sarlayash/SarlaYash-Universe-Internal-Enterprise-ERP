@@ -786,3 +786,70 @@ export const INITIAL_NOTIFICATIONS = [
     isRead: false
   }
 ];
+
+// Founder Super Admin Broadcasts, Media Posters, Videos & Sessions
+export const INITIAL_BROADCASTS = [
+  {
+    id: "BC-2026-001",
+    title: "AI Ladder 🪜 Live Masterclass — Building Production Autonomous Agents",
+    type: "Masterclass Session",
+    bannerUrl: "./sarlayash_blessings_banner.jpg",
+    videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    videoEmbedId: "dQw4w9WgXcQ",
+    dateTime: "Friday, 20 Nov 2026 • 06:00 PM – 07:30 PM IST",
+    date: "2026-11-20",
+    platform: "YouTube Live & Google Meet",
+    meetingLink: "https://meet.google.com/sarlayash-ai-ladder",
+    description: "Deep dive into real-world agentic design patterns, tool calling, and live streaming architectures. Hosted by Founder Kapil Narula. Team members are invited to nominate themselves for Guest Speaker, Live Demo Anchor, or Q&A Moderator roles.",
+    publishedBy: "Founder Kapil Narula",
+    publishedAt: "2026-11-16T10:00:00Z",
+    availableRoles: ["Guest Speaker", "Technical Demo Lead", "Session Moderator", "Q&A Anchor", "Slide Deck Curator"],
+    nominations: [
+      {
+        id: "NOM-001",
+        employeeId: "SYM004",
+        employeeName: "Amber Khanum",
+        employeeEcode: "SYM004",
+        role: "Guest Speaker",
+        pitch: "I have prepared the live Gemini 3.8 tool calling walkthrough and architecture slides.",
+        status: "Approved by Founder",
+        nominatedAt: "2026-11-16T14:30:00Z",
+        founderRemarks: "Approved as Co-Speaker with Kapil Narula."
+      }
+    ]
+  },
+  {
+    id: "BC-2026-002",
+    title: "SarlaYash Ecosystem Q4 Vision Address & All-Hands Meeting",
+    type: "All-Hands Meeting",
+    bannerUrl: "./sarlayash_logo.jpg",
+    videoUrl: "https://www.youtube.com/@SarlaYash",
+    videoEmbedId: null,
+    dateTime: "Monday, 23 Nov 2026 • 11:00 AM – 12:30 PM IST",
+    date: "2026-11-23",
+    platform: "Executive Google Meet",
+    meetingLink: "https://meet.google.com/sarlayash-allhands",
+    description: "Executive strategy alignment, SarlaYash Blessings Internships scaling, and Q4 performance incentives announcement by Founder Kapil Narula. Open roles for session coordination and student outreach presentations.",
+    publishedBy: "Founder Kapil Narula",
+    publishedAt: "2026-11-16T11:00:00Z",
+    availableRoles: ["Speaker / Domain Update", "Session Moderator", "Student Outreach Coordinator"],
+    nominations: []
+  },
+  {
+    id: "BC-2026-003",
+    title: "Mysteries Of POSH & Workplace Ethics Special Interactive Panel",
+    type: "Compliance Panel",
+    bannerUrl: "./sarlayash_blessings_banner.jpg",
+    videoUrl: "https://www.youtube.com/@MysteriesOfPOSHwithKapil",
+    videoEmbedId: null,
+    dateTime: "Thursday, 26 Nov 2026 • 04:00 PM – 05:30 PM IST",
+    date: "2026-11-26",
+    platform: "Google Meet & Live Stream",
+    meetingLink: "https://meet.google.com/sarlayash-posh",
+    description: "Real-world case discussions on ICC procedures, digital communication decorum, and zero-tolerance compliance standards under the leadership of CPO Trisha Ghosh and Founder Kapil Narula.",
+    publishedBy: "Founder Kapil Narula",
+    publishedAt: "2026-11-17T09:00:00Z",
+    availableRoles: ["Panelist / Case Study Presenter", "Moderator", "Compliance Notes Author"],
+    nominations: []
+  }
+];

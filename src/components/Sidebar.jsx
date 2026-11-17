@@ -15,7 +15,8 @@ import {
   AlertCircle,
   ExternalLink,
   ChevronRight,
-  ShieldAlert
+  ShieldAlert,
+  Radio
 } from "lucide-react";
 
 export default function Sidebar({
@@ -24,6 +25,7 @@ export default function Sidebar({
   currentUser,
   pendingLeavesCount = 0,
   pendingCorrectionsCount = 0,
+  broadcastsCount = 0,
   todayAttendance,
   onQuickPunch
 }) {
@@ -41,12 +43,20 @@ export default function Sidebar({
       desc: isSuperAdmin ? "Company-Wide Command" : "Personal Workspace"
     },
     {
+      id: "broadcasts",
+      label: isSuperAdmin ? "Founder Broadcast Hub" : "Sessions & Speaker Roles",
+      icon: Radio,
+      badge: broadcastsCount > 0 ? `${broadcastsCount} Active` : "Live",
+      badgeColor: "bg-[#dc2626] text-white font-black",
+      desc: isSuperAdmin ? "Push Posters, Videos & Meets" : "Nominate Speaker & Enroll"
+    },
+    {
       id: "attendance",
       label: isSuperAdmin ? "Master Attendance & Corrections" : "My Attendance & Punch",
       icon: Clock,
       badge: isCheckedIn ? "Present" : "Not In",
       badgeColor: isCheckedIn ? "bg-emerald-500/20 text-emerald-300 border-emerald-500/30" : "bg-[#dc2626]/20 text-[#fca5a5] border-[#dc2626]/40",
-      desc: isSuperAdmin ? "Roster & Punch Corrections" : "Daily Punch & Work Mode"
+      desc: isSuperAdmin ? "Roster & Punch Corrections" : "Daily Punch (Midnight Auto-Out)"
     },
     {
       id: "tasks",
@@ -214,10 +224,10 @@ export default function Sidebar({
       <div className="p-4 border-t border-[#222230] space-y-2 text-[10px] text-slate-500">
         <div className="flex items-center justify-between">
           <span className="text-[#ffd700] font-semibold">SarlaYash Universe</span>
-          <span className="font-mono text-slate-400">v2.6 Enterprise</span>
+          <span className="font-mono text-slate-400">v2.7 Enterprise</span>
         </div>
         <p className="text-[9px] leading-tight text-slate-400">
-          Legacy of Values. Future of Learning. 🙌 Powered By Kapil.
+          Midnight IST Auto Clock-Out • Sessions & Speaker Nominations Active 🙌
         </p>
       </div>
     </aside>
