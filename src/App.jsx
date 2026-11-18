@@ -270,14 +270,60 @@ export default function App() {
 
     // Notify Super Admin Kapil of punch
     if (record.employeeId !== "SYM001") {
+      const isCheckOut = !!record.checkOut;
       dispatchNotification({
         recipientId: "super_admin",
         senderName: record.employeeName,
-        title: `Attendance: ${record.employeeName}`,
-        message: `${record.employeeName} (${record.employeeId}) punched: ${record.checkIn || record.checkOut} [${record.workMode}]`,
+        title: isCheckOut ? `Clock-Out: ${record.employeeName}` : `Clock-In: ${record.employeeName}`,
+        message: `${record.employeeName} (${record.employeeId}) ${
+          isCheckOut ? `clocked OUT at ${record.checkOut}` : `clocked IN at ${record.checkIn}`
+        } [${record.workMode}] on ${record.date}.`,
         type: "attendance"
       });
     }
+  };
+
+  const handleDirectFounderCorrection = (record) => {
+    setAttendance((prev) => {
+      const idx = prev.findIndex(
+        (a) => a.employeeId === record.employeeId && a.date === record.date
+      );
+      if (idx >= 0) {
+        const updated = [...prev];
+        updated[idx] = record;
+        return updated;
+      }
+      return [record, ...prev];
+    });
+
+    // Notify the employee that Founder Kapil updated their punch
+    dispatchNotification({
+      recipientId: record.employeeId,
+      senderName: "Founder Kapil Narula",
+      title: `Attendance Updated for ${record.date}`,
+      message: `Founder Kapil Narula has updated your official punch: ${record.checkIn || "--"} to ${record.checkOut || "--"} [${record.status}]. Note: ${record.notes}`,
+      type: "attendance"
+    });
+
+    // Also notify super_admin stream so it displays in Founder activity command log
+    dispatchNotification({
+      recipientId: "super_admin",
+      senderName: "Founder Kapil Narula",
+      title: `Founder Punch Correction: ${record.employeeName}`,
+      message: `Updated attendance for ${record.employeeName} (${record.employeeId}) on ${record.date}: In ${record.checkIn || "--"} | Out ${record.checkOut || "--"} [${record.status}]`,
+      type: "attendance"
+    });
+  };
+
+  const handleDeleteAttendanceRecord = (recordId, empName, date) => {
+    setAttendance((prev) => prev.filter((a) => a.id !== recordId));
+    dispatchNotification({
+      recipientId: "super_admin",
+      senderName: "Founder Kapil Narula",
+      title: `Attendance Record Deleted`,
+      message: `Removed attendance record for ${empName} on ${date}.`,
+      type: "attendance"
+    });
   };
 
   const handleQuickPunch = () => {
@@ -636,10 +682,13 @@ export default function App() {
               todayAttendance={todayAttendance}
               punchCorrections={punchCorrections}
               broadcasts={broadcasts}
+              notifications={notifications}
               onNavigate={(tab) => setActiveTab(tab)}
               onQuickPunch={handleQuickPunch}
               onNominateClick={() => setActiveTab("broadcasts")}
               onPushBroadcastClick={() => setActiveTab("broadcasts")}
+              onMarkNotificationRead={handleMarkNotificationRead}
+              onClearNotifications={handleClearNotifications}
             />
           )}
 
@@ -667,6 +716,8 @@ export default function App() {
               onRequestCorrection={handleRequestCorrection}
               onApproveCorrection={handleApproveCorrection}
               onRejectCorrection={handleRejectCorrection}
+              onDirectFounderCorrection={handleDirectFounderCorrection}
+              onDeleteAttendanceRecord={handleDeleteAttendanceRecord}
             />
           )}
 

@@ -421,12 +421,12 @@ export const INITIAL_PUNCH_CORRECTIONS = [];
 
 // Attendance: Strictly active only from Nov 01, 2026 onwards (no past months)
 export const INITIAL_ATTENDANCE = [
-  // Today's attendance seed (16 Nov 2026) for active users
+  // Today's attendance seed (18 Nov 2026) for active users
   {
-    id: "ATT-2026-11-16-SYM001",
+    id: "ATT-2026-11-18-SYM001",
     employeeId: "SYM001",
     employeeName: "Kapil Narula",
-    date: "2026-11-16",
+    date: "2026-11-18",
     checkIn: "08:45 AM",
     checkOut: null,
     workMode: "Office - Executive Suite",
@@ -434,12 +434,236 @@ export const INITIAL_ATTENDANCE = [
     notes: "Leadership strategy review & portal deployment audit."
   },
   {
+    id: "ATT-2026-11-18-SYM002",
+    employeeId: "SYM002",
+    employeeName: "Sathursan Kamalanathan",
+    date: "2026-11-18",
+    checkIn: "09:05 AM",
+    checkOut: null,
+    workMode: "Office",
+    status: "Present",
+    notes: "Q4 operational sprint roadmap."
+  },
+  {
+    id: "ATT-2026-11-18-SYM003",
+    employeeId: "SYM003",
+    employeeName: "Trisha Ghosh",
+    date: "2026-11-18",
+    checkIn: "09:12 AM",
+    checkOut: null,
+    workMode: "Office",
+    status: "Present",
+    notes: "People and POSH compliance review."
+  },
+  {
+    id: "ATT-2026-11-18-SYM004",
+    employeeId: "SYM004",
+    employeeName: "Amber Khanum",
+    date: "2026-11-18",
+    checkIn: "09:20 AM",
+    checkOut: null,
+    workMode: "Office - AI Lab",
+    status: "Present",
+    notes: "AI Ladder episode recording."
+  },
+  {
+    id: "ATT-2026-11-18-SYM005",
+    employeeId: "SYM005",
+    employeeName: "Arpan Mandal",
+    date: "2026-11-18",
+    checkIn: "09:25 AM",
+    checkOut: null,
+    workMode: "Remote / Work From Home",
+    status: "Present",
+    notes: "DSA Trees problem set preparation."
+  },
+  {
+    id: "ATT-2026-11-18-SYM006",
+    employeeId: "SYM006",
+    employeeName: "Abhishek Kaundal",
+    date: "2026-11-18",
+    checkIn: "09:28 AM",
+    checkOut: null,
+    workMode: "Office",
+    status: "Present",
+    notes: "Cyber IQ lab setup."
+  },
+  {
+    id: "ATT-2026-11-18-SYM007",
+    employeeId: "SYM007",
+    employeeName: "Nidhi Rathore",
+    date: "2026-11-18",
+    checkIn: "09:15 AM",
+    checkOut: null,
+    workMode: "Office",
+    status: "Present",
+    notes: "Aptitude question vault generation."
+  },
+  {
+    id: "ATT-2026-11-18-SYM008",
+    employeeId: "SYM008",
+    employeeName: "Manju Kushwaha",
+    date: "2026-11-18",
+    checkIn: "09:35 AM",
+    checkOut: null,
+    workMode: "Office",
+    status: "Late Mark",
+    notes: "POSH case study curation."
+  },
+  {
+    id: "ATT-2026-11-18-SYM009",
+    employeeId: "SYM009",
+    employeeName: "Tarunika A",
+    date: "2026-11-18",
+    checkIn: "09:18 AM",
+    checkOut: null,
+    workMode: "Remote / Work From Home",
+    status: "Present",
+    notes: "Communication script drafting."
+  },
+  {
+    id: "ATT-2026-11-18-SYM010",
+    employeeId: "SYM010",
+    employeeName: "Madhumita Adak",
+    date: "2026-11-18",
+    checkIn: "09:10 AM",
+    checkOut: null,
+    workMode: "Office",
+    status: "Present",
+    notes: "Student placement inquiries."
+  },
+
+  // 17 Nov 2026 Historical Records
+  {
+    id: "ATT-2026-11-17-SYM001",
+    employeeId: "SYM001",
+    employeeName: "Kapil Narula",
+    date: "2026-11-17",
+    checkIn: "08:50 AM",
+    checkOut: "07:15 PM",
+    workMode: "Office - Executive Suite",
+    status: "Present",
+    notes: "SarlaYash Blessings Internships framework finalization."
+  },
+  {
+    id: "ATT-2026-11-17-SYM002",
+    employeeId: "SYM002",
+    employeeName: "Sathursan Kamalanathan",
+    date: "2026-11-17",
+    checkIn: "09:10 AM",
+    checkOut: "06:45 PM",
+    workMode: "Office",
+    status: "Present",
+    notes: "Engineering teams alignment & deliverables review."
+  },
+  {
+    id: "ATT-2026-11-17-SYM003",
+    employeeId: "SYM003",
+    employeeName: "Trisha Ghosh",
+    date: "2026-11-17",
+    checkIn: "09:05 AM",
+    checkOut: "06:30 PM",
+    workMode: "Office",
+    status: "Present",
+    notes: "HR policy and talent onboarding."
+  },
+  {
+    id: "ATT-2026-11-17-SYM004",
+    employeeId: "SYM004",
+    employeeName: "Amber Khanum",
+    date: "2026-11-17",
+    checkIn: "09:22 AM",
+    checkOut: "06:35 PM",
+    workMode: "Office",
+    status: "Present",
+    notes: "AI Ladder live demo scripting."
+  },
+  {
+    id: "ATT-2026-11-17-SYM005",
+    employeeId: "SYM005",
+    employeeName: "Arpan Mandal",
+    date: "2026-11-17",
+    checkIn: "09:15 AM",
+    checkOut: "06:30 PM",
+    workMode: "Remote / Work From Home",
+    status: "Present",
+    notes: "Optimal algorithms documentation."
+  },
+  {
+    id: "ATT-2026-11-17-SYM006",
+    employeeId: "SYM006",
+    employeeName: "Abhishek Kaundal",
+    date: "2026-11-17",
+    checkIn: "09:25 AM",
+    checkOut: "06:40 PM",
+    workMode: "Office",
+    status: "Present",
+    notes: "Cyber defense testbed validation."
+  },
+  {
+    id: "ATT-2026-11-17-SYM007",
+    employeeId: "SYM007",
+    employeeName: "Nidhi Rathore",
+    date: "2026-11-17",
+    checkIn: "09:12 AM",
+    checkOut: "06:30 PM",
+    workMode: "Office",
+    status: "Present",
+    notes: "Quantitative aptitude tests completed."
+  },
+  {
+    id: "ATT-2026-11-17-SYM008",
+    employeeId: "SYM008",
+    employeeName: "Manju Kushwaha",
+    date: "2026-11-17",
+    checkIn: "09:40 AM",
+    checkOut: "06:50 PM",
+    workMode: "Office",
+    status: "Late Mark",
+    notes: "POSH video script draft."
+  },
+  {
+    id: "ATT-2026-11-17-SYM009",
+    employeeId: "SYM009",
+    employeeName: "Tarunika A",
+    date: "2026-11-17",
+    checkIn: "09:10 AM",
+    checkOut: "06:30 PM",
+    workMode: "Remote / Work From Home",
+    status: "Present",
+    notes: "Articulation drills audio track."
+  },
+  {
+    id: "ATT-2026-11-17-SYM010",
+    employeeId: "SYM010",
+    employeeName: "Madhumita Adak",
+    date: "2026-11-17",
+    checkIn: "09:00 AM",
+    checkOut: "06:30 PM",
+    workMode: "Office",
+    status: "Present",
+    notes: "Foundation inquiries and student counseling."
+  },
+
+  // 16 Nov 2026 Historical Records
+  {
+    id: "ATT-2026-11-16-SYM001",
+    employeeId: "SYM001",
+    employeeName: "Kapil Narula",
+    date: "2026-11-16",
+    checkIn: "08:45 AM",
+    checkOut: "07:00 PM",
+    workMode: "Office - Executive Suite",
+    status: "Present",
+    notes: "ERP launch & ecosystem operational audit."
+  },
+  {
     id: "ATT-2026-11-16-SYM002",
     employeeId: "SYM002",
     employeeName: "Sathursan Kamalanathan",
     date: "2026-11-16",
     checkIn: "09:05 AM",
-    checkOut: null,
+    checkOut: "06:30 PM",
     workMode: "Office",
     status: "Present",
     notes: "Q4 operational sprint roadmap."
@@ -450,7 +674,7 @@ export const INITIAL_ATTENDANCE = [
     employeeName: "Trisha Ghosh",
     date: "2026-11-16",
     checkIn: "09:12 AM",
-    checkOut: null,
+    checkOut: "06:30 PM",
     workMode: "Office",
     status: "Present",
     notes: "People and POSH compliance review."
@@ -461,7 +685,7 @@ export const INITIAL_ATTENDANCE = [
     employeeName: "Amber Khanum",
     date: "2026-11-16",
     checkIn: "09:20 AM",
-    checkOut: null,
+    checkOut: "06:30 PM",
     workMode: "Office - AI Lab",
     status: "Present",
     notes: "AI Ladder episode recording."
@@ -472,7 +696,7 @@ export const INITIAL_ATTENDANCE = [
     employeeName: "Arpan Mandal",
     date: "2026-11-16",
     checkIn: "09:25 AM",
-    checkOut: null,
+    checkOut: "06:30 PM",
     workMode: "Remote / Work From Home",
     status: "Present",
     notes: "DSA Trees problem set preparation."
@@ -483,7 +707,7 @@ export const INITIAL_ATTENDANCE = [
     employeeName: "Abhishek Kaundal",
     date: "2026-11-16",
     checkIn: "09:28 AM",
-    checkOut: null,
+    checkOut: "06:30 PM",
     workMode: "Office",
     status: "Present",
     notes: "Cyber IQ lab setup."
@@ -494,7 +718,7 @@ export const INITIAL_ATTENDANCE = [
     employeeName: "Nidhi Rathore",
     date: "2026-11-16",
     checkIn: "09:15 AM",
-    checkOut: null,
+    checkOut: "06:30 PM",
     workMode: "Office",
     status: "Present",
     notes: "Aptitude question vault generation."
@@ -505,7 +729,7 @@ export const INITIAL_ATTENDANCE = [
     employeeName: "Manju Kushwaha",
     date: "2026-11-16",
     checkIn: "09:35 AM",
-    checkOut: null,
+    checkOut: "06:30 PM",
     workMode: "Office",
     status: "Late Mark",
     notes: "POSH case study curation."
@@ -516,7 +740,7 @@ export const INITIAL_ATTENDANCE = [
     employeeName: "Tarunika A",
     date: "2026-11-16",
     checkIn: "09:18 AM",
-    checkOut: null,
+    checkOut: "06:30 PM",
     workMode: "Remote / Work From Home",
     status: "Present",
     notes: "Communication script drafting."
@@ -527,7 +751,7 @@ export const INITIAL_ATTENDANCE = [
     employeeName: "Madhumita Adak",
     date: "2026-11-16",
     checkIn: "09:10 AM",
-    checkOut: null,
+    checkOut: "06:30 PM",
     workMode: "Office",
     status: "Present",
     notes: "Student placement inquiries."
@@ -782,8 +1006,68 @@ export const INITIAL_NOTIFICATIONS = [
     title: "Welcome to SarlaYash Universe ERP",
     message: "Official enterprise ERP is now live for all team members. Attendance tracking is active from November 01, 2026.",
     type: "system",
-    timestamp: "2026-11-16T09:00:00Z",
+    timestamp: "2026-11-18T08:30:00Z",
     isRead: false
+  },
+  {
+    id: "NOTIF-02",
+    recipientId: "super_admin",
+    senderName: "Amber Khanum",
+    title: "Clock-In: Amber Khanum",
+    message: "Amber Khanum (SYM004) clocked IN at 09:20 AM [Office - AI Lab] on 2026-11-18.",
+    type: "attendance",
+    timestamp: "2026-11-18T09:20:00Z",
+    isRead: false
+  },
+  {
+    id: "NOTIF-03",
+    recipientId: "super_admin",
+    senderName: "Arpan Mandal",
+    title: "Daily Deliverable Submitted",
+    message: "SYM005 logged 3.5 hrs on DSA Unfiltered With Kapil: \"Solved and recorded 2 LeetCode Tree/Graph problems with optimal complexity.\"",
+    type: "task",
+    timestamp: "2026-11-18T09:35:00Z",
+    isRead: false
+  },
+  {
+    id: "NOTIF-04",
+    recipientId: "super_admin",
+    senderName: "Amber Khanum",
+    title: "Speaker Nomination: Amber Khanum",
+    message: "Amber Khanum (SYM004) nominated for role \"Guest Speaker\" for session \"AI Ladder Live Masterclass\". Pitch: \"Prepared Gemini 3.8 tool calling walkthrough.\"",
+    type: "nomination",
+    timestamp: "2026-11-18T09:40:00Z",
+    isRead: false
+  },
+  {
+    id: "NOTIF-05",
+    recipientId: "super_admin",
+    senderName: "Abhishek Kaundal",
+    title: "Clock-In: Abhishek Kaundal",
+    message: "Abhishek Kaundal (SYM006) clocked IN at 09:28 AM [Office] on 2026-11-18.",
+    type: "attendance",
+    timestamp: "2026-11-18T09:28:00Z",
+    isRead: false
+  },
+  {
+    id: "NOTIF-06",
+    recipientId: "super_admin",
+    senderName: "Manju Kushwaha",
+    title: "Clock-In: Manju Kushwaha (Late Mark)",
+    message: "Manju Kushwaha (SYM008) clocked IN at 09:35 AM [Office] on 2026-11-18. Status: Late Mark.",
+    type: "attendance",
+    timestamp: "2026-11-18T09:35:00Z",
+    isRead: false
+  },
+  {
+    id: "NOTIF-07",
+    recipientId: "super_admin",
+    senderName: "Midnight IST Auto-Closure System",
+    title: "Shift Closure Audit (12:00 AM IST)",
+    message: "12:00 AM Midnight IST shift closure executed cleanly. All open punches from prior operating day sealed at 11:59 PM.",
+    type: "system",
+    timestamp: "2026-11-18T00:00:00Z",
+    isRead: true
   }
 ];
 

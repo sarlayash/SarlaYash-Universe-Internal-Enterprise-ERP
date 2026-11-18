@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   CalendarCheck2,
   Clock,
@@ -20,7 +20,13 @@ import {
   Radio,
   Video,
   ExternalLink,
-  Plus
+  Plus,
+  Bell,
+  Trash2,
+  Filter,
+  Calendar,
+  Layers,
+  MessageSquare
 } from "lucide-react";
 
 export default function DashboardView({
@@ -34,10 +40,13 @@ export default function DashboardView({
   todayAttendance,
   punchCorrections = [],
   broadcasts = [],
+  notifications = [],
   onNavigate,
   onQuickPunch,
   onNominateClick,
-  onPushBroadcastClick
+  onPushBroadcastClick,
+  onMarkNotificationRead,
+  onClearNotifications
 }) {
   const isSuperAdmin = currentUser?.role === "super_admin" || currentUser?.id === "SYM001";
   const isCheckedIn = !!todayAttendance?.checkIn && !todayAttendance?.checkOut;
@@ -46,7 +55,9 @@ export default function DashboardView({
   const myNovAttendance = attendanceList.filter(
     (a) => a.employeeId === currentUser?.id && a.date >= "2026-11-01"
   );
-  const myPresentDays = myNovAttendance.filter((a) => a.status === "Present" || a.status?.includes("Approved")).length;
+  const myPresentDays = myNovAttendance.filter(
+    (a) => a.status === "Present" || a.status?.includes("Approved") || a.status?.includes("Corrected")
+  ).length;
 
   const totalLeaveBalance =
     (currentUser?.leaveBalance?.casual || 0) +
@@ -60,9 +71,36 @@ export default function DashboardView({
     (c) => c.assignedEcode === currentUser?.ecode || currentUser?.assignedChannels?.includes(c.name)
   );
 
+  // Today's present count across team (strictly dynamically derived)
   const todayPresentCount = attendanceList.filter(
-    (a) => a.date === "2026-11-17" && a.checkIn
+    (a) => a.date === "2026-11-18" && a.checkIn
   ).length;
+
+  // Real-Time Activity Feed Filter State for Founder Kapil
+  const [activityFilter, setActivityFilter] = useState("all"); // 'all' | 'attendance' | 'leave' | 'task' | 'nomination' | 'system'
+
+  // Filter notifications relevant to current user
+  // If Super Admin: sees all notifications with recipientId === 'super_admin' || 'all' || 'SYM001'
+  // If regular user: sees recipientId === 'all' || recipientId === currentUser.id
+  const relevantNotifications = notifications.filter((n) => {
+    if (isSuperAdmin) {
+      return n.recipientId === "super_admin" || n.recipientId === "all" || n.recipientId === "SYM001";
+    }
+    return n.recipientId === "all" || n.recipientId === currentUser?.id || n.recipientId === currentUser?.ecode;
+  });
+
+  // Filtered by Category Tab
+  const displayedActivities = relevantNotifications.filter((n) => {
+    if (activityFilter === "all") return true;
+    if (activityFilter === "attendance") return n.type === "attendance" || n.type === "correction";
+    if (activityFilter === "leave") return n.type === "leave";
+    if (activityFilter === "task") return n.type === "task";
+    if (activityFilter === "nomination") return n.type === "nomination" || n.type === "broadcast";
+    if (activityFilter === "system") return n.type === "system";
+    return true;
+  });
+
+  const unreadCount = relevantNotifications.filter((n) => !n.isRead).length;
 
   return (
     <div className="space-y-6">
@@ -87,7 +125,7 @@ export default function DashboardView({
 
             <p className="text-sm text-slate-200 max-w-2xl leading-relaxed">
               {currentUser?.designation} • Department of <span className="text-white font-semibold">{currentUser?.department}</span>. Official time:{" "}
-              <span className="text-[#ffd700] font-bold">Tuesday, 17 November 2026 (IST)</span>.
+              <span className="text-[#ffd700] font-bold">Wednesday, 18 November 2026 (IST)</span>.
             </p>
 
             <div className="flex flex-wrap items-center gap-3 pt-2 text-xs">
@@ -169,46 +207,10 @@ export default function DashboardView({
           onClick={() => onNavigate("attendance")}
           className="text-[#ffd700] font-bold text-xs hover:underline flex items-center gap-1 shrink-0"
         >
-          <span>View My Attendance Matrix</span>
+          <span>View Master Attendance Matrix</span>
           <ChevronRight className="w-3.5 h-3.5" />
         </button>
       </div>
-
-      {/* SUPER ADMIN ACTION BANNER (If Founder Kapil) */}
-      {isSuperAdmin && (
-        <div className="p-5 rounded-3xl bg-gradient-to-r from-[#1c0c0e] via-[#120a0d] to-[#0e0e16] border-2 border-[#ffd700]/40 shadow-xl flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-          <div className="flex items-center gap-3">
-            <div className="p-3 rounded-2xl bg-[#dc2626]/20 border border-[#dc2626]/40 text-[#ffd700]">
-              <Shield className="w-6 h-6" />
-            </div>
-            <div>
-              <h3 className="font-black text-white text-base">Founder Super Admin Desk Pending Items</h3>
-              <p className="text-xs text-slate-300 mt-0.5">
-                {pendingLeavesForAdmin.length} leave application(s) • {pendingCorrectionsForAdmin.length} punch correction request(s) awaiting your executive approval.
-              </p>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-2 self-stretch md:self-auto">
-            {pendingLeavesForAdmin.length > 0 && (
-              <button
-                onClick={() => onNavigate("leaves")}
-                className="px-4 py-2 rounded-xl bg-[#dc2626] hover:bg-red-600 text-white font-bold text-xs shadow flex items-center gap-1.5"
-              >
-                <CalendarCheck2 className="w-4 h-4" /> Review Leaves ({pendingLeavesForAdmin.length})
-              </button>
-            )}
-            {pendingCorrectionsForAdmin.length > 0 && (
-              <button
-                onClick={() => onNavigate("attendance")}
-                className="px-4 py-2 rounded-xl bg-[#09090e] border border-[#ffd700]/40 hover:bg-[#161622] text-[#ffd700] font-bold text-xs shadow flex items-center gap-1.5"
-              >
-                <FileEdit className="w-4 h-4" /> Review Punches ({pendingCorrectionsForAdmin.length})
-              </button>
-            )}
-          </div>
-        </div>
-      )}
 
       {/* 4 Metric Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -247,21 +249,31 @@ export default function DashboardView({
           className="glass-panel glass-panel-hover p-5 rounded-3xl cursor-pointer border-t-4 border-t-[#dc2626]"
         >
           <div className="flex items-center justify-between">
-            <span className="text-xs font-bold text-slate-300 uppercase tracking-wider">Available Leaves</span>
+            <span className="text-xs font-bold text-slate-300 uppercase tracking-wider">
+              {isSuperAdmin ? "Pending Leave Requests" : "Available Leaves"}
+            </span>
             <div className="p-2 rounded-xl bg-[#dc2626]/20 text-[#fca5a5] border border-[#dc2626]/40">
               <CalendarCheck2 className="w-4 h-4" />
             </div>
           </div>
           <div className="mt-3">
-            <h3 className="text-3xl font-black text-white font-mono">{totalLeaveBalance} Days</h3>
+            <h3 className="text-3xl font-black text-white font-mono">
+              {isSuperAdmin ? `${pendingLeavesForAdmin.length} Requests` : `${totalLeaveBalance} Days`}
+            </h3>
             <p className="text-xs text-slate-400 mt-1 flex items-center gap-1.5">
-              <span>CL: {currentUser?.leaveBalance?.casual}</span> •{" "}
-              <span>SL: {currentUser?.leaveBalance?.sick}</span> •{" "}
-              <span className="text-[#ffd700] font-bold">Care: {currentUser?.leaveBalance?.blessings}</span>
+              {isSuperAdmin ? (
+                <span className="text-[#ffd700]">Requires Founder Decision</span>
+              ) : (
+                <>
+                  <span>CL: {currentUser?.leaveBalance?.casual}</span> •{" "}
+                  <span>SL: {currentUser?.leaveBalance?.sick}</span> •{" "}
+                  <span className="text-[#ffd700] font-bold">Care: {currentUser?.leaveBalance?.blessings}</span>
+                </>
+              )}
             </p>
           </div>
           <div className="mt-3 pt-2.5 border-t border-[#222230] flex items-center justify-between text-[11px] text-[#ffd700] font-bold">
-            <span>Apply or Review Leaves</span>
+            <span>{isSuperAdmin ? "Review Leave Applications" : "Apply or Review Leaves"}</span>
             <ChevronRight className="w-3.5 h-3.5" />
           </div>
         </div>
@@ -317,7 +329,233 @@ export default function DashboardView({
         </div>
       </div>
 
-      {/* NEW SECTION: FOUNDER BROADCASTS, SESSIONS & SPEAKER NOMINATIONS SPOTLIGHT */}
+      {/* FOUNDER EXECUTIVE REAL-TIME ACTIVITY & NOTIFICATION COMMAND STREAM */}
+      <div className="rounded-3xl bg-[#0c0c14] border-2 border-[#ffd700]/40 p-6 shadow-2xl space-y-5 glow-red-sm">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-[#222230]">
+          <div className="flex items-center gap-3">
+            <div className="p-2.5 rounded-2xl bg-gradient-to-tr from-[#dc2626] to-[#b91c1c] text-[#ffd700] shadow-lg border border-[#ffd700]/30 animate-pulse">
+              <Bell className="w-5 h-5 text-white" />
+            </div>
+            <div>
+              <div className="flex items-center gap-2">
+                <h3 className="text-base sm:text-lg font-black text-white font-serif gold-gradient-text">
+                  {isSuperAdmin
+                    ? "👑 Founder Real-Time Company Activity & Notification Feed"
+                    : "🔔 My Real-Time Notifications & Founder Updates"}
+                </h3>
+                {unreadCount > 0 && (
+                  <span className="px-2 py-0.5 rounded-full bg-[#dc2626] text-white text-[10px] font-bold">
+                    {unreadCount} Unread
+                  </span>
+                )}
+              </div>
+              <p className="text-xs text-slate-400 mt-0.5">
+                {isSuperAdmin
+                  ? "Instant enterprise notifications for all employee clock-ins, clock-outs, leave applications, daily tasks, and nominations."
+                  : "Official approvals, punch corrections, session confirmation, and corporate updates."}
+              </p>
+            </div>
+          </div>
+
+          {/* Activity Category Filters */}
+          <div className="flex flex-wrap items-center gap-1.5 bg-[#07070b] p-1.5 rounded-2xl border border-[#222230]">
+            <button
+              onClick={() => setActivityFilter("all")}
+              className={`px-3 py-1 rounded-xl text-xs font-bold transition-all ${
+                activityFilter === "all"
+                  ? "bg-[#dc2626] text-white"
+                  : "text-slate-400 hover:text-white"
+              }`}
+            >
+              All ({relevantNotifications.length})
+            </button>
+            <button
+              onClick={() => setActivityFilter("attendance")}
+              className={`px-3 py-1 rounded-xl text-xs font-bold transition-all ${
+                activityFilter === "attendance"
+                  ? "bg-[#dc2626] text-white"
+                  : "text-slate-400 hover:text-white"
+              }`}
+            >
+              🕒 Punches
+            </button>
+            <button
+              onClick={() => setActivityFilter("leave")}
+              className={`px-3 py-1 rounded-xl text-xs font-bold transition-all ${
+                activityFilter === "leave"
+                  ? "bg-[#dc2626] text-white"
+                  : "text-slate-400 hover:text-white"
+              }`}
+            >
+              📅 Leaves
+            </button>
+            <button
+              onClick={() => setActivityFilter("task")}
+              className={`px-3 py-1 rounded-xl text-xs font-bold transition-all ${
+                activityFilter === "task"
+                  ? "bg-[#dc2626] text-white"
+                  : "text-slate-400 hover:text-white"
+              }`}
+            >
+              📝 Tasks
+            </button>
+            <button
+              onClick={() => setActivityFilter("nomination")}
+              className={`px-3 py-1 rounded-xl text-xs font-bold transition-all ${
+                activityFilter === "nomination"
+                  ? "bg-[#dc2626] text-white"
+                  : "text-slate-400 hover:text-white"
+              }`}
+            >
+              🎤 Sessions
+            </button>
+          </div>
+        </div>
+
+        {/* Notifications List */}
+        <div className="space-y-3 max-h-[380px] overflow-y-auto pr-1">
+          {displayedActivities.length === 0 ? (
+            <div className="p-8 text-center text-slate-500 text-xs border border-dashed border-[#222230] rounded-2xl">
+              No recent notifications in this category. All systems are operating smoothly.
+            </div>
+          ) : (
+            displayedActivities.map((notif) => {
+              const isLeave = notif.type === "leave";
+              const isAttendance = notif.type === "attendance" || notif.type === "correction";
+              const isTask = notif.type === "task";
+              const isNomination = notif.type === "nomination" || notif.type === "broadcast";
+
+              // Find sender employee avatar
+              const senderEmp = employees.find(
+                (e) => e.name === notif.senderName || e.ecode === notif.senderName || e.id === notif.senderName
+              );
+
+              return (
+                <div
+                  key={notif.id}
+                  className={`p-3.5 rounded-2xl border transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-3 ${
+                    notif.isRead
+                      ? "bg-[#08080e] border-[#1e1e2c] opacity-80"
+                      : "bg-[#0e0e18] border-[#ffd700]/30 shadow-md"
+                  }`}
+                >
+                  <div className="flex items-start gap-3 min-w-0">
+                    <div
+                      className={`p-2 rounded-xl shrink-0 mt-0.5 border ${
+                        isLeave
+                          ? "bg-amber-500/15 text-amber-400 border-amber-500/30"
+                          : isAttendance
+                          ? "bg-emerald-500/15 text-emerald-400 border-emerald-500/30"
+                          : isTask
+                          ? "bg-sky-500/15 text-sky-400 border-sky-500/30"
+                          : isNomination
+                          ? "bg-purple-500/15 text-purple-400 border-purple-500/30"
+                          : "bg-red-500/15 text-red-400 border-red-500/30"
+                      }`}
+                    >
+                      {isLeave ? (
+                        <CalendarCheck2 className="w-4 h-4" />
+                      ) : isAttendance ? (
+                        <Clock className="w-4 h-4" />
+                      ) : isTask ? (
+                        <CheckSquare className="w-4 h-4" />
+                      ) : isNomination ? (
+                        <Radio className="w-4 h-4" />
+                      ) : (
+                        <Sparkles className="w-4 h-4" />
+                      )}
+                    </div>
+
+                    <div className="min-w-0">
+                      <div className="flex flex-wrap items-center gap-2">
+                        <span className="font-bold text-xs text-white leading-tight">
+                          {notif.title}
+                        </span>
+                        <span className="text-[10px] text-[#ffd700] font-mono px-2 py-0.2 rounded bg-[#181824] border border-[#2a2a38]">
+                          {senderEmp?.avatar || "👤"} {notif.senderName}
+                        </span>
+                        {!notif.isRead && (
+                          <span className="w-2 h-2 rounded-full bg-[#dc2626] animate-pulse"></span>
+                        )}
+                      </div>
+                      <p className="text-xs text-slate-300 mt-1 leading-relaxed">
+                        {notif.message}
+                      </p>
+                      <p className="text-[10px] text-slate-500 mt-1 font-mono">
+                        {notif.timestamp ? new Date(notif.timestamp).toLocaleString("en-IN", { timeZone: "Asia/Kolkata" }) : "Today (IST)"}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* 1-Click Action Jump */}
+                  <div className="flex items-center gap-2 shrink-0 self-end sm:self-center">
+                    {isLeave && (
+                      <button
+                        onClick={() => onNavigate("leaves")}
+                        className="px-3 py-1.5 rounded-xl bg-[#dc2626] hover:bg-red-600 text-white font-bold text-xs shadow flex items-center gap-1"
+                      >
+                        <span>Leaves Desk</span>
+                        <ChevronRight className="w-3 h-3" />
+                      </button>
+                    )}
+                    {isAttendance && (
+                      <button
+                        onClick={() => onNavigate("attendance")}
+                        className="px-3 py-1.5 rounded-xl bg-[#14141e] hover:bg-[#1e1e2c] text-[#ffd700] font-bold text-xs border border-[#ffd700]/30 shadow flex items-center gap-1"
+                      >
+                        <span>Attendance Roster</span>
+                        <ChevronRight className="w-3 h-3" />
+                      </button>
+                    )}
+                    {isTask && (
+                      <button
+                        onClick={() => onNavigate("tasks")}
+                        className="px-3 py-1.5 rounded-xl bg-[#14141e] hover:bg-[#1e1e2c] text-sky-300 font-bold text-xs border border-sky-500/30 shadow flex items-center gap-1"
+                      >
+                        <span>Task Logs</span>
+                        <ChevronRight className="w-3 h-3" />
+                      </button>
+                    )}
+                    {isNomination && (
+                      <button
+                        onClick={() => onNavigate("broadcasts")}
+                        className="px-3 py-1.5 rounded-xl bg-[#14141e] hover:bg-[#1e1e2c] text-purple-300 font-bold text-xs border border-purple-500/30 shadow flex items-center gap-1"
+                      >
+                        <span>Broadcasts</span>
+                        <ChevronRight className="w-3 h-3" />
+                      </button>
+                    )}
+
+                    {!notif.isRead && onMarkNotificationRead && (
+                      <button
+                        onClick={() => onMarkNotificationRead(notif.id)}
+                        className="p-1.5 rounded-lg bg-[#09090e] hover:bg-[#161622] text-slate-400 hover:text-white"
+                        title="Mark as read"
+                      >
+                        <Check className="w-3.5 h-3.5" />
+                      </button>
+                    )}
+                  </div>
+                </div>
+              );
+            })
+          )}
+        </div>
+
+        {relevantNotifications.length > 0 && onClearNotifications && (
+          <div className="pt-2 border-t border-[#1e1e2c] flex items-center justify-between text-xs text-slate-400">
+            <span>Real-time synchronisation active across all active clients.</span>
+            <button
+              onClick={onClearNotifications}
+              className="text-slate-400 hover:text-red-400 flex items-center gap-1 text-[11px]"
+            >
+              <Trash2 className="w-3 h-3" /> Clear Activity Log
+            </button>
+          </div>
+        )}
+      </div>
+
+      {/* FOUNDER BROADCASTS, SESSIONS & SPEAKER NOMINATIONS SPOTLIGHT */}
       <div className="rounded-3xl bg-[#0a0a10] border-2 border-[#ffd700]/30 p-6 shadow-2xl space-y-5 glow-red-sm">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[#222230]">
           <div>
