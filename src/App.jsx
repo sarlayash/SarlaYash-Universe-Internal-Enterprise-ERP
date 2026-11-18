@@ -13,6 +13,8 @@ import PayslipView from "./components/PayslipView";
 import PoliciesView from "./components/PoliciesView";
 import BroadcastsView from "./components/BroadcastsView";
 import LoginModal from "./components/LoginModal";
+import MobileBottomNav from "./components/MobileBottomNav";
+import OfflineIndicator from "./components/OfflineIndicator";
 import confetti from "canvas-confetti";
 import { Sparkles, Bell, CheckCircle2, AlertTriangle, Clock, X, Radio } from "lucide-react";
 
@@ -93,6 +95,42 @@ export default function App() {
   const [activeTab, setActiveTab] = useState("dashboard");
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [toastMessage, setToastMessage] = useState(null);
+
+  // Progressive Web App (PWA) Install Prompt State
+  const [deferredPrompt, setDeferredPrompt] = useState(null);
+  const [canInstall, setCanInstall] = useState(false);
+
+  useEffect(() => {
+    const handleBeforeInstallPrompt = (e) => {
+      e.preventDefault();
+      setDeferredPrompt(e);
+      setCanInstall(true);
+    };
+
+    window.addEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
+
+    return () => {
+      window.removeEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
+    };
+  }, []);
+
+  const handleInstallApp = async () => {
+    if (!deferredPrompt) {
+      alert(
+        "📲 Install SarlaYash ERP App on your Device:\n\n" +
+          "• iOS / iPhone (Safari): Tap the 'Share' button at bottom, scroll down and tap 'Add to Home Screen'.\n" +
+          "• Android (Chrome): Tap the top-right menu (⋮) and select 'Install app' or 'Add to Home screen'.\n" +
+          "• Desktop (Chrome/Edge): Click the Install icon (💻) in your browser address bar."
+      );
+      return;
+    }
+    deferredPrompt.prompt();
+    const { outcome } = await deferredPrompt.userChoice;
+    if (outcome === "accepted") {
+      setCanInstall(false);
+      setDeferredPrompt(null);
+    }
+  };
 
   // Sync to localStorage
   useEffect(() => {
@@ -637,6 +675,9 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-[#050507] text-slate-100 flex flex-col font-sans selection:bg-[#dc2626]/30 selection:text-[#ffd700]">
+      {/* PWA Offline Banner & Mobile Install Bar */}
+      <OfflineIndicator onInstallApp={handleInstallApp} canInstall={canInstall} />
+
       {/* Top Fixed Navbar */}
       <Navbar
         currentUser={currentUser}
@@ -652,6 +693,8 @@ export default function App() {
         onNavigate={(tab) => setActiveTab(tab)}
         onLogout={handleLogout}
         onOpenLoginModal={() => setIsLoginModalOpen(true)}
+        canInstall={canInstall}
+        onInstallApp={handleInstallApp}
       />
 
       {/* Main Workspace Layout */}
@@ -668,8 +711,8 @@ export default function App() {
           onQuickPunch={handleQuickPunch}
         />
 
-        {/* Content Area */}
-        <main className="flex-1 p-4 sm:p-6 lg:p-8 max-w-7xl mx-auto w-full transition-all">
+        {/* Content Area with Mobile Bottom Nav Clearance */}
+        <main className="flex-1 p-4 sm:p-6 lg:p-8 max-w-7xl mx-auto w-full transition-all pb-24 lg:pb-8">
           {activeTab === "dashboard" && (
             <DashboardView
               currentUser={currentUser}
@@ -824,6 +867,21 @@ export default function App() {
           </button>
         </div>
       )}
+
+      {/* Mobile Bottom Navigation Dock (Visible on Mobile / Tablet Screens) */}
+      <MobileBottomNav
+        activeTab={activeTab}
+        setActiveTab={setActiveTab}
+        currentUser={currentUser}
+        pendingLeavesCount={pendingLeavesCount}
+        pendingCorrectionsCount={pendingCorrectionsCount}
+        broadcastsCount={broadcasts.length}
+        todayAttendance={todayAttendance}
+        onQuickPunch={handleQuickPunch}
+        onInstallApp={handleInstallApp}
+        canInstall={canInstall}
+        onLogout={handleLogout}
+      />
 
       {/* Mandatory Login Modal on Landing Page or when logged out */}
       <LoginModal

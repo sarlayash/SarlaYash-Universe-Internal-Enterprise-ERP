@@ -12,7 +12,8 @@ import {
   Shield,
   Check,
   Trash2,
-  Lock
+  Lock,
+  Download
 } from "lucide-react";
 import { resetAllData } from "../utils/storage";
 
@@ -29,7 +30,9 @@ export default function Navbar({
   onClearNotifications,
   onNavigate,
   onLogout,
-  onOpenLoginModal
+  onOpenLoginModal,
+  onInstallApp,
+  canInstall
 }) {
   const [currentTime, setCurrentTime] = useState(new Date());
   const [showUserDropdown, setShowUserDropdown] = useState(false);
@@ -132,6 +135,18 @@ export default function Navbar({
             <UserCheck className="w-4 h-4" />
             <span>{isCheckedIn ? "Checked In (Clock Out)" : "Punch Attendance"}</span>
           </button>
+
+          {/* Install PWA App Button */}
+          {onInstallApp && (
+            <button
+              onClick={onInstallApp}
+              className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#111118] hover:bg-[#181824] border border-[#ffd700]/30 hover:border-[#ffd700] text-[#ffd700] text-xs font-bold transition-all shadow-sm"
+              title="Install SarlaYash ERP App on your Device"
+            >
+              <Download className="w-3.5 h-3.5 text-[#dc2626]" />
+              <span>Install App</span>
+            </button>
+          )}
 
           {/* Real-Time Notifications Bell */}
           <div className="relative">

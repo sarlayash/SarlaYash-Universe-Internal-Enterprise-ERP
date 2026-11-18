@@ -1,0 +1,66 @@
+{
+  "name": "SarlaYash Universe — Enterprise ERP",
+  "short_name": "SarlaYash ERP",
+  "description": "Internal Enterprise ERP & Blessings Earning Ecosystem Powered by Kapil",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#050507",
+  "theme_color": "#050507",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "./icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "./icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "./sarlayash_logo.jpg",
+      "sizes": "720x720",
+      "type": "image/jpeg"
+    }
+  ],
+  "categories": ["business", "productivity", "utilities"],
+  "shortcuts": [
+    {
+      "name": "Clock In / Punch",
+      "short_name": "Punch",
+      "description": "Quickly mark attendance",
+      "url": "./#attendance",
+      "icons": [{ "src": "./icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Daily Tasks",
+      "short_name": "Tasks",
+      "description": "Submit today's deliverables",
+      "url": "./#tasks",
+      "icons": [{ "src": "./icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Apply Leave",
+      "short_name": "Leave",
+      "description": "Submit leave application",
+      "url": "./#leaves",
+      "icons": [{ "src": "./icon-192.png", "sizes": "192x192" }]
+    }
+  ]
+}
