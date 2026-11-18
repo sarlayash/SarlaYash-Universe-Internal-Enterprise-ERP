@@ -1,7 +1,7 @@
 // SarlaYash Universe ERP — Progressive Web App (PWA) Service Worker
 // Enables 100% offline functionality, fast asset caching, and standalone mobile app experience.
 
-const CACHE_NAME = "sarlayash-erp-v2";
+const CACHE_NAME = "sarlayash-erp-v3";
 const STATIC_ASSETS = [
   "./",
   "./index.html",
@@ -9,6 +9,8 @@ const STATIC_ASSETS = [
   "./sarlayash_logo.jpg",
   "./sarlayash_blessings_banner.jpg",
   "./credentials_table.png",
+  "./kapil_founder_mentorship.jpg",
+  "./kapil_portrait.jpg",
   "./icon-192.png",
   "./icon-512.png"
 ];

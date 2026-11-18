@@ -26,7 +26,12 @@ import {
   Filter,
   Calendar,
   Layers,
-  MessageSquare
+  MessageSquare,
+  GraduationCap,
+  Briefcase,
+  Cpu,
+  HeartHandshake,
+  MessageSquareQuote
 } from "lucide-react";
 
 export default function DashboardView({
@@ -553,6 +558,118 @@ export default function DashboardView({
             </button>
           </div>
         )}
+      </div>
+
+      {/* FOUNDER'S VISION & ONE-STOP SOLUTION MENTORSHIP SHOWCASE */}
+      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#1c0c0f] via-[#10080d] to-[#07070a] border-2 border-[#ffd700]/50 p-6 sm:p-8 shadow-2xl glow-red-sm space-y-6">
+        {/* Ambient Backlight */}
+        <div className="absolute top-0 right-0 w-96 h-96 bg-[#ffd700]/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div className="absolute bottom-0 left-0 w-80 h-80 bg-[#dc2626]/15 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+          {/* Left Column: Founder Portrait Poster */}
+          <div className="lg:col-span-4 flex flex-col items-center sm:items-start space-y-3">
+            <div className="relative rounded-3xl overflow-hidden border-2 border-[#ffd700]/60 shadow-2xl bg-black group max-w-sm w-full mx-auto">
+              <img
+                src="./kapil_founder_mentorship.jpg"
+                alt="Kapil Narula — Founder & Mentor"
+                className="w-full h-80 sm:h-96 object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                onError={(e) => {
+                  e.target.src = "./sarlayash_logo.jpg";
+                }}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent"></div>
+              <div className="absolute bottom-3 left-4 right-4 text-left">
+                <span className="px-2.5 py-0.5 rounded bg-[#dc2626] text-white font-black text-[9px] uppercase tracking-wider shadow">
+                  FOUNDER & MENTOR
+                </span>
+                <h3 className="text-xl font-black text-white font-serif mt-1 gold-gradient-text drop-shadow">
+                  Kapil Narula
+                </h3>
+                <p className="text-xs text-slate-200 font-medium drop-shadow">
+                  SarlaYash Universe • Powered By Kapil
+                </p>
+              </div>
+            </div>
+
+            <div className="w-full text-center sm:text-left">
+              <p className="text-[11px] text-[#ffd700] font-serif font-black tracking-wider uppercase">
+                ONE-STOP Solution • Mentorship With Kapil
+              </p>
+            </div>
+          </div>
+
+          {/* Right Column: Founder's Note & Mentorship Pillars */}
+          <div className="lg:col-span-8 space-y-5">
+            <div>
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#dc2626]/20 border border-[#dc2626]/40 text-[#ffd700] text-xs font-bold mb-2">
+                <MessageSquareQuote className="w-3.5 h-3.5 text-[#dc2626]" />
+                <span>Founder's Executive Note</span>
+              </div>
+              <h3 className="text-2xl sm:text-3xl font-black text-white font-serif tracking-tight">
+                "Legacy of Values. <span className="gold-gradient-text">Future of Learning."</span>
+              </h3>
+            </div>
+
+            {/* Founder Note Quote Box */}
+            <div className="p-4 sm:p-5 rounded-2xl bg-[#090910]/90 border border-[#ffd700]/30 shadow-inner space-y-3">
+              <p className="text-xs sm:text-sm text-slate-200 leading-relaxed italic">
+                "An internship or corporate career should not feel like another mundane classroom. At SarlaYash Universe, we believe consistency matters more than keeping people busy. We have engineered a 5-day permanent work-from-home model rooted in human empathy, flexible care, and performance-based prosperity.
+              </p>
+              <p className="text-xs sm:text-sm text-slate-200 leading-relaxed italic">
+                Every engineer, intern, and leader here is trusted with responsibility, given room to breathe, and rewarded directly in proportion to their impact. The question is never 'What will I earn?' — the question is: 'How much impact am I ready to create?'
+              </p>
+              <div className="pt-2 border-t border-[#1e1e2c] flex flex-wrap items-center justify-between gap-2 text-xs">
+                <div>
+                  <span className="font-bold text-white">— Kapil Narula</span>
+                  <span className="text-[#ffd700] ml-2 text-[11px] font-mono">Founder & Super Admin</span>
+                </div>
+                <span className="text-slate-400 font-mono text-[11px]">Namaste & Jai Hind 🙌</span>
+              </div>
+            </div>
+
+            {/* Comprehensive Mentorship Ecosystem Pillars */}
+            <div className="space-y-2">
+              <p className="text-[10px] uppercase font-extrabold text-slate-400 tracking-wider">
+                Our One-Stop Solution Ecosystem Matrix:
+              </p>
+              <div className="flex flex-wrap gap-1.5 text-[10px]">
+                {["CSE", "B.Tech", "BBA", "MBA", "Soft Skills", "Quantitative Aptitude", "POSH Law & Ethics", "Data Structures (DSA)", "Artificial Intelligence (AI)", "Machine Learning (ML)", "Natural Language Processing (NLP)", "HR Management", "Power BI", "Advanced Excel", "Low Code / No Code"].map((domain) => (
+                  <span
+                    key={domain}
+                    className="px-2.5 py-1 rounded-xl bg-[#14141e] text-slate-200 border border-[#262635] font-medium hover:border-[#ffd700]/50 transition-colors"
+                  >
+                    ✦ {domain}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            {/* 5 Impact Guarantees */}
+            <div className="grid grid-cols-2 sm:grid-cols-5 gap-2 pt-1 text-center">
+              <div className="p-2.5 rounded-xl bg-[#0c0c14] border border-[#222230]">
+                <GraduationCap className="w-4 h-4 text-[#ffd700] mx-auto mb-1" />
+                <p className="text-[10px] font-bold text-white leading-tight">Academic Excellence</p>
+              </div>
+              <div className="p-2.5 rounded-xl bg-[#0c0c14] border border-[#222230]">
+                <Cpu className="w-4 h-4 text-[#dc2626] mx-auto mb-1" />
+                <p className="text-[10px] font-bold text-white leading-tight">Industry Readiness</p>
+              </div>
+              <div className="p-2.5 rounded-xl bg-[#0c0c14] border border-[#222230]">
+                <Briefcase className="w-4 h-4 text-emerald-400 mx-auto mb-1" />
+                <p className="text-[10px] font-bold text-white leading-tight">Placements & Careers</p>
+              </div>
+              <div className="p-2.5 rounded-xl bg-[#0c0c14] border border-[#222230]">
+                <Sparkles className="w-4 h-4 text-amber-400 mx-auto mb-1" />
+                <p className="text-[10px] font-bold text-white leading-tight">Real-World Projects</p>
+              </div>
+              <div className="p-2.5 rounded-xl bg-[#0c0c14] border border-[#222230] col-span-2 sm:col-span-1">
+                <HeartHandshake className="w-4 h-4 text-pink-400 mx-auto mb-1" />
+                <p className="text-[10px] font-bold text-white leading-tight">Mentoring & Guidance</p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
       {/* FOUNDER BROADCASTS, SESSIONS & SPEAKER NOMINATIONS SPOTLIGHT */}
